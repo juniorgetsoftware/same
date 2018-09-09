@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/layout.xhtml">
+
+	<ui:define name="page-name">
+		List. Usuário
+	</ui:define>
+
+	<ui:define name="page-menu">
+		<ui:include src="/WEB-INF/template/links-funcionais.xhtml" />
+	</ui:define>
+
+	<ui:define name="page-image">
+		<p:graphicImage library="img" name="usuario.svg" />
+	</ui:define>
+
+	<ui:define name="page-title">Usuários</ui:define>
+	<ui:define name="page-subtitle">Lista de Usuários</ui:define>
+	<ui:define name="content">
+		<h:form prependId="false">
+			<p:growl id="usuario-msg" life="7000" showDetail="true"
+				showSummary="true" />
+			<div class="ui-fluid">
+
+				<p:defaultCommand target="buscar" />
+				<p:focus for="filtro" />
+
+				<div class="ui-g-12 ">
+					<p:fieldset styleClass="my-fieldset">
+
+						<div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+							<p:outputLabel value="Filtrar por: " styleClass="my-label" />
+						</div>
+
+						<div class="ui-g-8 ui-lg-8 ui-md-8 ui-sm-8">
+							<p:inputText id="filtro" placeholder="Nome da usuário"
+								value="#{usuarioMB.usuarioFilter.nome}" />
+						</div>
+
+						<div class="ui-g-1 ui-lg-1 ui-md-1 ui-sm-2">
+							<p:commandButton action="#{usuarioMB.filtrar()}"
+								process="@this filtro" update="table" icon="fa fa-search"
+								styleClass="btn-grey" id="buscar" />
+						</div>
+
+						<div class="ui-g-1 ui-lg-1 ui-md-1 ui-sm-2">
+							<p:button icon="fa fa-plus" styleClass="btn-green"
+								outcome="/cad/usuario" id="novo" />
+						</div>
+
+					</p:fieldset>
+				</div>
+			</div>
+		</h:form>
+
+		<h:form prependId="false">
+			<div class="ui-fluid">
+				<div class="ui-g-12 ">
+					<p:dataTable id="table" var="usuario" lazy="true"
+						value="#{usuarioMB.usuariosLazy}" rowHover="true"
+						usuariotorPosition="bottom" usuariotor="true"
+						usuariotorAlwaysVisible="false" rows="20" rowsPerPageLabel="de"
+						emptyMessage="Nenhum registro foi encontrado!"
+						usuariotorTemplate="{CurrentPageReport} {FirstPageLink} 
+						{PreviousPageLink} {PageLinks} {NextPageLink} 
+							{LastPageLink} {RowsPerPageDropdown}"
+						currentPageReportTemplate="({startRecord} - {endRecord} de {totalRecords}, Página {currentPage} de {totalPages})">
+
+						<f:facet name="header" />
+
+						<p:column headerText="Nome" colspan="2" priority="1">
+							<div class="text-overflow">
+								<p:link outcome="/edit/usuario" styleClass="my-link"
+									value="#{usuario.nomeCompleto}">
+									<f:param name="id" value="#{usuario.id}" />
+								</p:link>
+							</div>
+						</p:column>
+
+						<p:column headerText="E-mail" colspan="2" priority="3">
+							<div class="text-overflow">
+								<p:outputLabel value="#{usuario.email}" />
+							</div>
+						</p:column>
+
+					</p:dataTable>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

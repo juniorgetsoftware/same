@@ -10,32 +10,31 @@ import javax.inject.Inject;
 public class MessagesHelper implements Serializable {
 
 	private static final long serialVersionUID = -7694306678404358097L;
-	
+
 	@Inject
 	private FacesContext context;
-	
 
-	public void addInfoMessage(String message) {
-		addMessage(FacesMessage.SEVERITY_INFO, message);
+	public void addInfoMessage(String clientId, String message) {
+		addMessage(clientId, FacesMessage.SEVERITY_INFO, message);
 	}
 
-	public void addErrorMessage(String message) {
-		addMessage(FacesMessage.SEVERITY_ERROR, message);
+	public void addErrorMessage(String clientId, String message) {
+		addMessage(clientId, FacesMessage.SEVERITY_ERROR, message);
 	}
 
-	public void addFlash(String message) {
+	public void addFlash(String clientId, String message) {
 		context.getExternalContext().getFlash().setKeepMessages(true);
-		addInfoMessage(message);
+		addInfoMessage(clientId, message);
 	}
 
-	public void validationFailed(String message) {
-		addErrorMessage(message);
+	public void validationFailed(String clientId, String message) {
+		addErrorMessage(clientId, message);
 		context.validationFailed();
 	}
 
-	private void addMessage(Severity severity, String msg) {
+	private void addMessage(String clientId, Severity severity, String msg) {
 		FacesMessage facesMessage = new FacesMessage(severity, msg, msg);
-		context.addMessage(null, facesMessage);
+		context.addMessage(clientId, facesMessage);
 	}
-	
+
 }

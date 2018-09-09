@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:form prependId="false">
+
+	<div class="ui-g-12 ui-g-nopad">
+		<p:messages id="msg" life="7000" showDetail="true" showSummary="true" />
+	</div>
+	<div class="ui-fluid" jsf:id="group">
+		<p:focus for="nome" />
+
+		<div class="ui-g-6 ui-lg-6 ui-md-8 ui-sm-12">
+			<p:outputLabel for="nome" styleClass="my-label" value="Nome " />
+			<p:inputText id="nome" value="#{paginaMB.pagina.nome}"
+				placeholder="Nome da página">
+				<p:ajax process="@this" event="change" update="nomeIdentificador" />
+				<p:clientValidator event="keyup" />
+			</p:inputText>
+			<p:message for="nome" />
+		</div>
+
+		<div class="ui-g-6 ui-lg-6 ui-md-8 ui-sm-12">
+			<p:outputLabel for="nomeIdentificador" styleClass="my-label"
+				value="Nome Identificador" />
+			<br />
+			<div class="destaque centralizado  ">
+				<p:outputLabel id="nomeIdentificador"
+					value="#{paginaMB.pagina.nomeIdentificador}" />
+			</div>
+			<p:message for="nomeIdentificador" />
+		</div>
+
+		<div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+			<p:outputLabel for="descricao" styleClass="my-label"
+				value="Descrição" />
+			<p:inputTextarea id="descricao" value="#{paginaMB.pagina.descricao}"
+				placeholder="Descreva a página">
+				<p:clientValidator event="keyup" />
+			</p:inputTextarea>
+			<p:message for="descricao" />
+		</div>
+
+
+		<div class="ui-g-6 ui-lg-6 ui-md-8 ui-sm-12">
+			<p:outputLabel for="status" styleClass="my-label" value="Status" />
+			<p:selectOneRadio id="status" value="#{paginaMB.pagina.status}">
+				<f:selectItems itemLabel="#{status.descricao}" var="status"
+					value="#{utilMB.listarStatus()}" itemValue="#{status}" />
+			</p:selectOneRadio>
+			<p:message for="status" />
+		</div>
+
+		<div class="ui-g-12 ui-g-nopad">
+			<div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-6">
+
+				<p:commandButton value="Cadastrar" action="#{paginaMB.salvar()}"
+					update="group" validateClient="true" icon="fa fa-save"
+					rendered="#{paginaMB.pagina.id == null}" styleClass="btn-blue">
+				</p:commandButton>
+
+				<p:commandButton value="Editar" action="#{paginaMB.atualizar()}"
+					update="group" validateClient="true" icon="fa fa-edit"
+					rendered="#{paginaMB.pagina.id != null}" styleClass="btn-green">
+				</p:commandButton>
+			</div>
+			<div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-6">
+
+				<p:button value="Cancelar" outcome="/list/pagina" icon="fa fa-close"
+					styleClass="btn-red ">
+				</p:button>
+			</div>
+		</div>
+	</div>
+</h:form>
+</html>
