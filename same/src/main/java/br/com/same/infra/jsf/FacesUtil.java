@@ -9,7 +9,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import org.primefaces.PrimeFaces;
+//import org.primefaces.PrimeFaces;
 
 public class FacesUtil implements Serializable {
 
@@ -68,7 +68,7 @@ public class FacesUtil implements Serializable {
 	}
 
 	public void updateComponent(String idComponent) {
-		PrimeFaces.current().ajax().update(idComponent);
+		//PrimeFaces.current().ajax().update(idComponent);
 	}
 
 	public void updateComponents(String... idsComponent) {
@@ -78,7 +78,7 @@ public class FacesUtil implements Serializable {
 	}
 	
 	public void executeJS(String javascript) {
-		PrimeFaces.current().executeScript(javascript);
+		//PrimeFaces.current().executeScript(javascript);
 	}
 	
 	public FacesContext getContext() {

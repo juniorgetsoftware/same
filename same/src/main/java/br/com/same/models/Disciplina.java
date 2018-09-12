@@ -1,6 +1,13 @@
 package br.com.same.models;
 
-public class Disciplina extends EntidadeBase {
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity(name = "disciplina")
+@Table(name = "disciplina")
+public class Disciplina extends EntidadeBase implements Serializable{
 
 	public Disciplina() {
 	}

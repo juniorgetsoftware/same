@@ -1,5 +1,6 @@
 package br.com.same.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,12 +10,12 @@ import javax.persistence.Transient;
 
 @Entity(name = "escola")
 @Table(name = "escola")
-public class Escola extends EntidadeBase {
+public class Escola extends EntidadeBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	public Escola() {
-		
+
 	}
 
 	public Escola(String nome) {

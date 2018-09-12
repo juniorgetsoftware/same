@@ -1,6 +1,18 @@
 package br.com.same.models;
 
-public class Resposta extends EntidadeBase {
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity(name = "resposta")
+@Table(name = "resposta")
+public class Resposta extends EntidadeBase implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public Resposta() {
 	}

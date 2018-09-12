@@ -1,10 +1,17 @@
 package br.com.same.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Avaliacao extends EntidadeBase {
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity(name = "avaliacao")
+@Table(name = "avaliacao")
+public class Avaliacao extends EntidadeBase implements Serializable {
 
 	public Avaliacao() {
 		this.provas = new ArrayList<>();
@@ -17,7 +24,11 @@ public class Avaliacao extends EntidadeBase {
 	}
 
 	private String nome;
+
+	@OneToMany
 	private List<Prova> provas;
+
+	@OneToMany
 	private List<Habilidade> habilidades;
 
 	public List<Prova> getProvas() {

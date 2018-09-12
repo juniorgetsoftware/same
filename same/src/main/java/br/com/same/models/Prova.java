@@ -1,10 +1,22 @@
 package br.com.same.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Prova extends EntidadeBase {
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity(name = "prova")
+@Table(name = "prova")
+public class Prova extends EntidadeBase implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public Prova() {
 		this.questoes = new ArrayList<>();
@@ -16,6 +28,8 @@ public class Prova extends EntidadeBase {
 	}
 
 	private String nome;
+	
+	@Transient
 	private List<Questao> questoes;
 
 	public List<Questao> getQuestoes() {

@@ -1,5 +1,8 @@
 package br.com.same.models;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Endereco {
 
 	private String logradouro;

@@ -10,11 +10,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 
 @MappedSuperclass()
 public abstract class EntidadeBase implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -27,7 +31,8 @@ public abstract class EntidadeBase implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private StatusEntidade status;
 
-	@Column(name = "data_cadastro")
+	//@Column(name = "data_cadastro")
+	@Transient
 	private LocalDateTime dataCadastro;
 
 	public Long getId() {

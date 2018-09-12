@@ -1,6 +1,18 @@
 package br.com.same.models;
 
-public class Professor extends EntidadeBase {
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity(name = "professor")
+@Table(name = "professor")
+public class Professor extends EntidadeBase implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3836899332152683975L;
 
 	public Professor() {
 	}

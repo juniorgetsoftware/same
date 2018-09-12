@@ -1,10 +1,24 @@
 package br.com.same.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Turma extends EntidadeBase {
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity(name = "turma")
+@Table(name = "turma")
+public class Turma extends EntidadeBase implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public Turma() {
 		this.alunos = new ArrayList<>();
@@ -19,9 +33,14 @@ public class Turma extends EntidadeBase {
 	}
 
 	private String nome;
+	
+	@Enumerated(EnumType.STRING)
 	private Turno turno;
+	@ManyToMany
 	private List<Aluno> alunos;
+	@ManyToMany
 	private List<Professor> professores;
+	@ManyToMany
 	private List<Disciplina> disciplinas;
 
 	public String getNome() {

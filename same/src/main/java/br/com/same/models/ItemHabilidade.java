@@ -1,6 +1,13 @@
 package br.com.same.models;
 
-public class ItemHabilidade {
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity(name = "item_habilidade")
+@Table(name = "item_habilidade")
+public class ItemHabilidade extends EntidadeBase implements Serializable {
 
 	public ItemHabilidade() {
 	}

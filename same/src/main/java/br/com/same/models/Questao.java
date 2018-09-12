@@ -1,10 +1,24 @@
 package br.com.same.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Questao extends EntidadeBase {
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity(name = "questao")
+@Table(name = "questao")
+public class Questao extends EntidadeBase implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public Questao() {
 		this.respostas = new ArrayList<>();
@@ -21,7 +35,10 @@ public class Questao extends EntidadeBase {
 	}
 
 	private String enunciado;
+	
+	@Enumerated(EnumType.STRING)
 	private NivelDificuldadeQuestao nivelDificuldadeQuestao;
+	@OneToMany
 	private List<Resposta> respostas;
 
 	public String getEnunciado() {
