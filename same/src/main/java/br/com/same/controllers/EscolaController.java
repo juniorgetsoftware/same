@@ -30,18 +30,20 @@ public class EscolaController implements Serializable {
 	private Escola escola;
 
 	public void cadastrar() {
-//		try {
+		try {
 			escolaService.cadastrar(escola);
-//			helper.addInfoMessage("msgs", "Escola dacastrada com sucesso.");
-//		} catch (Exception e) {
-
-//		} finally {
-//			facesUtil.updateComponent("msgs");
-//		}
+			helper.addInfoMessage("msgs", "Escola dacastrada com sucesso.", "");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			facesUtil.updateComponent("msgs");
+			escola = null;
+		}
 	}
 
 	public Escola getEscola() {
-		if(Objects.isNull(escola)) escola = new Escola(); 
+		if (Objects.isNull(escola))
+			escola = new Escola();
 		return escola;
 	}
 

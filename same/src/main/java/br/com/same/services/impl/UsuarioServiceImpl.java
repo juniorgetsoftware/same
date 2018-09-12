@@ -13,7 +13,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	
 	@Override
 	public Usuario usuarioPorEmail(String email) {
-		return dao.buscarPorAtributo("select u from usuario u where u.email = :email", "email", email);
+		return dao.usuarioPorEmail(email);
 	}
 
 }

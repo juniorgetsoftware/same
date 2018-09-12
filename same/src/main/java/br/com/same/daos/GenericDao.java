@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.transaction.Transactional;
 
 import br.com.same.models.EntidadeBase;
 
@@ -36,28 +37,29 @@ public abstract class GenericDao<T extends EntidadeBase> implements Serializable
 		this.clazz = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 	}
 
+	@Transactional
 	public void cadastrar(T t) {
 		em.merge(t);
 	}
-	
+
 	public T buscarPorAtributo(String jpql, String campo, Object valor) {
-		return (T) em.createQuery(jpql)
-		.setParameter(campo, startswith(valor))
-		.getSingleResult();
+		return (T) em.createQuery(jpql).setParameter(campo, startswith(valor)).getSingleResult();
 	}
 
-	public T buscarPorAtributos(String jpql, Object...parametros ) {
+	public T buscarPorAtributos(String jpql, Object... parametros) {
 		Query createQuery = em.createQuery(jpql);
 		for (int i = 0; i < parametros.length; i++) {
-			createQuery.setParameter(parametros[i].toString(), parametros[i+1]);
+			createQuery.setParameter(parametros[i].toString(), parametros[i + 1]);
 		}
-	return (T) createQuery.getSingleResult();
+		return (T) createQuery.getSingleResult();
 	}
 
+	@Transactional
 	public void editar(T t) {
 		em.merge(t);
 	}
 
+	@Transactional
 	public void remover(T t) {
 		t = buscarPorId(t.getId());
 		if (t != null) {

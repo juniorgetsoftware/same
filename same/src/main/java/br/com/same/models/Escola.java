@@ -14,7 +14,7 @@ public class Escola extends EntidadeBase {
 	private static final long serialVersionUID = 1L;
 
 	public Escola() {
-		this.periodosLetivos = new ArrayList<>();
+		
 	}
 
 	public Escola(String nome) {
@@ -26,6 +26,8 @@ public class Escola extends EntidadeBase {
 
 	@Transient
 	private List<PeriodoLetivo> periodosLetivos;
+
+	@Transient
 	private Endereco endereco;
 
 	public String getNome() {

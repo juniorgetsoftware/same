@@ -9,16 +9,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import br.com.same.daos.UsuarioDAO;
 import br.com.same.infra.cdi.CDIServiceLocator;
 import br.com.same.models.Pagina;
 import br.com.same.models.Usuario;
-import br.com.same.services.UsuarioService;
 
 public class AppUserDetailsService implements UserDetailsService {
 
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		UsuarioService usuarioService = (UsuarioService) CDIServiceLocator.getBean(UsuarioService.class);
-		Usuario usuario = usuarioService.usuarioPorEmail(email);
+		UsuarioDAO usuarioDao = CDIServiceLocator.getBean(UsuarioDAO.class);
+		Usuario usuario = usuarioDao.usuarioPorEmail(email);
 		UsuarioSistema user = null;
 		if (usuario != null) {
 			user = new UsuarioSistema(usuario, this.getPaginas(usuario));

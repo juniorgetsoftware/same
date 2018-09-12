@@ -52,7 +52,6 @@ public class Usuario extends EntidadeBase implements Serializable {
 	@JoinTable(name = "usuario_pagina", joinColumns = { @JoinColumn(name = "usuario_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "pagina_id") })
 	@NotNull
-
 	private List<Pagina> paginas = new ArrayList<>();
 
 	public String getNome() {
