@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>Cad. Escola</h:head>
+<body>
+	<div class="ui-fluid">
+		<h:form prependId="false">
+			<div class="ui-g-12">
+				<p:messages autoUpdate="true"/>
+			</div>
+			<div class="ui-g-12">
+				<div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
+					<label>Nome:</label>
+					<p:inputText id="escola-nome" value="#{escolaCtrl.escola.nome}"
+						required="true" label="Nome">
+						<p:clientValidator event="keyup" />
+					</p:inputText>
+					<p:message for="escola-nome" />
+				</div>
+			</div>
+
+			<div class="ui-g-12">
+				<div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
+					<label>Observação:</label>
+					<p:inputTextarea id="escola-observacao"
+						value="#{escolaCtrl.escola.observacao}" label="Observação">
+						<p:clientValidator event="keyup" />
+					</p:inputTextarea>
+					<p:message for="escola-observacao" />
+					<p:commandButton value="Salvar" validateClient="true"
+						action="#{escolaCtrl.salvar()}" />
+				</div>
+			</div>
+		</h:form>
+	</div>
+</body>
+</html>
