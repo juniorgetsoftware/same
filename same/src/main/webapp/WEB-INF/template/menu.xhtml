@@ -5,18 +5,26 @@
 	
 		<nav class="cm-navbar cm-navbar-primary">
 			<div class="btn btn-primary md-menu-white hidden-md hidden-lg"
-				data-toggle="cm-menu"></div>
+				data-toggle="cm-menu">
+			</div>
+			
 			<div class="cm-flex">
-				<h1>Dashboard</h1>
+				<h1>
+					<ui:insert name="titulo-pagina" >
+						Título da página
+					</ui:insert>
+				</h1>
 				<form id="cm-search" action="index.html" method="get">
 					<input type="search" name="q" autocomplete="off"
 						placeholder="Search..."></input>
 				</form>
 			</div>
+			
 			<div class="pull-right">
 				<div id="cm-search-btn" class="btn btn-primary md-search-white"
 					data-toggle="cm-search"></div>
 			</div>
+			
 			<div class="dropdown pull-right">
 				<button class="btn btn-primary md-notifications-white"
 					data-toggle="dropdown">
@@ -53,6 +61,7 @@
 					</div>
 				</div>
 			</div>
+			
 			<div class="dropdown pull-right">
 				<button class="btn btn-primary md-account-circle-white"
 					data-toggle="dropdown"></button>
@@ -69,26 +78,7 @@
 		</nav>
 		
 		
-		<nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
-			<div class="cm-flex">
-				<div class="nav-tabs-container">
-					<ul class="nav nav-tabs">
-						<li class="active"><a href="dashboard-sales.html">Sales
-								analytics</a></li>
-						<li><a href="dashboard-visitors.html">Website Visitors</a></li>
-						<li><a href="dashboard-server_stats.html">Server Stats</a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="pull-right" style="border-left: 1px solid #e5e5e5">
-				<a title="Download as PDF"
-					class="btn btn-default btn-light md-file-download"></a>
-			</div>
-			<div class="pull-right">
-				<a title="Customize indicators"
-					class="btn btn-default btn-light md-settings"></a>
-			</div>
-		</nav>
+		
 	</header>
 
 </ui:composition>

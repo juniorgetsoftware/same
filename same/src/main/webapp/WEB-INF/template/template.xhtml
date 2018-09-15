@@ -8,8 +8,9 @@
 	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-	<title>JSF Integrate Bootstrap</title>
+	<title><ui:insert name="template-titulo">Título da página</ui:insert></title>
 
+	
 	<h:outputStylesheet library="css" name="style.css" />
 	<h:outputStylesheet library="layout" name="css/bootstrap-clearmin.css" />
 	<h:outputStylesheet library="layout" name="css/roboto.css" />
@@ -18,18 +19,31 @@
 	<h:outputStylesheet library="layout" name="css/c3.min.css" />
 
 
-
+	<ui:insert name="template-css-extra" />
 
 </h:head>
 
 
-<h:body styleClass="cm-no-transition cm-2-navbar">
+<h:body styleClass="cm-no-transition cm-1-navbar">
 
-	<ui:include src="../template/sidebar.xhtml" />
-	<ui:include src="../template/menu.xhtml" />
+	<ui:insert name="template-sidebar">
+		<ui:include src="../template/sidebar.xhtml" />
+	</ui:insert>
+
+	<ui:insert name="template-menu">
+		<ui:include src="../template/menu.xhtml" />
+	</ui:insert>
+
 	<div id="global">
-		<ui:include src="../template/content.xhtml" />
-		<ui:include src="../template/footer.xhtml" />
+
+		<ui:insert name="template-conteudo">
+			<ui:include src="../template/content.xhtml" />
+		</ui:insert>
+
+		<ui:insert name="template-rodape">
+			<ui:include src="../template/footer.xhtml" />
+		</ui:insert>
+
 	</div>
 
 	<!-- load js at bottom for faster loading-->
@@ -40,10 +54,10 @@
 	<h:outputScript library="layout" name="js/fastclick.min.js" />
 	<h:outputScript library="layout" name="js/bootstrap.min.js" />
 	<h:outputScript library="layout" name="js/clearmin.js" />
-
-	<h:outputScript library="layout" name="js/lib/c3.min.js" />
-	<h:outputScript library="layout" name="js/lib/d3.min.js" />
-	<h:outputScript library="js" name="app.js" />
+	<!-- 	<h:outputScript library="layout" name="js/lib/c3.min.js" /> -->
+	<!-- 	<h:outputScript library="layout" name="js/lib/d3.min.js" /> -->
+	<!-- 	<h:outputScript library="js" name="app.js" /> -->
+	<ui:insert name="template-js-extra" />
 
 
 

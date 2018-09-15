@@ -1,19 +1,28 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="/WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>Cad. Escola</h:head>
-<body>
-	<div class="ui-fluid">
-		<h:form prependId="false">
-			<div class="ui-g-12">
-				<p:messages autoUpdate="true"/>
+	<ui:define name="template-titulo">
+	Cad. Escola
+</ui:define>
+
+	<ui:define name="nome-pagina">
+	Cad. Escola
+</ui:define>
+
+	<ui:define name="descricao-pagina">
+	Cad. Escola
+</ui:define>
+
+	<ui:define name="conteudo-panel">
+		<h:form prependId="false" >
+			<div class="col-12 form-group">
+				<p:messages autoUpdate="true" />
 			</div>
-			<div class="ui-g-12">
-				<div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
+			<div class="col-12 form-group">
+				<div class="col-3 col-lg-3 col-md-4 col-sm-12">
 					<label>Nome:</label>
 					<p:inputText id="escola-nome" value="#{escolaCtrl.escola.nome}"
 						required="true" label="Nome">
@@ -23,8 +32,8 @@
 				</div>
 			</div>
 
-			<div class="ui-g-12">
-				<div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
+			<div class="col-12 form-group">
+				<div class="col-3 col-lg-3 col-md-4 col-sm-12">
 					<label>Observação:</label>
 					<p:inputTextarea id="escola-observacao"
 						value="#{escolaCtrl.escola.observacao}" label="Observação">
@@ -36,6 +45,5 @@
 				</div>
 			</div>
 		</h:form>
-	</div>
-</body>
-</html>
+	</ui:define>
+</ui:composition>
