@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.deltaspike.jsf.api.message.JsfMessage;
+import org.primefaces.PrimeFaces;
 
 import br.com.same.jsf.Msgs;
 import br.com.same.models.Escola;
@@ -26,6 +27,7 @@ public class EscolaCtrl {
 		escolaService.salvar(escola);
 		msgs.addInfo().cadastradoComSucesso();
 		escola = null;
+		PrimeFaces.current().ajax().update("msgs");
 		return null;
 	}
 

@@ -19,6 +19,7 @@ public class Escola {
 	private Long id;
 
 	@NotBlank
+	@Length(min = 5, max = 255)
 	@Column(unique = true, nullable = false)
 	private String nome;
 	
