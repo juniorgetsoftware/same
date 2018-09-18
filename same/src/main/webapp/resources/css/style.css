@@ -1,0 +1,16 @@
+.bg-red {
+	color: #ffffff !important;
+    background-color: #e74c3c !important;
+    border-color: #e43725 !important;
+}
+
+.bg-green {
+	color: #ffffff !important;
+    background-color: #2ecc71 !important;
+    border-color: #29b765 !important;
+}
+
+.h1 {
+	margin-top: 0 !important;
+	font-weight: bold !important;
+} 

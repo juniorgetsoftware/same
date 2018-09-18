@@ -1,8 +1,34 @@
-<ui:composition
-        template="/WEB-INF/template/template.xhtml"
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
-    
+	<f:metadata>
+		<f:event type="preRenderView" listener="#{escolaCtrl.listarEscolas()}" />
+	</f:metadata>
+
+	<ui:define name="conteudo-panel">
+
+		<h1 class="h1">Escolas</h1>
+
+		<ui:repeat var="escola" value="#{escolaCtrl.escolas}">
+			<p:link outcome="/public/index.xhtml">
+			<f:param name="escola" value="#{escola.id}"/>
+				<div class="col-sm-3">
+					<div class="panel panel-default">
+						<div class="panel-heading">#{escola.nome}</div>
+						<div class="panel-body">
+							<div class="img-responsive">
+								<p:graphicImage library="img" name="brasao.svg"/>
+							</div>
+							<p>#{escola.observacao}</p>
+						</div>
+					</div>
+				</div>
+			</p:link>
+		</ui:repeat>
+
+	</ui:define>
 
 </ui:composition>
