@@ -5,21 +5,20 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="template-titulo">
-	Cad. Escola
-</ui:define>
-
-	<ui:define name="nome-pagina">
-	Cad. Escola
-</ui:define>
-
+		Cad. Escola
+	</ui:define>
 
 	<ui:define name="conteudo-panel">
-	
-	<p:focus for="escola-nome" />
+
+		<p:focus for="escola-nome" />
 		<h:form prependId="false">
 
+			<h1>
+				<b>Cadastrar Escola</b>
+			</h1>
+
 			<div class="col-12 ">
-				<p:growl id="msgs" closable="true" life="5000"/>
+				<p:growl id="msgs" closable="true" life="5000" />
 			</div>
 
 			<div class="row form-group">
@@ -38,17 +37,25 @@
 					<label>Observação:</label>
 					<p:inputTextarea id="escola-observacao" styleClass="form-control"
 						value="#{escolaCtrl.escola.observacao}" label="Observação">
-					<p:clientValidator event="keyup" />
+						<p:clientValidator event="keyup" />
 					</p:inputTextarea>
 					<p:message for="escola-observacao" />
 				</div>
 			</div>
-			
-			<p:commandButton value="Salvar" validateClient="true" icon="fa fa-save" styleClass="btn btn-primary"
-				action="#{escolaCtrl.salvar()}" update="escola-nome, escola-observacao"/>
-			
-			<p:button icon="fa fa-ban " value="Cancelar" styleClass="btn btn-danger"/>
-			
+
+			<div class="row form-group">
+				<div class="col-12">
+					<div class="col-lg-3, col-md-4, col-sm-6">
+						<p:commandButton value="Salvar" validateClient="true"
+							icon="fa fa-save" styleClass="btn btn-primary"
+							action="#{escolaCtrl.salvar()}"
+							update="escola-nome, escola-observacao" />
+
+						<p:button icon="fa fa-ban " value="Cancelar"
+							styleClass="btn btn-danger" />
+					</div>
+				</div>
+			</div>
 		</h:form>
 	</ui:define>
 </ui:composition>

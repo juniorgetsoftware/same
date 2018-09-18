@@ -1,5 +1,7 @@
 package br.com.same.services.impl;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import br.com.same.dao.EscolaDao;
@@ -14,6 +16,11 @@ public class EscolaServiceImpl implements EscolaService {
 	@Override
 	public void salvar(Escola escola) {
 		escolaDao.salvar(escola);
+	}
+
+	@Override
+	public List<Escola> listar() {
+		return escolaDao.listar();
 	}
 
 }

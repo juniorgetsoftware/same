@@ -1,0 +1,57 @@
+<ui:composition template="/WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<f:metadata>
+		<f:event type="preRenderView" listener="#{escolaCtrl.listarEscolas()}" />
+	</f:metadata>
+
+	<ui:define name="template-titulo">
+		Escolas
+	</ui:define>
+
+	<ui:define name="conteudo-panel">
+
+		<h:form prependId="false">
+
+			<h1>
+				<b>Escolas</b>
+			</h1>
+
+			<div class="col-12 ">
+				<p:growl id="msgs" closable="true" life="5000" />
+			</div>
+
+
+			<p:dataTable var="escola" value="#{escolaCtrl.escolas}"
+				styleClass="table table-bordered table-hover" paginator="true"
+				emptyMessage="Nenhum registro foi encontrado" rows="20"
+				rowHover="true" sortBy="#{escola.nome}" paginatorPosition="bottom"
+				paginatorAlwaysVisible="false"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="25,50,100">
+
+				<p:column headerText="Nome" sortBy="#{escola.nome}" colspan="2">
+					#{escola.nome}
+				</p:column>
+
+				<p:column headerText="Observação" colspan="4" priority="3">
+					#{escola.observacao}
+				</p:column>
+				
+				<p:column headerText="Ações" colspan="1" priority="2">
+					<i class="fa-2x fa fa-refresh primary"></i>
+					<i class="fa-2x fa fa-star secondary"></i>
+					<i class="fa-2x fa fa-trash danger"></i>
+				</p:column>
+			</p:dataTable>
+
+
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>

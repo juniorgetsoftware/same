@@ -1,5 +1,6 @@
 package br.com.same.controllers;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.enterprise.context.RequestScoped;
@@ -17,6 +18,9 @@ import br.com.same.services.EscolaService;
 @RequestScoped
 public class EscolaCtrl {
 	
+	private Escola escola;
+	private List<Escola> escolas;
+	
 	@Inject
 	private JsfMessage<Msgs> msgs;
 	
@@ -30,8 +34,10 @@ public class EscolaCtrl {
 		PrimeFaces.current().ajax().update("msgs");
 		return null;
 	}
-
-	private Escola escola;
+	
+	public void listarEscolas() {
+		this.escolas = escolaService.listar();
+	}
 
 	public Escola getEscola() {
 		if (Objects.isNull(escola))  escola = new Escola();
@@ -41,5 +47,14 @@ public class EscolaCtrl {
 	public void setEscola(Escola escola) {
 		this.escola = escola;
 	}
-	
+
+
+	public List<Escola> getEscolas() {
+		return escolas;
+	}
+
+
+	public void setEscolas(List<Escola> escolas) {
+		this.escolas = escolas;
+	}
 }
