@@ -11,4 +11,7 @@ public interface Msgs {
 
 	@MessageTemplate("{cadastrado.sucesso}")
 	String cadastradoComSucesso();
+
+	@MessageTemplate("{editado.sucesso}")
+	String editadoComSucesso();
 }

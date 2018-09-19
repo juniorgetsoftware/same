@@ -2,19 +2,18 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
-
-	<ui:define name="template-titulo">
-		Cad. Escola
-	</ui:define>
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:o="http://omnifaces.org/ui">
 
 	<ui:define name="conteudo-panel">
 
 		<p:focus for="escola-nome" />
+		
 		<h:form prependId="false">
 
 			<h1 class="h1">
-				<b>Cadastrar Escola</b>
+				<b>#{escolaCtrl.editando ? 'Editar' : 'Cadastrar'} Escola</b>
 			</h1>
 
 			<div class="col-12 ">
@@ -47,8 +46,13 @@
 				<div class="col-12">
 					<div class="col-lg-3, col-md-4, col-sm-6">
 						<p:commandButton value="Salvar" validateClient="true"
-							icon="fa fa-save" 
+							icon="fa fa-save" rendered="#{not escolaCtrl.editando}"
 							action="#{escolaCtrl.salvar()}"
+							update="escola-nome, escola-observacao" />
+
+						<p:commandButton value="Editar" validateClient="true"
+							icon="fa fa-refresh" rendered="#{escolaCtrl.editando}"
+							action="#{escolaCtrl.editar()}" styleClass="bg-green"
 							update="escola-nome, escola-observacao" />
 
 						<p:button icon="fa fa-ban " value="Cancelar"

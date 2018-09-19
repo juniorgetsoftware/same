@@ -1,5 +1,6 @@
 package br.com.same.models;
 
+import javax.enterprise.inject.Produces;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,6 +49,11 @@ public class Escola {
 
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
+	}
+	
+	@Produces
+	public Escola getInstancia() {
+		return new Escola();
 	}
 
 	@Override

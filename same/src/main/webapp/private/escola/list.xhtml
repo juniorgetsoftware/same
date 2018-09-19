@@ -17,9 +17,12 @@
 
 		<h:form prependId="false">
 
-			<h1>
+			<h1 class="h1">
 				<b>Escolas</b>
 			</h1>
+
+			<p:commandButton icon="fa fa-plus" styleClass="pull-right"/>
+				
 
 			<div class="col-12 ">
 				<p:growl id="msgs" closable="true" life="5000" />
@@ -30,12 +33,17 @@
 				styleClass="table table-bordered table-hover" paginator="true"
 				emptyMessage="Nenhum registro foi encontrado" rows="20"
 				rowHover="true" sortBy="#{escola.nome}" paginatorPosition="bottom"
-				paginatorAlwaysVisible="false"
+				paginatorAlwaysVisible="true"
 				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 				rowsPerPageTemplate="25,50,100">
+				
+				<f:facet name="header"><h1></h1></f:facet>
 
-				<p:column headerText="Nome" sortBy="#{escola.nome}" colspan="2">
-					#{escola.nome}
+				<p:column headerText="Nome" colspan="2">
+					<p:link outcome="/private/escola/form.xhtml">
+						<f:param name="escola" value="#{escola.id}"/>
+						#{escola.nome}
+					</p:link>
 				</p:column>
 
 				<p:column headerText="Observação" colspan="4" priority="3">
