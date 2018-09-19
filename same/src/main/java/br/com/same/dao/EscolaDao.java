@@ -24,7 +24,7 @@ public class EscolaDao implements Serializable {
 		entityManager.persist(escola);
 	}
 
-//	@Transactional
+	@Transactional
 	public void editar(Escola escola) {
 		entityManager.merge(escola);
 	}
