@@ -21,7 +21,7 @@ main {
 }
 
 /* TOPBAR */
-.aw-topbar {
+.topbar {
 	position: fixed;
 	top: 0;
 	right: 0;
@@ -66,7 +66,7 @@ body {
 	margin-left: 15px;
 }
 
-.aw-topbar>img {
+.topbar>img {
 	margin-top: 5px;
 	margin-left: 5px;
 }
@@ -76,7 +76,7 @@ body {
 }
 
 /* SIDEBAR */
-.aw-sidebar {
+.sidebar {
 	position: fixed;
 	top: 40px;
 	bottom: 0;
@@ -91,41 +91,41 @@ body {
 	/*border-right: 1px solid #eaeaea;*/
 }
 
-.aw-sidebar.is-toggled {
+.sidebar.is-toggled {
 	margin-left: 0px;
 }
 
 @media ( min-width : 960px) {
-	.aw-sidebar {
+	.sidebar {
 		margin-left: 0px;
 	}
-	.aw-sidebar.is-toggled {
+	.sidebar.is-toggled {
 		margin-left: -18%;
 	}
 }
 
 /* CONTENT */
-.aw-content {
-	padding: 0px 5px;
-	margin-top: 47px;
-	transition: margin-left 0.5s;
+.content {
+    padding: 0px 15px;
+    margin-top: 55px;
+    transition: margin-left 0.5s;
 }
 
-.aw-footer-content {
+.footer-content {
 	transition: margin-left 0.5s;
 }
 
 @media ( min-width : 960px) {
-	.aw-content {
+	.content {
 		margin-left: 18%;
 	}
-	.aw-content.is-toggled {
+	.content.is-toggled {
 		margin-left: 0;
 	}
-	.aw-footer-content {
+	.footer-content {
 		margin-left: 18%;
 	}
-	.aw-footer-content.is-toggled {
+	.footer-content.is-toggled {
 		margin-left: 0;
 	}
 }
@@ -370,7 +370,7 @@ a.my-link {
 }
 
 /* TOGGLE */
-.aw-toggle {
+.toggle {
 	/* float: right;
      line-height: 50px; */
 	margin-right: 15px;
@@ -378,19 +378,19 @@ a.my-link {
 }
 
 /* MENU */
-.aw-menu {
+.menu {
 	font-size: 1.1em;
 }
 
 /* PAGE-TITLE */
-.aw-page-title {
+.page-title {
 	margin: 0;
 	/*padding: 20px 0px 0px 0px;*/
 	font-size: 1.5em;
 	color: #373737;
 }
 
-.aw-page-subtitle {
+.page-subtitle {
 	margin: 0;
 	font-size: 0.75em;
 	color: #373737;
@@ -569,7 +569,7 @@ a.my-link {
 	width: 100%;
 	display: block;
 	border-bottom: #b5b5b5 dashed 1px;
-	padding-bottom: 10px;
+	padding-bottom: 15px;
 }
 
 .my-head-title {
@@ -595,13 +595,13 @@ a.my-link {
 }
 
 .menu-color {
-	color: #666;
-	padding: 15px;
-	text-decoration: none;
+    color: #666;
+    padding: 16px;
+    text-decoration: none;
 }
 
 .menu-color:hover {
-	border-radius: 50%;
+	/*border-radius: 50%;*/
 	color: #156090;
 	background: #f5f5f5;
 }

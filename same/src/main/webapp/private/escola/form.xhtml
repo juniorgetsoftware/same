@@ -36,7 +36,7 @@
 
 			<div class="ui-fluid" jsf:id="group">
 
-				<div class="ui-lg-6 ui-md-8 ui-sm-12">
+				<div class=" ui-lg-6 ui-md-8 ui-sm-12">
 					<label>Nome</label>
 					<p:inputText id="escola-nome" value="#{escolaCtrl.escola.nome}"
 						required="true" label="Nome" styleClass="form-control">
@@ -65,15 +65,16 @@
 						<p:dataTable id="escola-periodo-letivo" var="periodo"
 							value="#{escolaCtrl.escola.periodosLetivo}"
 							emptyMessage="Nenhum período foi adicionado">
+
 							<p:column headerText="Nome" colspan="3">
 								#{periodo.nome}
 							</p:column>
 
-							<p:column headerText="Descrição" colspan="6">
+							<p:column headerText="Descrição" colspan="6" priority="3">
 								#{periodo.descricao}
 							</p:column>
 
-							<p:column headerText="Ações" colspan="1">
+							<p:column headerText="Ações" colspan="1" priority="3">
 								<p:commandButton styleClass="btn-red" icon="fa fa-trash">
 									<p:collector value="#{escolaCtrl.periodoLetivo}"
 										removeFrom="#{escolaCtrl.escola.periodosLetivo}" />
@@ -113,11 +114,11 @@
 					closable="true" closeOnEscape="true" draggable="false"
 					header="Adicionar período letivo" maximizable="false"
 					minimizable="false" resizable="false" modal="true"
-					showEffect="fade" hideEffect="fade" visible="true"
+					showEffect="fade" hideEffect="fade" visible="false"
 					focus="periodo-letivo-nome" responsive="true">
 
 					<div class="ui-g-12">
-						<div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+						<div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12">
 							<label>Nome</label>
 							<p:inputText id="periodo-letivo-nome"
 								value="#{escolaCtrl.periodoLetivo.nome}" required="true"
@@ -126,9 +127,7 @@
 							</p:inputText>
 							<p:message for="periodo-letivo-nome" />
 						</div>
-					</div>
 
-					<div class="ui-g-12">
 						<div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
 							<label>Observação</label>
 							<p:inputTextarea id="periodo-letivo-observacao"
@@ -138,11 +137,8 @@
 							</p:inputTextarea>
 							<p:message for="periodo-letivo-observacao" />
 						</div>
-					</div>
 
-
-					<div class="ui-g-12 ">
-						<div class="ui-g-6  ">
+						<div class="ui-g-3  ui-lg-3 ui-md-6 ui-sm-6">
 							<p:commandButton value="Cadastrar" icon="fa fa-save"
 								update="escola-periodo-letivo, periodo-letivo"
 								action="#{escolaCtrl.reiniciarPeriodoLetivo()}">
@@ -150,7 +146,7 @@
 									addTo="#{escolaCtrl.escola.periodosLetivo}" />
 							</p:commandButton>
 						</div>
-						<div class="ui-g-6 ">
+						<div class="ui-g-3  ui-lg-3 ui-md-6 ui-sm-6">
 							<p:commandButton value="Cancelar" icon="fa fa-close"
 								styleClass="btn-red	" oncomplete="PF('periodo-letivo').hide();"
 								process="@none" />

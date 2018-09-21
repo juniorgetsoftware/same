@@ -7,52 +7,38 @@
 	<f:metadata>
 		<f:event type="preRenderView" listener="#{escolaCtrl.listarEscolas()}" />
 	</f:metadata>
-	
+
 	<ui:define name="page-name">
 		Home
 	</ui:define>
 
-	<ui:define name="page-menu"/>
-	
+	<ui:define name="page-menu" />
+
 	<ui:define name="footer">
 		<ui:include src="/WEB-INF/template/loading.xhtml" />
 		<ui:include src="/WEB-INF/template/footer.xhtml" />
 	</ui:define>
 
-	<ui:define name="content">
-
-		<div class="ui-g-12">
-			<h1 style="h1">Escolas</h1>
-		</div>
-		
+	<ui:define name="full-content">
 		<div class="ui-fluid">
-			<div class="ui-g-12">
-			<ui:repeat var="escola" value="#{escolaCtrl.escolas}">			
-			 
+			<ui:repeat var="escola" value="#{escolaCtrl.escolas}">
 				<p:link outcome="/public/index.xhtml">
-					<f:param name="escola" value="#{escola.id}"/>
-					<div class="ui-g-3  ui-md-6 ui-lg-3 ui-sm-12">
+					<f:param name="escola" value="#{escola.id}" />
+					<div class="ui-g-3 ui-xl-2 ui-md-6 ui-lg-3 ui-sm-12">
 						<div class="ui-g-12 card shadow-effect ">
 							<div class="ui-g-12 ui-md-12 ui-lg-12 box ui-g-nopad">
 								<div class="center">
-									<div class="dash-title-1 font-dark-grey" >
-										#{escola.nome}
-									</div>
+									<div class="dash-title-1 font-dark-grey">#{escola.nome}</div>
 								</div>
-	
 								<div class="ui-g-12 ui-md-12 ui-lg-12 box ui-g-nopad">
-									<p:graphicImage library="img" name="brasao.svg"/>
+									<p:graphicImage library="img" name="brasao.svg" />
 								</div>
-									<p>#{escola.observacao}</p>
+								<p>#{escola.observacao}</p>
 							</div>
 						</div>
 					</div>
 				</p:link>
-			
 			</ui:repeat>
-			</div>
 		</div>
-		
 	</ui:define>
-
 </ui:composition>
