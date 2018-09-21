@@ -1,65 +1,165 @@
-<ui:composition template="/WEB-INF/template/template.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:o="http://omnifaces.org/ui">
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	template="/WEB-INF/template/layout.xhtml">
 
-	<ui:define name="conteudo-panel">
+	<ui:define name="page-name">
+		Cad. Escola
+	</ui:define>
 
+	<ui:define name="page-title">
+		Escola
+	</ui:define>
+
+	<ui:define name="page-subtitle">
+		Manutenção de Atividade Eclesiástica
+	</ui:define>
+
+	<ui:define name="page-image">
+		<p:graphicImage library="img" name="atividade.svg" />
+	</ui:define>
+
+	<ui:define name="content">
 		<p:focus for="escola-nome" />
-		
+
 		<h:form prependId="false">
 
-			<h1 class="h1">
-				<b>#{escolaCtrl.editando ? 'Editar' : 'Cadastrar'} Escola</b>
-			</h1>
-
-			<div class="col-12 ">
-				<p:growl id="msgs" closable="true" life="5000" />
+			<div class="ui-g-12 ui-g-nopad">
+				<p:messages id="msgs" life="7000" showDetail="true"
+					showSummary="true" />
 			</div>
 
-			<div class="row form-group">
-				<div class="col-lg-6 col-md-8 col-sm-12">
-					<label>Nome:</label>
+			<div class="ui-fluid" jsf:id="group">
+
+				<div class="ui-lg-6 ui-md-8 ui-sm-12">
+					<label>Nome</label>
 					<p:inputText id="escola-nome" value="#{escolaCtrl.escola.nome}"
 						required="true" label="Nome" styleClass="form-control">
 						<p:clientValidator event="keyup" />
 					</p:inputText>
 					<p:message for="escola-nome" />
 				</div>
-			</div>
 
-			<div class="row form-group">
-				<div class="col-lg-6 col-md-8 col-sm-12">
-					<label>Observação:</label>
+				<div class="ui-lg-6 ui-md-8 ui-sm-12">
+					<label>Observação</label>
 					<p:inputTextarea id="escola-observacao" styleClass="form-control"
 						value="#{escolaCtrl.escola.observacao}" label="Observação">
 						<p:clientValidator event="keyup" />
 					</p:inputTextarea>
 					<p:message for="escola-observacao" />
 				</div>
-			</div>
 
-			<div class="row form-group">
-				<div class="col-12">
-					<div class="col-lg-3, col-md-4, col-sm-6">
+				<div class="ui-g-12">
+					<div class="ui-lg-12, ui-md-12, ui-sm-12">
+						<label>Período letivo</label>
+						<p:commandLink styleClass="fa-2x add"
+							title="Adicionar período letivo"
+							oncomplete="PF('periodo-letivo').show();" update="periodo-letivo">
+							<i class="fa fa-plus" />
+						</p:commandLink>
+						<p:dataTable id="escola-periodo-letivo" var="periodo"
+							value="#{escolaCtrl.escola.periodosLetivo}"
+							emptyMessage="Nenhum período foi adicionado">
+							<p:column headerText="Nome" colspan="3">
+								#{periodo.nome}
+							</p:column>
+
+							<p:column headerText="Descrição" colspan="6">
+								#{periodo.descricao}
+							</p:column>
+
+							<p:column headerText="Ações" colspan="1">
+								<p:commandButton styleClass="btn-red" icon="fa fa-trash">
+									<p:collector value="#{escolaCtrl.periodoLetivo}"
+										removeFrom="#{escolaCtrl.escola.periodosLetivo}" />
+								</p:commandButton>
+							</p:column>
+						</p:dataTable>
+
+					</div>
+				</div>
+
+				<div class="ui-g-12 ui-g-nopad">
+					<div class="ui-g-3 ui-lg-3, ui-md-4, ui-sm-6">
 						<p:commandButton value="Salvar" validateClient="true"
-							icon="fa fa-save" rendered="#{not escolaCtrl.editando}"
-							action="#{escolaCtrl.salvar()}"
-							update="escola-nome, escola-observacao" />
+							icon="fa fa-save" rendered="#{escolaCtrl.escola.id eq null}"
+							action="#{escolaCtrl.salvar()}" update="group" />
+					</div>
 
+					<div class="ui-g-3 ui-lg-3, ui-md-4, ui-sm-6"
+						jsf:rendered="#{escolaCtrl.escola.id ne null}">
 						<p:commandButton value="Editar" validateClient="true"
-							icon="fa fa-refresh" rendered="#{escolaCtrl.editando}"
-							action="#{escolaCtrl.editar()}" styleClass="bg-green"
-							update="escola-nome, escola-observacao" />
+							icon="fa fa-refresh" action="#{escolaCtrl.editar()}"
+							styleClass="btn-green" update="group" />
+					</div>
 
-						<p:button icon="fa fa-ban " value="Cancelar"
-							styleClass="bg-red" outcome="/public/index"/>
+					<div class="ui-g-3 ui-lg-3, ui-md-4, ui-sm-6">
+						<p:button icon="fa fa-ban " value="Cancelar" styleClass="btn-red"
+							outcome="/public/index" />
 					</div>
 				</div>
 			</div>
 		</h:form>
+
+		<h:form prependId="false">
+
+			<div class="ui-fluid">
+				<p:dialog id="periodo-letivo" widgetVar="periodo-letivo"
+					closable="true" closeOnEscape="true" draggable="false"
+					header="Adicionar período letivo" maximizable="false"
+					minimizable="false" resizable="false" modal="true"
+					showEffect="fade" hideEffect="fade" visible="true"
+					focus="periodo-letivo-nome" responsive="true">
+
+					<div class="ui-g-12">
+						<div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+							<label>Nome</label>
+							<p:inputText id="periodo-letivo-nome"
+								value="#{escolaCtrl.periodoLetivo.nome}" required="true"
+								label="Nome" styleClass="form-control">
+								<p:clientValidator event="keyup" />
+							</p:inputText>
+							<p:message for="periodo-letivo-nome" />
+						</div>
+					</div>
+
+					<div class="ui-g-12">
+						<div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+							<label>Observação</label>
+							<p:inputTextarea id="periodo-letivo-observacao"
+								styleClass="form-control"
+								value="#{escolaCtrl.periodoLetivo.descricao}" label="Observação">
+								<p:clientValidator event="keyup" />
+							</p:inputTextarea>
+							<p:message for="periodo-letivo-observacao" />
+						</div>
+					</div>
+
+
+					<div class="ui-g-12 ">
+						<div class="ui-g-6  ">
+							<p:commandButton value="Cadastrar" icon="fa fa-save"
+								update="escola-periodo-letivo, periodo-letivo"
+								action="#{escolaCtrl.reiniciarPeriodoLetivo()}">
+								<p:collector value="#{escolaCtrl.periodoLetivo}"
+									addTo="#{escolaCtrl.escola.periodosLetivo}" />
+							</p:commandButton>
+						</div>
+						<div class="ui-g-6 ">
+							<p:commandButton value="Cancelar" icon="fa fa-close"
+								styleClass="btn-red	" oncomplete="PF('periodo-letivo').hide();"
+								process="@none" />
+						</div>
+					</div>
+				</p:dialog>
+			</div>
+
+		</h:form>
 	</ui:define>
+
 </ui:composition>

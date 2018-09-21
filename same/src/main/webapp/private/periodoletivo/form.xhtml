@@ -1,0 +1,65 @@
+<ui:composition template="/WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="conteudo-panel">
+
+		<p:focus for="escola-nome" />
+		
+		<h:form prependId="false">
+
+			<h1 class="h1">
+				<b>#{escolaCtrl.editando ? 'Editar' : 'Cadastrar'} Escola</b>
+			</h1>
+
+			<div class="col-12 ">
+				<p:growl id="msgs" closable="true" life="5000" />
+			</div>
+
+			<div class="row form-group">
+				<div class="col-lg-6 col-md-8 col-sm-12">
+					<label>Nome:</label>
+					<p:inputText id="escola-nome" value="#{escolaCtrl.escola.nome}"
+						required="true" label="Nome" styleClass="form-control">
+						<p:clientValidator event="keyup" />
+					</p:inputText>
+					<p:message for="escola-nome" />
+				</div>
+			</div>
+
+			<div class="row form-group">
+				<div class="col-lg-6 col-md-8 col-sm-12">
+					<label>Observação:</label>
+					<p:inputTextarea id="escola-observacao" styleClass="form-control"
+						value="#{escolaCtrl.escola.observacao}" label="Observação">
+						<p:clientValidator event="keyup" />
+					</p:inputTextarea>
+					<p:message for="escola-observacao" />
+				</div>
+			</div>
+
+			<div class="row form-group">
+				<div class="col-12">
+					<div class="col-lg-3, col-md-4, col-sm-6">
+						<p:commandButton value="Salvar" validateClient="true"
+							icon="fa fa-save" rendered="#{not escolaCtrl.editando}"
+							action="#{escolaCtrl.salvar()}"
+							update="escola-nome, escola-observacao" />
+
+						<p:commandButton value="Editar" validateClient="true"
+							icon="fa fa-refresh" rendered="#{escolaCtrl.editando}"
+							action="#{escolaCtrl.editar()}" styleClass="bg-green"
+							update="escola-nome, escola-observacao" />
+
+						<p:button icon="fa fa-ban " value="Cancelar"
+							styleClass="bg-red" outcome="/public/index"/>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,6 +1,5 @@
 package br.com.same.controllers;
 
-import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 import java.io.Serializable;
@@ -15,74 +14,50 @@ import org.apache.deltaspike.jsf.api.message.JsfMessage;
 import org.omnifaces.cdi.Param;
 import org.primefaces.PrimeFaces;
 
-import br.com.same.controllers.converters.EscolaConverter;
+import br.com.same.controllers.converters.PeriodoLetivoConverter;
 import br.com.same.jsf.Msgs;
-import br.com.same.models.Escola;
 import br.com.same.models.PeriodoLetivo;
-import br.com.same.services.EscolaService;
+import br.com.same.services.PeriodoLetivoService;
 
 @Named
 @ViewScoped
-public class EscolaCtrl implements Serializable {
+public class PeriodoLetivoCtrl implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-//	@Param(name = "escola", converterClass = EscolaConverter.class)
-	private Escola escola;
-	
+	@Inject
+	@Param(name = "periodoLetivo", converterClass = PeriodoLetivoConverter.class)
 	private PeriodoLetivo periodoLetivo;
 
-	private List<Escola> escolas;
+	private List<PeriodoLetivo> periodoLetivos;
 
 	@Inject
 	private JsfMessage<Msgs> msgs;
 
 	@Inject
-	private EscolaService escolaService;
+	private PeriodoLetivoService periodoLetivoService;
 
 	public String salvar() {
-		escolaService.salvar(escola);
+		periodoLetivoService.salvar(periodoLetivo);
 		msgs.addInfo().cadastradoComSucesso();
-		escola = null;
+		periodoLetivo = null;
 		PrimeFaces.current().ajax().update("msgs");
 		return null;
 	}
 
 	public String editar() {
-		escolaService.editar(escola);
+		periodoLetivoService.editar(periodoLetivo);
 		msgs.addInfo().editadoComSucesso();
-		escola = null;
+		periodoLetivo = null;
 		PrimeFaces.current().ajax().update("msgs");
-		return "/private/escola/list.xhtml?faces-redirect=true";
+		return "/private/periodoLetivo/list.xhtml?faces-redirect=true";
 	}
 
-	public void listarEscolas() {
-		this.escolas = escolaService.listar();
-	}
-
-	public Escola getEscola() {
-		if (isNull(escola))
-			escola = new Escola();
-		return escola;
-	}
-
-	public void setEscola(Escola escola) {
-		this.escola = escola;
-	}
-
-	public List<Escola> getEscolas() {
-		return escolas;
-	}
-
-	public void setEscolas(List<Escola> escolas) {
-		this.escolas = escolas;
-	}
-
-	public boolean isEditando() {
-		return nonNull(getEscola()) && nonNull(getEscola().getId());
+	public void listarPeriodoLetivos() {
+		this.periodoLetivos = periodoLetivoService.listar();
 	}
 
 	public PeriodoLetivo getPeriodoLetivo() {
@@ -94,10 +69,16 @@ public class EscolaCtrl implements Serializable {
 	public void setPeriodoLetivo(PeriodoLetivo periodoLetivo) {
 		this.periodoLetivo = periodoLetivo;
 	}
-	
-	public String reiniciarPeriodoLetivo() {
-		periodoLetivo = new PeriodoLetivo();
-		return null;
+
+	public List<PeriodoLetivo> getPeriodoLetivos() {
+		return periodoLetivos;
 	}
-	
+
+	public void setPeriodoLetivos(List<PeriodoLetivo> periodoLetivos) {
+		this.periodoLetivos = periodoLetivos;
+	}
+
+	public boolean isEditando() {
+		return nonNull(periodoLetivo) && nonNull(periodoLetivo.getId());
+	}
 }

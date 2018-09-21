@@ -1,32 +1,20 @@
 package br.com.same.models;
 
-import static java.util.Objects.isNull;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.enterprise.inject.Produces;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-@Table(name = "escola")
-@Entity(name = "escola")
-public class Escola implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+@Entity(name = "periodo_letivo")
+@Table(name = "periodo_letivo")
+public class PeriodoLetivo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,16 +22,15 @@ public class Escola implements Serializable {
 
 	@NotBlank
 	@Size(min = 5, max = 255)
-	@Column(unique = true, nullable = false)
+	@Column(nullable = false, unique = true)
 	private String nome;
-	
+
 	@Size(min = 5, max = 255)
-	private String observacao;
-	
-	@OneToMany(mappedBy = "escola", cascade = { CascadeType.ALL }, targetEntity = PeriodoLetivo.class, orphanRemoval = true)
-	private List<PeriodoLetivo> periodosLetivo;
-	
-	//
+	private String descricao;
+
+	@ManyToOne(targetEntity = Escola.class)
+	@JoinColumn(name = "escola_id", nullable = false)
+	private Escola escola;
 
 	public Long getId() {
 		return id;
@@ -61,27 +48,20 @@ public class Escola implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getObservacao() {
-		return observacao;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setObservacao(String observacao) {
-		this.observacao = observacao;
-	}
-	
-	@Produces
-	public Escola getInstancia() {
-		return new Escola();
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public List<PeriodoLetivo> getPeriodosLetivo() {
-		if(isNull(periodosLetivo)) 
-			periodosLetivo = new ArrayList<>();
-		return periodosLetivo;
+	public Escola getEscola() {
+		return escola;
 	}
 
-	public void setPeriodosLetivo(List<PeriodoLetivo> periodosLetivo) {
-		this.periodosLetivo = periodosLetivo;
+	public void setEscola(Escola escola) {
+		this.escola = escola;
 	}
 
 	@Override
@@ -100,7 +80,7 @@ public class Escola implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Escola other = (Escola) obj;
+		PeriodoLetivo other = (PeriodoLetivo) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
