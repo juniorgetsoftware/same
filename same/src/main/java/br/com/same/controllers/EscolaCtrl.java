@@ -17,6 +17,7 @@ import org.omnifaces.cdi.Param;
 import org.primefaces.PrimeFaces;
 
 import br.com.same.controllers.converters.EscolaConverter;
+import br.com.same.jsf.FacesUtil;
 import br.com.same.jsf.Msgs;
 import br.com.same.models.Escola;
 import br.com.same.models.PeriodoLetivo;
@@ -45,11 +46,14 @@ public class EscolaCtrl implements Serializable {
 	@Inject
 	private EscolaService escolaService;
 
+	@Inject
+	private FacesUtil facesUtil;
+
 	public String salvar() {
 		escolaService.salvar(escola);
 		msgs.addInfo().cadastradoComSucesso();
 		escola = null;
-		PrimeFaces.current().ajax().update("msgs");
+		facesUtil.atualizarComponente("msgs");
 		return null;
 	}
 
@@ -57,12 +61,12 @@ public class EscolaCtrl implements Serializable {
 		escolaService.editar(escola);
 		msgs.addInfo().editadoComSucesso();
 		escola = null;
-		PrimeFaces.current().ajax().update("msgs");
+		facesUtil.atualizarComponente("msgs");
 		return "/private/escola/list.xhtml?faces-redirect=true";
 	}
 
 	public void listarEscolas() {
-		if(!FacesContext.getCurrentInstance().isPostback() || isNull(escolas)) {			
+		if (facesUtil.isNotPostback() || isNull(escolas)) {
 			this.escolas = escolaService.listar();
 		}
 	}
@@ -102,22 +106,21 @@ public class EscolaCtrl implements Serializable {
 	public void adicionar() {
 		this.escola.adicionar(periodoLetivo);
 		msgs.addInfo().cadastradoComSucesso();
-		PrimeFaces.current().ajax().update("msgs");
+		facesUtil.atualizarComponente("msgs");
 		periodoLetivo = new PeriodoLetivo();
 	}
 
 	public void atualizar() {
 		this.escola.atualizar(periodoLetivo);
 		msgs.addInfo().editadoComSucesso();
-		PrimeFaces.current().ajax().update("msgs");
+		facesUtil.atualizarComponente("msgs");
 		periodoLetivo = new PeriodoLetivo();
 	}
 
 	public void remover() {
 		this.escola.remover(periodoLetivo);
 		msgs.addInfo().deletadoComSucesso();
-		PrimeFaces.current().ajax().update("msgs");
+		facesUtil.atualizarComponente("msgs");
 		periodoLetivo = new PeriodoLetivo();
 	}
-
 }
