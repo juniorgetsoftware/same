@@ -14,20 +14,21 @@
 	<link rel="shortcut icon" type="image/x-icon"
 		href="#{facesContext.externalContext.requestContextPath}/resources/img/logo.ico" />
 
-	<title><ui:insert name="page-name" /></title>
+	<title>
+		<ui:insert name="page-name" />
+	</title>
 
 	<h:outputStylesheet library="css" name="custom.css" />
 	<h:outputStylesheet library="css" name="menu.css" />
 	<h:outputStylesheet library="css" name="layout.css" />
 
-	<h:outputScript target="body" library="primefaces"
-		name="jquery/jquery.js" />
-
+	<h:outputScript target="body" library="primefaces" name="jquery/jquery.js" />
 	<h:outputScript target="body" library="js" name="app.js" />
 	<h:outputScript target="body" library="js" name="locale.js" />
 	<h:outputScript target="body" library="js" name="menu.js" />
 	<h:outputScript target="body" library="js" name="jquery.maskMoney.js" />
-
+	
+	<ui:insert name="css-extra"/>
 
 </h:head>
 
@@ -70,8 +71,8 @@
 								<ui:include src="/WEB-INF/template/dados-pagina.xhtml" />
 							</ui:insert>
 	
-							<ui:insert name="page-menu">
-							</ui:insert>
+							<ui:insert name="page-menu"/>
+							
 						</div>
 					</div>
 	
@@ -95,6 +96,8 @@
 	<ui:insert name="footer">
 		<ui:include src="/WEB-INF/template/footer.xhtml" />
 	</ui:insert>
+	
+	<ui:insert name="js-extra"/>
 
 </h:body>
 
