@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -61,7 +62,9 @@ public class EscolaCtrl implements Serializable {
 	}
 
 	public void listarEscolas() {
-		this.escolas = escolaService.listar();
+		if(!FacesContext.getCurrentInstance().isPostback() || isNull(escolas)) {			
+			this.escolas = escolaService.listar();
+		}
 	}
 
 	public Escola getEscola() {

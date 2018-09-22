@@ -39,8 +39,9 @@
 				<div class="ui-g-12">
 					<div class="ui-g-6 ui-lg-6 ui-md-8 ui-sm-12 ui-g-nopad">
 						<label>Nome</label>
-						<p:inputText id="periodo-letivo-nome" value="#{periodoLetivoCtrl.periodoLetivo.nome}"
-							required="true" label="Nome" styleClass="form-control">
+						<p:inputText id="periodo-letivo-nome"
+							value="#{periodoLetivoCtrl.periodoLetivo.nome}" required="true"
+							label="Nome" styleClass="form-control">
 							<p:clientValidator event="keyup" />
 						</p:inputText>
 						<p:message for="periodo-letivo-nome" />
@@ -50,37 +51,41 @@
 				<div class="ui-g-12">
 					<div class="ui-g-6 ui-lg-6 ui-md-8 ui-sm-12 ui-g-nopad">
 						<label>Descrição</label>
-						<p:inputTextarea id="periodo-letivo-descricao" 
-							value="#{periodoLetivoCtrl.periodoLetivo.descricao}" label="Descrição">
+						<p:inputTextarea id="periodo-letivo-descricao"
+							value="#{periodoLetivoCtrl.periodoLetivo.descricao}"
+							label="Descrição">
 							<p:clientValidator event="keyup" />
 						</p:inputTextarea>
 						<p:message for="periodo-letivo-descricao" />
 					</div>
 				</div>
-				
+
 				<div class="ui-g-12 ui-g-nopad">
 					<div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
 						<label>Selecionar escola</label>
-						<p:commandLink styleClass="add fa-2x" oncomplete="PF('escola').show()" 
-							process="@this" update="escola" actionListener="#{escolaCtrl.listarEscolas()}">
-							<i class="fa fa-plus"/>
-						</p:commandLink>	
+						<p:commandLink styleClass="add fa-2x"
+							oncomplete="PF('escola').show()" process="@this" update="escola"
+							actionListener="#{escolaCtrl.listarEscolas()}">
+							<i class="fa fa-plus" />
+						</p:commandLink>
 					</div>
-					
-					<div jsf:id="periodo-letivo-escola" class="ui-g-12 ui-lg-6 ui-md-6 ui-sm-6 ">
-						<div class="destaque centralizado" jsf:rendered="#{periodoLetivoCtrl.periodoLetivo.escola ne null}">
+
+					<div jsf:id="periodo-letivo-escola"
+						class="ui-g-12 ui-lg-6 ui-md-8 ui-sm-12 ">
+						<div class="destaque centralizado"
+							jsf:rendered="#{periodoLetivoCtrl.periodoLetivo.escola ne null}">
 							Escola selecionada:
-							#{periodoLetivoCtrl.periodoLetivo.escola.nome}
-						</div>
+							#{periodoLetivoCtrl.periodoLetivo.escola.nome}</div>
 					</div>
-					
+
 				</div>
 
 				<div class="ui-g-12 ui-g-nopad">
 					<div class="ui-g-3 ui-lg-3, ui-md-4, ui-sm-6"
 						jsf:rendered="#{periodoLetivoCtrl.periodoLetivo.id eq null}">
 						<p:commandButton value="Salvar" validateClient="true"
-							icon="fa fa-save" action="#{periodoLetivoCtrl.salvar()}" update="group" />
+							icon="fa fa-save" action="#{periodoLetivoCtrl.salvar()}"
+							update="group" />
 					</div>
 
 					<div class="ui-g-3 ui-lg-3, ui-md-4, ui-sm-6"
@@ -101,32 +106,34 @@
 		<h:form prependId="false">
 
 			<div class="ui-fluid">
-				<p:dialog id="escola" widgetVar="escola"
-					closable="true" closeOnEscape="true" draggable="false"
-					header="Selecionar escola" maximizable="false"
-					minimizable="false" resizable="false" modal="true"
-					showEffect="fade" hideEffect="fade" visible="true"
-					responsive="true" width="800">
+				<div class="ui-g-12">
+					<div class="ui-g-6 ui-lg-6 ui-md-8 ui-sm-12">
+						<p:dialog id="escola" widgetVar="escola" closable="true"
+							closeOnEscape="true" draggable="false" header="Selecionar escola"
+							maximizable="false" minimizable="false" resizable="false"
+							modal="true" showEffect="fade" hideEffect="fade" visible="false" 
+							responsive="true" fitViewport="true" width="80%">
 
-					<div class="ui-g-12">
-						<div class="ui-g-12 ">
-							<label>Nome</label>
-							<p:dataTable var="escola" value="#{escolaCtrl.escolas}" 
+							<p:dataTable var="escola" value="#{escolaCtrl.escolas}"
 								emptyMessage="Nenhuma escola foi listada">
-								<p:column headerText="Nome" colspan="8">
-									#{escola.nome}
-								</p:column>
-								<p:column headerText="Selecionar" colspan="1">
-									<p:commandButton icon="fa fa-check" process="@this"
-										update="periodo-letivo-escola" oncomplete="PF('escola').hide()">
-										<f:setPropertyActionListener value="#{escola}" 
-											target="#{periodoLetivoCtrl.periodoLetivo.escola}" />
-									</p:commandButton>
-								</p:column>
+								<p:column headerText="Nome" colspan="6">
+								#{escola.nome}
+							</p:column>
+							
+							<p:column headerText="#" colspan="1">
+								<p:commandButton icon="fa fa-check" process="@this"
+									disabled="#{periodoLetivoCtrl.periodoLetivo.escola eq escola}"
+									update="periodo-letivo-escola"
+									oncomplete="PF('escola').hide()">
+									<f:setPropertyActionListener value="#{escola}"
+										target="#{periodoLetivoCtrl.periodoLetivo.escola}" />
+								</p:commandButton>
+							</p:column>
+							
 							</p:dataTable>
-						</div>
-					</div> 
-				</p:dialog>
+						</p:dialog>
+					</div>
+				</div>
 			</div>
 		</h:form>
 	</ui:define>
