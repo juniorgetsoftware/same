@@ -18,6 +18,7 @@ import br.com.same.controllers.converters.PeriodoLetivoConverter;
 import br.com.same.jsf.FacesUtil;
 import br.com.same.jsf.Msgs;
 import br.com.same.models.PeriodoLetivo;
+import br.com.same.models.Turma;
 import br.com.same.services.PeriodoLetivoService;
 
 @Named
@@ -44,6 +45,8 @@ public class PeriodoLetivoCtrl implements Serializable {
 	@Inject
 	private FacesUtil facesUtil;
 
+	private Turma turma;
+
 	public String salvar() {
 		periodoLetivoService.salvar(periodoLetivo);
 		msgs.addInfo().cadastradoComSucesso();
@@ -60,7 +63,7 @@ public class PeriodoLetivoCtrl implements Serializable {
 		return "/private/periodoLetivo/list.xhtml?faces-redirect=true";
 	}
 
-	public void listarPeriodoLetivos() {
+	public void listar() {
 		if (facesUtil.isNotPostback() || isNull(periodoLetivos)) {
 			this.periodoLetivos = periodoLetivoService.listar();
 		}
@@ -86,5 +89,26 @@ public class PeriodoLetivoCtrl implements Serializable {
 
 	public boolean isEditando() {
 		return nonNull(periodoLetivo) && nonNull(periodoLetivo.getId());
+	}
+
+	public void adicionar() {
+		this.periodoLetivo.adicionar(turma);
+		msgs.addInfo().cadastradoComSucesso();
+		facesUtil.atualizarComponente("msgs");
+		turma = new Turma();
+	}
+
+	public void atualizar() {
+		this.periodoLetivo.atualizar(turma);
+		msgs.addInfo().editadoComSucesso();
+		facesUtil.atualizarComponente("msgs");
+		turma = new Turma();
+	}
+
+	public void remover() {
+		this.periodoLetivo.remover(turma);
+		msgs.addInfo().deletadoComSucesso();
+		facesUtil.atualizarComponente("msgs");
+		turma = new Turma();
 	}
 }

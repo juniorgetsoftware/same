@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	template="/WEB-INF/template/layout.xhtml">
+
+	<ui:define name="page-name">
+		Turma
+	</ui:define>
+
+	<ui:define name="page-title">
+		Turma
+	</ui:define>
+
+	<ui:define name="page-subtitle">
+		Manutenção de Turmas
+	</ui:define>
+
+	<ui:define name="page-image">
+		<p:graphicImage library="img" name="graduates.svg" />
+	</ui:define>
+
+	<ui:define name="content">
+		<p:focus for="turma-nome" />
+
+		<h:form prependId="false">
+
+			<div class="ui-g-12 ">
+				<p:messages id="msgs" life="7000" showDetail="true"
+					showSummary="true" />
+			</div>
+
+			<div class="ui-fluid" jsf:id="group">
+
+				<div class="ui-g-12">
+					<div class="ui-g-6 ui-lg-6 ui-md-8 ui-sm-12 ui-g-nopad">
+						<label>Nome</label>
+						<p:inputText id="turma-nome"
+							value="#{turmaCtrl.turma.nome}" required="true"
+							label="Nome" styleClass="form-control">
+							<p:clientValidator event="keyup" />
+						</p:inputText>
+						<p:message for="turma-nome" />
+					</div>
+				</div>
+
+				<div class="ui-g-12">
+					<div class="ui-g-6 ui-lg-6 ui-md-8 ui-sm-12 ui-g-nopad">
+						<label>Descrição</label>
+						<p:inputTextarea id="turma-descricao"
+							value="#{turmaCtrl.turma.descricao}"
+							label="Descrição">
+							<p:clientValidator event="keyup" />
+						</p:inputTextarea>
+						<p:message for="turma-descricao" />
+					</div>
+				</div>
+
+				<div class="ui-g-12 ui-g-nopad">
+					<div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+						<label>Selecionar Período letivo</label>
+						<p:commandLink styleClass="add fa-2x"
+							oncomplete="PF('periodoLetivo').show()" process="@this" update="periodoLetivo"
+							actionListener="#{periodoLetivoCtrl.listarPeriodoLetivos()}">
+							<i class="fa fa-plus" />
+						</p:commandLink>
+					</div>
+
+					<div jsf:id="turma-periodoLetivo"
+						class="ui-g-12 ui-lg-6 ui-md-8 ui-sm-12 ">
+						<div class="destaque centralizado"
+							jsf:rendered="#{turmaCtrl.turma.periodoLetivo ne null}">
+							Período letivo selecionada:
+							#{turmaCtrl.turma.periodoLetivo.escola.nome} - #{turmaCtrl.turma.periodoLetivo.nome}
+						</div>
+					</div>
+
+				</div>
+
+				<div class="ui-g-12 ui-g-nopad">
+					<div class="ui-g-3 ui-lg-3, ui-md-4, ui-sm-6"
+						jsf:rendered="#{turmaCtrl.turma.id eq null}">
+						<p:commandButton value="Salvar" validateClient="true"
+							icon="fa fa-save" action="#{turmaCtrl.salvar()}"
+							update="group" />
+					</div>
+
+					<div class="ui-g-3 ui-lg-3, ui-md-4, ui-sm-6"
+						jsf:rendered="#{turmaCtrl.turma.id ne null}">
+						<p:commandButton value="Editar" validateClient="true"
+							icon="fa fa-refresh" action="#{turmaCtrl.editar()}"
+							styleClass="btn-green" update="group" />
+					</div>
+
+					<div class="ui-g-3 ui-lg-3, ui-md-4, ui-sm-6">
+						<p:button icon="fa fa-ban " value="Cancelar" styleClass="btn-red"
+							outcome="/public/index" />
+					</div>
+				</div>
+			</div>
+		</h:form>
+
+		<h:form prependId="false">
+
+			<div class="ui-fluid">
+				<div class="ui-g-12">
+					<div class="ui-g-6 ui-lg-6 ui-md-8 ui-sm-12">
+						<p:dialog id="periodoLetivo" widgetVar="periodoLetivo" closable="true"
+							closeOnEscape="true" draggable="false" header="Selecionar Período letivo"
+							maximizable="false" minimizable="false" resizable="false"
+							modal="true" showEffect="fade" hideEffect="fade" visible="false" 
+							responsive="true" fitViewport="true" width="80%">
+
+							<p:dataTable var="periodoLetivo" value="#{periodoLetivoCtrl.periodoLetivos}"
+								emptyMessage="Nenhuma periodoLetivo foi listada">
+								<p:column headerText="Nome" colspan="6">
+								#{periodoLetivo.escola.nome} - #{periodoLetivo.nome}
+							</p:column>
+							
+							<p:column headerText="#" colspan="1">
+								<p:commandButton icon="fa fa-check" process="@this"
+									disabled="#{turmaCtrl.turma.periodoLetivo eq periodoLetivo}"
+									update="turma-periodoLetivo"
+									oncomplete="PF('periodoLetivo').hide()">
+									<f:setPropertyActionListener value="#{periodoLetivo}"
+										target="#{turmaCtrl.turma.periodoLetivo}" />
+								</p:commandButton>
+							</p:column>
+							
+							</p:dataTable>
+						</p:dialog>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

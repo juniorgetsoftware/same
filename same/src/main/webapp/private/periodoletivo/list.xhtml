@@ -6,23 +6,24 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 	<f:metadata>
-		<f:event type="preRenderView" listener="#{escolaCtrl.listarEscolas()}" />
+		<f:event type="preRenderView"
+			listener="#{periodoLetivoCtrl.listar()}" />
 	</f:metadata>
 
 	<ui:define name="page-name">
-		Cad. Escola
+		Cad. Período letivo
 	</ui:define>
 
 	<ui:define name="page-title">
-		Escolas
+		Período letivo
 	</ui:define>
 
 	<ui:define name="page-subtitle">
-		Manutenção de Escolas
+		Manutenção de Período letivo
 	</ui:define>
 
 	<ui:define name="page-image">
-		<p:graphicImage library="img" name="layers.svg" />
+		<p:graphicImage library="img" name="clock.svg" />
 	</ui:define>
 
 	<ui:define name="content">
@@ -31,9 +32,9 @@
 
 			<div class="ui-g-12 ">
 				<div class=" pull-right">
-					<p:button value="Nova Escola" icon="fa fa-plus"
-						title="Clique para cadastrar uma nova escola"
-						outcome="/private/escola/form.xhtml" />
+					<p:button value="Novo Período letivo" icon="fa fa-plus"
+						title="Clique para cadastrar um novo Período letivo"
+						outcome="/private/periodoletivo/form.xhtml" />
 				</div>
 			</div>
 
@@ -44,23 +45,24 @@
 						<p:growl id="msgs" closable="true" life="5000" />
 					</div>
 
-					<p:dataTable var="escola" value="#{escolaCtrl.escolas}"
+					<p:dataTable var="periodoLetivo"
+						value="#{periodoLetivoCtrl.periodoLetivos}"
 						styleClass="table table-bordered table-hover" paginator="true"
 						emptyMessage="Nenhum registro foi encontrado" rows="20"
-						rowHover="true" sortBy="#{escola.nome}" paginatorPosition="bottom"
-						paginatorAlwaysVisible="true"
+						rowHover="true" sortBy="#{periodoLetivo.nome}"
+						paginatorPosition="bottom" paginatorAlwaysVisible="true"
 						paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 						rowsPerPageTemplate="25,50,100">
 
 						<p:column headerText="Nome" colspan="2">
-							<p:link outcome="/private/escola/form.xhtml">
-								<f:param name="escola" value="#{escola.id}" />
-						#{escola.nome}
+							<p:link outcome="/private/periodoletivo/form.xhtml">
+								<f:param name="periodoLetivo" value="#{periodoLetivo.id}" />
+						#{periodoLetivo.nome}
 					</p:link>
 						</p:column>
 
-						<p:column headerText="Observação" colspan="4" priority="3">
-					#{escola.observacao}
+						<p:column headerText="Descrição" colspan="4" priority="3">
+					#{periodoLetivo.descricao}
 				</p:column>
 
 						<p:column headerText="Ações" colspan="1" priority="2">

@@ -1,27 +1,23 @@
 package br.com.same.models;
 
-import static java.util.Objects.isNull;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.enterprise.inject.Produces;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-@Table(name = "escola")
-@Entity(name = "escola")
-public class Escola implements Serializable {
+@Table(name = "turma")
+@Entity(name = "turma")
+public class Turma implements Serializable {
 
 	/**
 	 * 
@@ -34,15 +30,15 @@ public class Escola implements Serializable {
 
 	@NotBlank
 	@Size(min = 5, max = 255)
-	@Column(unique = true, nullable = false)
+	@Column(nullable = false)
 	private String nome;
 
 	@Size(min = 5, max = 255)
 	private String descricao;
 
-	@OneToMany(mappedBy = "escola", cascade = {
-			CascadeType.ALL }, targetEntity = PeriodoLetivo.class, orphanRemoval = true)
-	private List<PeriodoLetivo> periodosLetivo;
+	@ManyToOne(targetEntity = PeriodoLetivo.class)
+	@JoinColumn(name = "periodo_letivo_id", nullable = false)
+	private PeriodoLetivo periodoLetivo;
 
 	//
 
@@ -70,19 +66,17 @@ public class Escola implements Serializable {
 		this.descricao = descricao;
 	}
 
+	public PeriodoLetivo getPeriodoLetivo() {
+		return periodoLetivo;
+	}
+
+	public void setPeriodoLetivo(PeriodoLetivo periodoLetivo) {
+		this.periodoLetivo = periodoLetivo;
+	}
+
 	@Produces
-	public Escola getInstancia() {
-		return new Escola();
-	}
-
-	public List<PeriodoLetivo> getPeriodosLetivo() {
-		if (isNull(periodosLetivo))
-			periodosLetivo = new ArrayList<>();
-		return periodosLetivo;
-	}
-
-	public void setPeriodosLetivo(List<PeriodoLetivo> periodosLetivo) {
-		this.periodosLetivo = periodosLetivo;
+	public Turma getInstancia() {
+		return new Turma();
 	}
 
 	@Override
@@ -101,30 +95,13 @@ public class Escola implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Escola other = (Escola) obj;
+		Turma other = (Turma) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-
-	public void adicionar(PeriodoLetivo periodoLetivo) {
-		if (periodoLetivo == null) {
-			throw new RuntimeException("O Período Letivo é inválido");
-		}
-		periodoLetivo.setEscola(this);
-		this.getPeriodosLetivo().add(periodoLetivo);
-	}
-
-	public void atualizar(PeriodoLetivo periodoLetivo) {
-		int index = this.getPeriodosLetivo().indexOf(periodoLetivo);
-		this.getPeriodosLetivo().set(index, periodoLetivo);
-	}
-
-	public void remover(PeriodoLetivo periodoLetivo) {
-		this.getPeriodosLetivo().remove(periodoLetivo);
 	}
 
 }

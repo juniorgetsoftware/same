@@ -30,7 +30,7 @@ public class PeriodoLetivoDao implements Serializable {
 	}
 
 	public List<PeriodoLetivo> listar() {
-		return entityManager.createQuery("from periodoLetivo", PeriodoLetivo.class).getResultList();
+		return entityManager.createQuery("from periodo_letivo", PeriodoLetivo.class).getResultList();
 	}
 
 	public PeriodoLetivo buscarPorId(Long id) {

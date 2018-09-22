@@ -1,5 +1,8 @@
 package br.com.same.models;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -31,6 +35,10 @@ public class PeriodoLetivo {
 	@ManyToOne(targetEntity = Escola.class)
 	@JoinColumn(name = "escola_id", nullable = false)
 	private Escola escola;
+
+	@OneToMany(mappedBy = "periodoLetivo", cascade = {
+			CascadeType.ALL }, targetEntity = Turma.class, orphanRemoval = true)
+	private List<Turma> turmas;
 
 	public Long getId() {
 		return id;
@@ -64,6 +72,14 @@ public class PeriodoLetivo {
 		this.escola = escola;
 	}
 
+	public List<Turma> getTurmas() {
+		return turmas;
+	}
+
+	public void setTurmas(List<Turma> turmas) {
+		this.turmas = turmas;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -89,4 +105,20 @@ public class PeriodoLetivo {
 		return true;
 	}
 
+	public void adicionar(Turma turma) {
+		if (turma == null) {
+			throw new RuntimeException("A Turma é inválida");
+		}
+		turma.setPeriodoLetivo(this);
+		this.getTurmas().add(turma);
+	}
+
+	public void atualizar(Turma turma) {
+		int index = this.getTurmas().indexOf(turma);
+		this.getTurmas().set(index, turma);
+	}
+
+	public void remover(Turma turma) {
+		this.getTurmas().remove(turma);
+	}
 }

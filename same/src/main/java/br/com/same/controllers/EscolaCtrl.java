@@ -7,14 +7,12 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.deltaspike.jsf.api.message.JsfMessage;
 import org.omnifaces.cdi.Param;
-import org.primefaces.PrimeFaces;
 
 import br.com.same.controllers.converters.EscolaConverter;
 import br.com.same.jsf.FacesUtil;
@@ -65,7 +63,7 @@ public class EscolaCtrl implements Serializable {
 		return "/private/escola/list.xhtml?faces-redirect=true";
 	}
 
-	public void listarEscolas() {
+	public void listar() {
 		if (facesUtil.isNotPostback() || isNull(escolas)) {
 			this.escolas = escolaService.listar();
 		}
