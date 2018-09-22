@@ -369,6 +369,12 @@ a.my-link {
 	padding-top: 15px;
 }
 
+.page-image {
+	width: 50px; 
+	float: left; 
+	padding-right: 15px;
+}
+
 /* TOGGLE */
 .toggle {
 	/* float: right;

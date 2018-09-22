@@ -30,9 +30,10 @@ public class EscolaCtrl implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-//	@Param(name = "escola", converterClass = EscolaConverter.class)
+	@Inject
+	@Param(name = "escola", converterClass = EscolaConverter.class)
 	private Escola escola;
-	
+
 	private PeriodoLetivo periodoLetivo;
 
 	private List<Escola> escolas;
@@ -94,10 +95,26 @@ public class EscolaCtrl implements Serializable {
 	public void setPeriodoLetivo(PeriodoLetivo periodoLetivo) {
 		this.periodoLetivo = periodoLetivo;
 	}
-	
-	public String reiniciarPeriodoLetivo() {
+
+	public void adicionar() {
+		this.escola.adicionar(periodoLetivo);
+		msgs.addInfo().cadastradoComSucesso();
+		PrimeFaces.current().ajax().update("msgs");
 		periodoLetivo = new PeriodoLetivo();
-		return null;
 	}
-	
+
+	public void atualizar() {
+		this.escola.atualizar(periodoLetivo);
+		msgs.addInfo().editadoComSucesso();
+		PrimeFaces.current().ajax().update("msgs");
+		periodoLetivo = new PeriodoLetivo();
+	}
+
+	public void remover() {
+		this.escola.remover(periodoLetivo);
+		msgs.addInfo().deletadoComSucesso();
+		PrimeFaces.current().ajax().update("msgs");
+		periodoLetivo = new PeriodoLetivo();
+	}
+
 }

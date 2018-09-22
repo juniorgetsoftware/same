@@ -32,55 +32,63 @@
 </h:head>
 
 <h:body>
-	<main> <header class="topbar">
-		<h:form prependId="false">
-			<div class="logo center">
-				<h:link outcome="/public/index.xhtml">
-					<div class="logo-text font-white ">
-						<div class="fa fa-institution" />
-						SAME
-					</div>
-				</h:link>
-			</div>
-
-		</h:form>
-
-		<ui:insert name="menu-super">
-			<ui:include src="/WEB-INF/template/menu.xhtml" />
-		</ui:insert>
-
-	</header> <ui:insert name="menu-aside">
-		<ui:include src="/WEB-INF/template/menu-aside.xhtml" />
-	</ui:insert>
-
-	<section class="content js-content padding">
-		<ui:insert name="full-content">
-			<div class="ui-g-12 card shadow-effect">
-				<div class="my-head-title">
-					<div class="ui-fluid">
-
-						<ui:insert name="dados-pagina">
-							<ui:include src="/WEB-INF/template/dados-pagina.xhtml" />
-						</ui:insert>
-
-						<ui:insert name="page-menu">
-						</ui:insert>
-					</div>
+	
+	<main> 
+	
+		<header class="topbar">
+			<h:form prependId="false">
+				<div class="logo center">
+					<h:link outcome="/public/index.xhtml">
+						<div class="logo-text font-white ">
+							<div class="fa fa-institution" />
+							SAME
+						</div>
+					</h:link>
 				</div>
-
-				<ui:insert name="content" />
-
-				<ui:insert name="load">
-					<ui:include src="/WEB-INF/template/loading.xhtml" />
-				</ui:insert>
-			</div>
-
+	
+			</h:form>
+	
+			<ui:insert name="menu-super">
+				<ui:include src="/WEB-INF/template/menu.xhtml" />
+			</ui:insert>
+	
+		</header> 
+	
+		<ui:insert name="menu-aside">
+			<ui:include src="/WEB-INF/template/menu-aside.xhtml" />
 		</ui:insert>
-	</section>
 
-	<div id="toTop" style="display: none;">
-		<i class="fa fa-arrow-circle-up" />
-	</div>
+		<section class="content js-content padding">
+			<ui:insert name="full-content">
+				
+				<div class="ui-g-12 card shadow-effect">
+					
+					<div class="my-head-title">
+						<div class="ui-fluid">
+	
+							<ui:insert name="dados-pagina">
+								<ui:include src="/WEB-INF/template/dados-pagina.xhtml" />
+							</ui:insert>
+	
+							<ui:insert name="page-menu">
+							</ui:insert>
+						</div>
+					</div>
+	
+					<ui:insert name="content" />
+	
+					<ui:insert name="load">
+						<ui:include src="/WEB-INF/template/loading.xhtml" />
+					</ui:insert>
+					
+				</div>
+	
+			</ui:insert>
+		</section>
+
+		<div id="toTop" style="display: none;">
+			<i class="fa fa-arrow-circle-up" />
+		</div>
 
 	</main>
 

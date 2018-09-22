@@ -22,7 +22,7 @@ public class PeriodoLetivo {
 
 	@NotBlank
 	@Size(min = 5, max = 255)
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	private String nome;
 
 	@Size(min = 5, max = 255)

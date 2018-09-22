@@ -29,7 +29,7 @@
 
 						<ul>
 							<li >
-								<p:link href="/private/escola/form.xhtml" id="cad-atividade">
+								<p:link href="/private/escola/form.xhtml" >
 									<i class="fa fa-fw fa-cubes" />
 									Escola
 								</p:link>
@@ -42,24 +42,15 @@
 							<i class="fa  fa-fw  fa-list-alt" />
 							Listar
 							<i class="fa  fa-fw  fa-angle-down right" />
-							
-							</p:link>
+						</p:link>
 
 						<ul>
-							<li jsf:rendered="#{seguranca.listarAtividadeEclesiastica}">
-								<p:link href="/list/atividade.xhtml" id="list-atividade">
+							<li >
+								<p:link href="/private/escola/list.xhtml" >
 									<i class="fa fa-fw fa-cubes" />
-										Atividade
+									Escola
 								</p:link>
 							</li>
-
-							<li jsf:rendered="#{seguranca.listarCargo}">
-								<p:link href="/list/cargo.xhtml" id="list-cargo">
-									<i class="fa fa-fw fa-certificate" />
-										Cargo
-								</p:link>
-							</li>
-
 						</ul>
 					</li>
 

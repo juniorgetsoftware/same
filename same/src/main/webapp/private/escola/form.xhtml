@@ -29,33 +29,37 @@
 
 		<h:form prependId="false">
 
-			<div class="ui-g-12 ui-g-nopad">
+			<div class="ui-g-12 ">
 				<p:messages id="msgs" life="7000" showDetail="true"
 					showSummary="true" />
 			</div>
 
 			<div class="ui-fluid" jsf:id="group">
 
-				<div class=" ui-lg-6 ui-md-8 ui-sm-12">
-					<label>Nome</label>
-					<p:inputText id="escola-nome" value="#{escolaCtrl.escola.nome}"
-						required="true" label="Nome" styleClass="form-control">
-						<p:clientValidator event="keyup" />
-					</p:inputText>
-					<p:message for="escola-nome" />
-				</div>
-
-				<div class="ui-lg-6 ui-md-8 ui-sm-12">
-					<label>Observação</label>
-					<p:inputTextarea id="escola-observacao" styleClass="form-control"
-						value="#{escolaCtrl.escola.observacao}" label="Observação">
-						<p:clientValidator event="keyup" />
-					</p:inputTextarea>
-					<p:message for="escola-observacao" />
+				<div class="ui-g-12">
+					<div class="ui-g-6 ui-lg-6 ui-md-8 ui-sm-12 ui-g-nopad">
+						<label>Nome</label>
+						<p:inputText id="escola-nome" value="#{escolaCtrl.escola.nome}"
+							required="true" label="Nome" styleClass="form-control">
+							<p:clientValidator event="keyup" />
+						</p:inputText>
+						<p:message for="escola-nome" />
+					</div>
 				</div>
 
 				<div class="ui-g-12">
-					<div class="ui-lg-12, ui-md-12, ui-sm-12">
+					<div class="ui-g-6 ui-lg-6 ui-md-8 ui-sm-12 ui-g-nopad">
+						<label>Observação</label>
+						<p:inputTextarea id="escola-observacao" styleClass="form-control"
+							value="#{escolaCtrl.escola.observacao}" label="Observação">
+							<p:clientValidator event="keyup" />
+						</p:inputTextarea>
+						<p:message for="escola-observacao" />
+					</div>
+				</div>
+
+				<div class="ui-g-12">
+					<div class="ui-lg-12 ui-md-12, ui-sm-12 ui-g-nopad">
 						<label>Período letivo</label>
 						<p:commandLink styleClass="fa-2x add"
 							title="Adicionar período letivo"
@@ -75,9 +79,8 @@
 							</p:column>
 
 							<p:column headerText="Ações" colspan="1" priority="3">
-								<p:commandButton styleClass="btn-red" icon="fa fa-trash">
-									<p:collector value="#{escolaCtrl.periodoLetivo}"
-										removeFrom="#{escolaCtrl.escola.periodosLetivo}" />
+								<p:commandButton styleClass="btn-red" icon="fa fa-trash"
+									action="#{escolaCtrl.remover()}">
 								</p:commandButton>
 							</p:column>
 						</p:dataTable>
@@ -86,10 +89,10 @@
 				</div>
 
 				<div class="ui-g-12 ui-g-nopad">
-					<div class="ui-g-3 ui-lg-3, ui-md-4, ui-sm-6">
+					<div class="ui-g-3 ui-lg-3, ui-md-4, ui-sm-6"
+						jsf:rendered="#{escolaCtrl.escola.id eq null}">
 						<p:commandButton value="Salvar" validateClient="true"
-							icon="fa fa-save" rendered="#{escolaCtrl.escola.id eq null}"
-							action="#{escolaCtrl.salvar()}" update="group" />
+							icon="fa fa-save" action="#{escolaCtrl.salvar()}" update="group" />
 					</div>
 
 					<div class="ui-g-3 ui-lg-3, ui-md-4, ui-sm-6"
@@ -141,9 +144,7 @@
 						<div class="ui-g-3  ui-lg-3 ui-md-6 ui-sm-6">
 							<p:commandButton value="Cadastrar" icon="fa fa-save"
 								update="escola-periodo-letivo, periodo-letivo"
-								action="#{escolaCtrl.reiniciarPeriodoLetivo()}">
-								<p:collector value="#{escolaCtrl.periodoLetivo}"
-									addTo="#{escolaCtrl.escola.periodosLetivo}" />
+								action="#{escolaCtrl.adicionar()}">
 							</p:commandButton>
 						</div>
 						<div class="ui-g-3  ui-lg-3 ui-md-6 ui-sm-6">

@@ -108,5 +108,22 @@ public class Escola implements Serializable {
 			return false;
 		return true;
 	}
+	
+	public void adicionar(PeriodoLetivo periodoLetivo) {
+		if(periodoLetivo == null) {
+			throw new RuntimeException("O Período Letivo é inválido");
+		}
+		periodoLetivo.setEscola(this);
+		this.getPeriodosLetivo().add(periodoLetivo);
+	}
+
+	public void atualizar(PeriodoLetivo periodoLetivo) {
+		int index = this.getPeriodosLetivo().indexOf(periodoLetivo);
+		this.getPeriodosLetivo().set(index, periodoLetivo);
+	}
+
+	public void remover(PeriodoLetivo periodoLetivo) {
+		this.getPeriodosLetivo().remove(periodoLetivo);
+	}
 
 }
