@@ -111,7 +111,7 @@ ul.menu-user {
 }
 
 #cssmenu > ul > li.open >a {
-    background: #08080833;
+    background: #00000033;
     color: #c5c5c5;
     border-left: solid #094771;
     font-weight: bold;
