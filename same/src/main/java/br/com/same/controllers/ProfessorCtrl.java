@@ -10,12 +10,14 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.deltaspike.data.api.EntityRepository;
 import org.apache.deltaspike.jsf.api.message.JsfMessage;
 import org.omnifaces.cdi.Param;
 
 import br.com.same.controllers.converters.ProfessorConverter;
 import br.com.same.jsf.FacesUtil;
 import br.com.same.jsf.Msgs;
+import br.com.same.jsf.primefaces.LazyDataModel;
 import br.com.same.models.Professor;
 import br.com.same.services.ProfessorService;
 
@@ -32,7 +34,7 @@ public class ProfessorCtrl implements Serializable {
 	@Param(name = "professor", converterClass = ProfessorConverter.class)
 	private Professor professor;
 
-	private List<Professor> professors;
+	private LazyDataModel<Professor, Long> professores;
 
 	@Inject
 	private JsfMessage<Msgs> msgs;
@@ -60,8 +62,8 @@ public class ProfessorCtrl implements Serializable {
 	}
 
 	public void listar() {
-		if (facesUtil.isNotPostback() || isNull(professors)) {
-			this.professors = professorService.listar();
+		if (facesUtil.isNotPostback() || isNull(professores)) {
+			this.professores = new LazyDataModel<>(professorService.getRepository());
 		}
 	}
 
@@ -75,12 +77,12 @@ public class ProfessorCtrl implements Serializable {
 		this.professor = professor;
 	}
 
-	public List<Professor> getProfessors() {
-		return professors;
+	public LazyDataModel<Professor, Long> getProfessores() {
+		return professores;
 	}
 
-	public void setProfessors(List<Professor> professors) {
-		this.professors = professors;
+	public void setProfessores(LazyDataModel<Professor, Long> professores) {
+		this.professores = professores;
 	}
 
 	public boolean isEditando() {

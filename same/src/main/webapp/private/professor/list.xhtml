@@ -57,7 +57,7 @@
 				</div>
 
 				<div class="ui-g-12">
-					<p:dataTable var="professor" value="#{professorCtrl.professors}"
+					<p:dataTable var="professor" value="#{professorCtrl.professores}" lazy="true"
 						paginator="true" emptyMessage="Nenhum registro foi encontrado"
 						rows="25" rowHover="true" sortBy="#{professor.nome}"
 						paginatorPosition="bottom" paginatorAlwaysVisible="true"

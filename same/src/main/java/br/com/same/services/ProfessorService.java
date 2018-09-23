@@ -1,11 +1,12 @@
 package br.com.same.services;
 
-import java.io.Serializable;
 import java.util.List;
+
+import org.apache.deltaspike.data.api.EntityRepository;
 
 import br.com.same.models.Professor;
 
-public interface ProfessorService extends Serializable {
+public interface ProfessorService extends Service<Professor, Long> {
 
 	void salvar(Professor professor);
 
@@ -16,5 +17,7 @@ public interface ProfessorService extends Serializable {
 	Professor buscarPorId(Long id);
 
 	void remover(Professor professor);
+
+	EntityRepository<Professor, Long> getRepository();
 
 }

@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.deltaspike.data.api.EntityRepository;
+
 import br.com.same.models.Professor;
 import br.com.same.repository.ProfessorRepository;
 import br.com.same.services.ProfessorService;
@@ -41,6 +43,11 @@ public class ProfessorServiceImpl implements ProfessorService {
 	@Override
 	public void editar(Professor professor) {
 		professorRepository.save(professor);
+	}
+
+	@Override
+	public EntityRepository<Professor, Long> getRepository() {
+		return this.professorRepository;
 	}
 
 }
