@@ -22,3 +22,29 @@ INSERT INTO turma (id, nome, descricao, periodo_letivo_id) VALUES (9, '2B - Segu
 INSERT INTO turma (id, nome, descricao, periodo_letivo_id) VALUES (10, '1A - Primeiro A', 'Alguma descrição sobre a turma', 4);
 INSERT INTO turma (id, nome, descricao, periodo_letivo_id) VALUES (11, '2A - Segundo A', 'Alguma descrição sobre a turma', 5);
 INSERT INTO turma (id, nome, descricao, periodo_letivo_id) VALUES (12, '2B - Segundo B', 'Alguma descrição sobre a turma', 6);
+
+INSERT INTO professor (id, nome) VALUES(1, 'Wilton Aureliano');
+INSERT INTO professor (id, nome) VALUES(2, 'Neide Lima');
+INSERT INTO professor (id, nome) VALUES(3, 'Alex Wilton');
+INSERT INTO professor (id, nome) VALUES(4, 'Aline Mysna');
+INSERT INTO professor (id, nome) VALUES(5, 'Amanda Miller');
+INSERT INTO professor (id, nome) VALUES(6, 'Junior Oliveira');
+INSERT INTO professor (id, nome) VALUES(7, 'Ian Lucas');
+INSERT INTO professor (id, nome) VALUES(8, 'David Emanuell');
+INSERT INTO professor (id, nome) VALUES(9, 'Cícero Aureliano');
+INSERT INTO professor (id, nome) VALUES(10, 'Maria Ambrosina');
+INSERT INTO professor (id, nome) VALUES(11, 'Francisco Alves');
+INSERT INTO professor (id, nome) VALUES(12, 'Maria José');
+
+INSERT INTO disciplina (id, nome) VALUES(1, 'Português');
+INSERT INTO disciplina (id, nome) VALUES(2, 'Matemática');
+INSERT INTO disciplina (id, nome) VALUES(3, 'Biologia');
+INSERT INTO disciplina (id, nome) VALUES(4, 'Química');
+INSERT INTO disciplina (id, nome) VALUES(5, 'História');
+INSERT INTO disciplina (id, nome) VALUES(6, 'Geografia');
+INSERT INTO disciplina (id, nome) VALUES(7, 'Inglês');
+INSERT INTO disciplina (id, nome) VALUES(8, 'Espanhol');
+INSERT INTO disciplina (id, nome) VALUES(9, 'Geometria');
+INSERT INTO disciplina (id, nome) VALUES(10, 'Filosofia');
+INSERT INTO disciplina (id, nome) VALUES(11, 'Física');
+INSERT INTO disciplina (id, nome) VALUES(12, 'Educação Física');
