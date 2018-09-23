@@ -2,6 +2,11 @@ label {
 	color: #333333;
 }
 
+.pull-right {
+    float: right;
+    padding: 0.5em;
+}
+
 /* TABVIEW */
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected a {
 	color: #555;

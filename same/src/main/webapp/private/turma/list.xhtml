@@ -20,7 +20,7 @@
 	<ui:define name="page-subtitle">
 		Manutenção de Turmas
 	</ui:define>
-
+ 
 	<ui:define name="page-image">
 		<p:graphicImage library="img" name="graduates.svg" />
 	</ui:define>
@@ -29,47 +29,74 @@
 
 		<h:form prependId="false">
 
-			<div class="ui-g-12 ">
-				<div class=" pull-right">
-					<p:button value="Nova Turma" icon="fa fa-plus"
+			<div class="ui-g-12 ui-g-nopad">
+				<div class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-12">
+				<div class=" pull-left">
+					<label>Buscar por: </label>
+					<div class="ui-inputgroup">
+						<p:inputText placeholder="Nome da turma" />
+						<span class="ui-inputgroup-addon">
+							<p:commandLink >
+								<i class="fa fa-search fonte-dark-grey"/>
+							</p:commandLink>
+						</span>
+					</div>
+					</div>
+				</div>
+				
+				<div class="pull-right ShowOnDesktop">
+					<p:button icon="fa fa-plus" value="Nova turma"
 						title="Clique para cadastrar uma nova turma"
 						outcome="/private/turma/form.xhtml" />
 				</div>
 			</div>
 
 			<div class="ui-fluid">
+
+				<div class="ui-g ui-nopad">
+					<p:growl id="msgs" closable="true" life="5000" />
+				</div>
+
 				<div class="ui-g-12">
-
-					<div class="ui-g-12 ui-nopad">
-						<p:growl id="msgs" closable="true" life="5000" />
-					</div>
-
-					<p:dataTable var="turma" value="#{turmaCtrl.turmas}"
-						styleClass="table table-bordered table-hover" paginator="true"
-						emptyMessage="Nenhum registro foi encontrado" rows="20"
+					<p:dataTable var="turma" 
+						value="#{turmaCtrl.turmas}"
+						paginator="true"
+						emptyMessage="Nenhum registro foi encontrado" rows="25"
 						rowHover="true" sortBy="#{turma.nome}" paginatorPosition="bottom"
 						paginatorAlwaysVisible="true"
 						paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 						rowsPerPageTemplate="25,50,100">
 
 						<p:column headerText="Nome" colspan="3">
-							<p:link outcome="/private/turma/form.xhtml">
+							<p:link outcome="/private/turma/form.xhtml" styleClass="my-link"
+								title="Clique para editar este registro">
 								<f:param name="turma" value="#{turma.id}" />
-						#{turma.periodoLetivo.escola.nome} - #{turma.periodoLetivo.nome} - #{turma.nome}
-					</p:link>
+								#{turma.periodoLetivo.escola.nome} - #{turma.periodoLetivo.nome} - #{turma.nome}
+							</p:link>
 						</p:column>
 
-						<p:column headerText="Observação" colspan="4" priority="3">
-					#{turma.descricao}
-				</p:column>
-
-						<p:column headerText="Ações" colspan="1" priority="2">
-							<i class="fa-2x fa fa-refresh primary"></i>
-							<i class="fa-2x fa fa-star secondary"></i>
-							<i class="fa-2x fa fa-trash danger"></i>
+						<p:column headerText="Observação" colspan="4" priority="4">
+							#{turma.descricao}
 						</p:column>
+
+						<p:column headerText="Ações" colspan="1" priority="2"
+							styleClass="center">
+
+							<p:commandLink styleClass="my-link icon-list">
+								<i class="fa fa-refresh primary"></i>
+							</p:commandLink>
+
+							<p:commandLink styleClass="my-link icon-list">
+								<i class="fa fa-star secondary"></i>
+							</p:commandLink>
+
+							<p:commandLink styleClass="my-link icon-list">
+								<i class="fa fa-trash danger"></i>
+							</p:commandLink>
+
+						</p:column>
+
 					</p:dataTable>
-
 
 				</div>
 			</div>

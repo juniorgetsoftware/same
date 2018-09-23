@@ -328,12 +328,12 @@ li {
 	color: red !important;
 }
 
-a.my-link:hover {
+.my-link:hover {
 	color: #020fff !important;
 }
 
-a.my-link {
-	color: #525252 !important;
+.my-link {
+	text-decoration: none;
 }
 
 .text-overflow {
@@ -401,14 +401,6 @@ a.my-link {
 	font-size: 0.75em;
 	color: #373737;
 	/*padding-bottom: 20px;*/
-}
-
-.font-white {
-	color: white;
-}
-
-.font-dark-grey {
-	color: #333333;
 }
 
 .dash-values {
@@ -507,6 +499,81 @@ a.my-link {
 	background: #3f51b5;
 }
 
+/* CORES DE FONTE */
+
+.font-white {
+	color: white;
+}
+
+.font-dark-grey {
+	color: #333333;
+}
+
+.fonte-green {
+	color: #4CAF50 !important;
+}
+
+.fonte-oliva-1 {
+	color: #73b558 !important;
+}
+
+.fonte-oliva-2 {
+	color: #5f924a !important;
+}
+
+.fonte-oliva-3 {
+	color: #375a29 !important;
+}
+
+.fonte-purple-1 {
+	color: #7d48dc !important;
+}
+
+.fonte-purple-2 {
+	color: #663ab5 !important;
+}
+
+.fonte-purple-3 {
+	color: #512d90 !important;
+}
+
+.fonte-blue {
+	color: #03A9F4 !important;
+}
+
+.fonte-orange {
+	color: #fb5e00 !important;
+}
+
+.fonte-purple {
+	color: #673AB7 !important;
+}
+
+.fonte-red {
+	color: #E53935 !important;
+}
+
+.fonte-red2 {
+	color: #F44336 !important;
+}
+
+.fonte-yellow {
+	color: #ffe500 !important;
+}
+
+.fonte-grey {
+	color: #d3d7cf !important;
+}
+
+.fonte-dark-grey {
+	color: #535353 !important;
+}
+
+.fonte-dark-blue {
+	color: #3f51b5 !important;
+}
+
+
 @media ( min-width :480px) {
 	.ShowOnMobile {
 		display: none !important;
@@ -592,12 +659,19 @@ a.my-link {
 		display: none;
 	}
 }
-
+/*
 .my-head-menu {
 	float: right;
 	top: -60px;
 	position: relative;
 	color: #333;
+}
+*/
+.my-head-menu {
+    position: absolute;
+    float: right !important;
+    right: 35px;
+    top: 85px;
 }
 
 .menu-color {
@@ -612,6 +686,11 @@ a.my-link {
 	background: #f5f5f5;
 }
 
+.icon-list {
+	font-size: 1.3em !important;
+	color: #333;
+}
+
 .icon {
 	font-size: 80px !important;
 	color: #333;
@@ -619,11 +698,6 @@ a.my-link {
 
 .icon:hover {
 	color: #2399e5;
-}
-
-.my-link {
-	text-decoration: none;
-	font-weight: bold;
 }
 
 #top-menu .active {
@@ -654,6 +728,7 @@ h1, h2, h3, h4, h5 {
 
 .h1 {
 	margin-top: 0 !important;
+	margin-bottom: 0 !important;
 	font-weight: bold !important;
 } 
 
