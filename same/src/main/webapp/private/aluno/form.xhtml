@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	template="/WEB-INF/template/layout.xhtml">
+
+	<ui:define name="page-name">
+		Aluno
+	</ui:define>
+
+	<ui:define name="page-title">
+		Aluno
+	</ui:define>
+
+	<ui:define name="page-subtitle">
+		Manutenção de Alunos
+	</ui:define>
+
+	<ui:define name="page-image">
+		<p:graphicImage library="img" name="aluno.svg" />
+	</ui:define>
+
+	<ui:define name="content">
+		<p:focus for="aluno-nome" />
+
+		<h:form prependId="false">
+
+			<div class="ui-g-12 ">
+				<p:messages id="msgs" life="7000" showDetail="true"
+					showSummary="true" />
+			</div>
+
+			<div class="ui-fluid" jsf:id="group">
+
+				<div class="ui-g-12">
+					<div class="ui-g-6 ui-lg-6 ui-md-8 ui-sm-12 ui-g-nopad">
+						<label>Nome</label>
+						<p:inputText id="aluno-nome"
+							value="#{alunoCtrl.aluno.nome}" required="true"
+							label="Nome" styleClass="form-control">
+							<p:clientValidator event="keyup" />
+						</p:inputText>
+						<p:message for="aluno-nome" />
+					</div>
+				</div>
+				
+<!-- 				<div class="ui-g-12"> -->
+<!-- 					<div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad"> -->
+<!-- 					<label>Disciplinas</label> -->
+<!-- 					<p:commandLink styleClass="fa-2x add" process="@this" update="disciplina" -->
+<!-- 						oncomplete="PF('disciplina').show()" action="#{disciplinaCtrl.listar()}" -->
+<!-- 						title="Clique para adicionar disciplina"> -->
+<!-- 						<i class="fa fa-plus"/> -->
+<!-- 					</p:commandLink> -->
+						
+<!-- 						<p:dataTable id="aluno-disciplina" var="disciplina"  -->
+<!-- 							value="#{alunoCtrl.aluno.disciplinas}" emptyMessage="Nenhuma disciplina foi adicionada"> -->
+							
+<!-- 							<p:column headerText="Nome" colspan="5"> -->
+<!-- 								#{disciplina.nome} -->
+<!-- 							</p:column> -->
+							
+<!-- 							<p:column headerText="Remover" colspan="1"> -->
+<!-- 								<p:commandButton icon="fa fa-trash" styleClass="btn-red" process="@this" -->
+<!-- 								action="#{alunoCtrl.aluno.remover(disciplina)}" update="aluno-disciplina"/> -->
+<!-- 							</p:column> -->
+							
+<!-- 						</p:dataTable> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+
+
+				<div class="ui-g-12 ui-g-nopad">
+					<div class="ui-g-3 ui-lg-3, ui-md-4, ui-sm-6"
+						jsf:rendered="#{alunoCtrl.aluno.id eq null}">
+						<p:commandButton value="Salvar" validateClient="true"
+							icon="fa fa-save" action="#{alunoCtrl.salvar()}"
+							update="group" />
+					</div>
+
+					<div class="ui-g-3 ui-lg-3, ui-md-4, ui-sm-6"
+						jsf:rendered="#{alunoCtrl.aluno.id ne null}">
+						<p:commandButton value="Editar" validateClient="true"
+							icon="fa fa-refresh" action="#{alunoCtrl.editar()}"
+							styleClass="btn-green" update="group" />
+					</div>
+
+					<div class="ui-g-3 ui-lg-3, ui-md-4, ui-sm-6">
+						<p:button icon="fa fa-ban " value="Cancelar" styleClass="btn-red"
+							outcome="/public/index" />
+					</div>
+				</div>
+			</div>
+		</h:form>
+		
+<!-- 			<h:form prependId="false"> -->
+
+<!-- 			<div class="ui-fluid"> -->
+<!-- 				<p:dialog id="disciplina" widgetVar="disciplina" -->
+<!-- 					closable="true" closeOnEscape="true" draggable="false" -->
+<!-- 					header="Selecionar disciplina" maximizable="false" -->
+<!-- 					minimizable="false" resizable="false" modal="true" -->
+<!-- 					showEffect="fade" hideEffect="fade" visible="false" -->
+<!-- 					responsive="true" width="80%" height="60%" fitViewport="true"> -->
+
+<!-- 					<div class="ui-g-12"> -->
+						 
+ 
+<!-- 						 <p:dataTable var="disciplina" value="#{disciplinaCtrl.disciplinas}" -->
+<!-- 						 	id="disciplinas-dlg"> -->
+						 
+<!-- 						 <p:column headerText="Nome" colspan="5"> -->
+<!-- 						 	#{disciplina.nome} -->
+<!-- 						 </p:column> -->
+						 
+<!-- 						 <p:column headerText="Add" colspan="1" styleClass="center"> -->
+<!-- 							<p:commandButton icon="fa fa-check" title="Clique para adicionar esta disciplina" -->
+<!-- 								update="aluno-disciplina, disciplinas-dlg" process="@this"  -->
+<!-- 								action="#{alunoCtrl.aluno.adicionar(disciplina)}" -->
+<!-- 								rendered="#{not alunoCtrl.aluno.disciplinas.contains(disciplina)}"> -->
+<!-- 							</p:commandButton> -->
+							
+<!-- 							<p:outputLabel value="Adicionada" rendered="#{alunoCtrl.aluno.disciplinas.contains(disciplina)}"/> -->
+							
+<!-- 						 </p:column> -->
+							
+<!-- 						</p:dataTable> -->
+						 
+<!-- 						<div class="ui-g-3  ui-lg-3 ui-md-6 ui-sm-6"> -->
+<!-- 							<p:commandButton value="Cancelar" icon="fa fa-close" -->
+<!-- 								styleClass="btn-red	" oncomplete="PF('disciplina').hide();" -->
+<!-- 								process="@none" /> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</p:dialog> -->
+<!-- 			</div> -->
+
+<!-- 		</h:form> -->
+
+	</ui:define>
+</ui:composition>
