@@ -71,6 +71,12 @@
 								#{professor.nome}
 							</p:link>
 						</p:column>
+						
+						<p:column headerText="Disciplinas" colspan="2">
+							<p:repeat var="disciplina" value="#{professor.disciplinas}" varStatus="index">								
+								#{disciplina.nome} #{index.last ? '' : '-'} 
+							</p:repeat>
+						</p:column>
 
 						<p:column headerText="Ações" colspan="1" priority="2"
 							styleClass="center">

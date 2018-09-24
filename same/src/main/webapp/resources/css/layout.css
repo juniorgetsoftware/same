@@ -351,13 +351,14 @@ li {
 }
 
 .destaque {
-	padding: 2px 6px;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	border-radius: 10px;
-	background: #2196F3;
-	color: white;
-	/*font-weight: bold;*/
+    padding: 2px 5px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #2196F3;
+    color: white;
+    font-weight: bold;
+    display: inline;
 }
 
 .tipo:hover {

@@ -114,11 +114,13 @@ public class PeriodoLetivo {
 	}
 
 	public void atualizar(Turma turma) {
+		turma.setPeriodoLetivo(this);
 		int index = this.getTurmas().indexOf(turma);
 		this.getTurmas().set(index, turma);
 	}
 
 	public void remover(Turma turma) {
 		this.getTurmas().remove(turma);
+		turma.setPeriodoLetivo(null);
 	}
 }

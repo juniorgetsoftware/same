@@ -119,12 +119,14 @@ public class Escola implements Serializable {
 	}
 
 	public void atualizar(PeriodoLetivo periodoLetivo) {
+		periodoLetivo.setEscola(this);
 		int index = this.getPeriodosLetivo().indexOf(periodoLetivo);
 		this.getPeriodosLetivo().set(index, periodoLetivo);
 	}
 
 	public void remover(PeriodoLetivo periodoLetivo) {
 		this.getPeriodosLetivo().remove(periodoLetivo);
+		periodoLetivo.setEscola(null);
 	}
 
 }

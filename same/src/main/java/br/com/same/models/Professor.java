@@ -1,12 +1,19 @@
 package br.com.same.models;
 
+import static java.util.Objects.isNull;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -30,6 +37,13 @@ public class Professor implements Serializable {
 	@Column(nullable = false)
 	private String nome;
 
+	@ManyToMany(targetEntity = Disciplina.class)
+	@JoinTable(name = "professor_disciplina", joinColumns = {
+			@JoinColumn(name = "professor_id") }, inverseJoinColumns = { @JoinColumn(name = "disciplina_id") })
+	private List<Disciplina> disciplinas;
+
+	//
+
 	public Long getId() {
 		return id;
 	}
@@ -44,6 +58,15 @@ public class Professor implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public List<Disciplina> getDisciplinas() {
+		if(isNull(disciplinas)) disciplinas = new ArrayList<>();
+		return disciplinas;
+	}
+
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
 	}
 
 	@Override
@@ -69,6 +92,22 @@ public class Professor implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public void adicionar(Disciplina disciplina) {
+		if (disciplina == null) {
+			throw new RuntimeException("A disciplina é inválida");
+		}
+		this.getDisciplinas().add(disciplina);
+	}
+
+	public void atualizar(Disciplina disciplina) {
+		int index = this.getDisciplinas().indexOf(disciplina);
+		this.getDisciplinas().set(index, disciplina);
+	}
+
+	public void remover(Disciplina disciplina) {
+		this.getDisciplinas().remove(disciplina);
 	}
 
 }

@@ -47,6 +47,31 @@
 						<p:message for="professor-nome" />
 					</div>
 				</div>
+				
+				<div class="ui-g-12">
+					<div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+					<label>Disciplinas</label>
+					<p:commandLink styleClass="fa-2x add" process="@this" update="disciplina"
+						oncomplete="PF('disciplina').show()" action="#{disciplinaCtrl.listar()}"
+						title="Clique para adicionar disciplina">
+						<i class="fa fa-plus"/>
+					</p:commandLink>
+						
+						<p:dataTable id="professor-disciplina" var="disciplina" 
+							value="#{professorCtrl.professor.disciplinas}" emptyMessage="Nenhuma disciplina foi adicionada">
+							
+							<p:column headerText="Nome" colspan="5">
+								#{disciplina.nome}
+							</p:column>
+							
+							<p:column headerText="Remover" colspan="1">
+								<p:commandButton icon="fa fa-trash" styleClass="btn-red" process="@this"
+								action="#{professorCtrl.professor.remover(disciplina)}" update="professor-disciplina"/>
+							</p:column>
+							
+						</p:dataTable>
+					</div>
+				</div>
 
 
 				<div class="ui-g-12 ui-g-nopad">
@@ -70,6 +95,50 @@
 					</div>
 				</div>
 			</div>
+		</h:form>
+		
+			<h:form prependId="false">
+
+			<div class="ui-fluid">
+				<p:dialog id="disciplina" widgetVar="disciplina"
+					closable="true" closeOnEscape="true" draggable="false"
+					header="Selecionar disciplina" maximizable="false"
+					minimizable="false" resizable="false" modal="true"
+					showEffect="fade" hideEffect="fade" visible="false"
+					responsive="true" width="80%" height="60%" fitViewport="true">
+
+					<div class="ui-g-12">
+						 
+ 
+						 <p:dataTable var="disciplina" value="#{disciplinaCtrl.disciplinas}"
+						 	id="disciplinas-dlg">
+						 
+						 <p:column headerText="Nome" colspan="5">
+						 	#{disciplina.nome}
+						 </p:column>
+						 
+						 <p:column headerText="Add" colspan="1" styleClass="center">
+							<p:commandButton icon="fa fa-check" title="Clique para adicionar esta disciplina"
+								update="professor-disciplina, disciplinas-dlg" process="@this" 
+								action="#{professorCtrl.professor.adicionar(disciplina)}"
+								rendered="#{not professorCtrl.professor.disciplinas.contains(disciplina)}">
+							</p:commandButton>
+							
+							<p:outputLabel value="Adicionada" rendered="#{professorCtrl.professor.disciplinas.contains(disciplina)}"/>
+							
+						 </p:column>
+							
+						</p:dataTable>
+						 
+						<div class="ui-g-3  ui-lg-3 ui-md-6 ui-sm-6">
+							<p:commandButton value="Cancelar" icon="fa fa-close"
+								styleClass="btn-red	" oncomplete="PF('disciplina').hide();"
+								process="@none" />
+						</div>
+					</div>
+				</p:dialog>
+			</div>
+
 		</h:form>
 
 	</ui:define>
