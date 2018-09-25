@@ -62,6 +62,7 @@
 						rows="25" rowHover="true" sortBy="#{professor.nome}"
 						paginatorPosition="bottom" paginatorAlwaysVisible="true"
 						paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+						currentPageReportTemplate="({startRecord} - {endRecord} de {totalRecords}, página {currentPage} de {totalPages})"
 						rowsPerPageTemplate="25,50,100">
 
 						<p:column headerText="Nome" colspan="3">
