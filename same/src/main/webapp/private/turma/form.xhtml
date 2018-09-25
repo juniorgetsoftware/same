@@ -65,7 +65,7 @@
 						<label>Selecionar Período letivo</label>
 						<p:commandLink styleClass="add fa-2x"
 							oncomplete="PF('periodoLetivo').show()" process="@this" update="periodoLetivo"
-							actionListener="#{periodoLetivoCtrl.listarPeriodoLetivos()}">
+							actionListener="#{periodoLetivoCtrl.listar()}">
 							<i class="fa fa-plus" />
 						</p:commandLink>
 					</div>
@@ -79,6 +79,32 @@
 						</div>
 					</div>
 
+				</div>
+				
+				
+				<div class="ui-g-12">
+					<div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+					<label>Adicionar alunos</label>
+					<p:commandLink styleClass="fa-2x add" process="@this" update="aluno"
+						oncomplete="PF('aluno').show()" action="#{alunoCtrl.listar()}"
+						title="Clique para adicionar aluno">
+						<i class="fa fa-plus"/>
+					</p:commandLink>
+						
+						<p:dataTable id="turma-aluno" var="aluno" 
+							value="#{turmaCtrl.turma.alunos}" emptyMessage="Nenhum aluno foi adicionado">
+							
+							<p:column headerText="Nome" colspan="5">
+								#{aluno.nome}
+							</p:column>
+							
+							<p:column headerText="Remover" colspan="1">
+								<p:commandButton icon="fa fa-trash" styleClass="btn-red" process="@this"
+								action="#{turmaCtrl.turma.remover(aluno)}" update="turma-aluno"/>
+							</p:column>
+							
+						</p:dataTable>
+					</div>
 				</div>
 
 				<div class="ui-g-12 ui-g-nopad">
@@ -137,5 +163,57 @@
 				</div>
 			</div>
 		</h:form>
+		
+		
+		
+		
+		<h:form prependId="false">
+			<div class="ui-fluid">
+				<p:dialog id="aluno" widgetVar="aluno" 
+					closable="true" closeOnEscape="true" draggable="false"
+					header="Selecionar aluno" maximizable="false"
+					minimizable="false" resizable="false" modal="true"
+					showEffect="fade" hideEffect="fade" visible="false"
+					responsive="true" width="80%" height="60%" fitViewport="true">
+
+					<div class="ui-g-12">
+						 
+ 
+						 <p:dataTable var="aluno" value="#{alunoCtrl.alunos}"
+						 	id="alunos-dlg" lazy="true" emptyMessage="Nenhum aluno foi cadastrado"
+						 	paginator="true" rowHover="true" 
+						 	paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+							rowsPerPageTemplate="25,50,100" rows="25">
+						 
+							 <p:column headerText="Nome" colspan="5">
+							 	#{aluno.nome}
+							 </p:column>
+							 
+							 <p:column headerText="Add" colspan="1" styleClass="center">
+								<p:commandButton icon="fa fa-check" title="Clique para adicionar este aluno"
+									update="turma-aluno, alunos-dlg" process="@this" 
+									action="#{turmaCtrl.turma.adicionar(aluno)}"
+									rendered="#{not turmaCtrl.turma.alunos.contains(aluno)}">
+								</p:commandButton>
+								
+								<p:outputLabel value="Adicionado" rendered="#{turmaCtrl.turma.alunos.contains(aluno)}"/>
+								
+							 </p:column>
+							
+						</p:dataTable>
+						 
+						<div class="ui-g-3  ui-lg-3 ui-md-6 ui-sm-6">
+							<p:commandButton value="Cancelar" icon="fa fa-close"
+								styleClass="btn-red	" oncomplete="PF('aluno').hide();"
+								process="@none" />
+						</div>
+					</div>
+				</p:dialog>
+			</div>
+
+		</h:form>
+		
+		
+		
 	</ui:define>
 </ui:composition>

@@ -7,7 +7,8 @@ import java.util.Map;
 import org.apache.deltaspike.data.api.EntityRepository;
 import org.primefaces.model.SortOrder;
 
-public class LazyDataModel<T, PK extends Serializable> extends org.primefaces.model.LazyDataModel<T> {
+public class LazyDataModel<T, PK extends Serializable> extends org.primefaces.model.LazyDataModel<T>
+		implements Serializable {
 
 	/**
 	 * 
