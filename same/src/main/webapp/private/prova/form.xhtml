@@ -120,7 +120,7 @@
 										
 										<div class="ui-inputgroup">
 												<span class="ui-inputgroup-addon">
-													<p:commandButton icon="fa fa-trash" styleClass="btn-red" 
+													<p:commandButton icon="fa fa-trash" styleClass="btn-red" process="@this"
 														action="#{provaCtrl.prova.remover(questao)}" update="prova-gerada"
 														title="Clique para remover a questão #{indiceQuestao.index +1 }"/>
 												</span>
@@ -146,7 +146,7 @@
 												
 											<div class="ui-inputgroup">
 												<span class="ui-inputgroup-addon">
-													<p:commandButton icon="fa fa-trash" styleClass="btn-red" 
+													<p:commandButton icon="fa fa-trash" styleClass="btn-red" process="@this" 
 														action="#{questao.remover(alternativa)}" update="prova-gerada"
 														title="Clique para remover a alternativa #{indiceQuestao.index +1 }.#{indiceAlternativa.index +1 }"/>
 												</span>
@@ -183,6 +183,16 @@
 							</div>
 						</h:panelGroup>
 					</p:repeat>
+					
+					<h:panelGroup rendered="#{empty provaCtrl.prova.questoes}">
+						<div class="ui-g-2">
+							<p:commandButton icon="fa fa-plus" value="Adicionar questão"
+								title="Clique para adicionar mais uma questão" style="width:200px"
+								action="#{provaCtrl.prova.adicionarQuestaoEmBranco()}"
+								 update="prova-gerada" process="@this"/>
+						</div>
+					</h:panelGroup>
+					
 				</div>
 
 				<div class="ui-g-3 ui-lg-3 ui-md-6 ui-sm-12">
