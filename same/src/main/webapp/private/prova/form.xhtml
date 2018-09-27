@@ -25,6 +25,12 @@
 	</ui:define>
 
 	<ui:define name="content">
+	
+	<div class="ui-g-12 ">
+		<p:messages id="msgs" life="7000" showDetail="true"
+			showSummary="true" />
+	</div>
+			
 		<div class="ui-fluid">
 
 			<h:form prependId="false">
@@ -144,7 +150,7 @@
 
 				<div class="ui-g-3 ui-lg-3 ui-md-6 ui-sm-12">
 					<p:commandButton icon="fa fa-cloud" value="Cadastrar prova"
-						action="#{provaCtrl.cadastrar()}"
+						action="#{provaCtrl.salvar()}"
 						rendered="#{not empty provaCtrl.prova.questoes}"
 						update="dados-prova, prova-gerada" process="@form"
 						validateClient="true" />

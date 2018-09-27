@@ -1,10 +1,44 @@
 package br.com.same.models;
 
-public class Alternativa {
+import static java.util.Objects.isNull;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
+
+@Table(name = "alternativa")
+@Entity(name = "alternativa")
+public class Alternativa implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@NotBlank
+	@Size(min = 5, max = 255)
+	@Column(nullable = false)
 	private String descricao;
+
 	private boolean resposta;
+
+	@ManyToOne(targetEntity = Questao.class)
+	@JoinColumn(name = "questao_id", nullable = false)
+	private Questao questao;
 
 	public Long getId() {
 		return id;
@@ -28,6 +62,15 @@ public class Alternativa {
 
 	public void setResposta(boolean resposta) {
 		this.resposta = resposta;
+	}
+
+	public Questao getQuestao() {
+		if (isNull(questao)) questao = new Questao();
+		return questao;
+	}
+
+	public void setQuestao(Questao questao) {
+		this.questao = questao;
 	}
 
 	@Override

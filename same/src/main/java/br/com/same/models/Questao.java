@@ -2,14 +2,41 @@ package br.com.same.models;
 
 import static java.util.Objects.isNull;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Questao {
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+@Table(name = "questao")
+@Entity(name = "questao")
+public class Questao implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String enunciado;
+
+	@OneToMany(mappedBy = "questao", cascade = {
+			CascadeType.ALL }, targetEntity = Alternativa.class, orphanRemoval = true)
 	private List<Alternativa> alternativas;
+
+	@ManyToOne(targetEntity = Prova.class)
+	@JoinColumn(name = "prova_id", nullable = false)
+	private Prova prova;
 
 	public Long getId() {
 		return id;
@@ -35,6 +62,34 @@ public class Questao {
 
 	public void setAlternativas(List<Alternativa> alternativas) {
 		this.alternativas = alternativas;
+	}
+
+	public Prova getProva() {
+		if (isNull(prova)) prova = new Prova();
+		return prova;
+	}
+
+	public void setProva(Prova prova) {
+		this.prova = prova;
+	}
+
+	public void adicionar(Alternativa alternativa) {
+		if (alternativa == null) {
+			throw new RuntimeException("A alternativa é inválida");
+		}
+		alternativa.setQuestao(this);
+		this.getAlternativas().add(alternativa);
+	}
+
+	public void atualizar(Alternativa alternativa) {
+		alternativa.setQuestao(this);
+		int index = this.getAlternativas().indexOf(alternativa);
+		this.getAlternativas().set(index, alternativa);
+	}
+
+	public void remover(Alternativa alternativa) {
+		this.getAlternativas().remove(alternativa);
+		alternativa.setQuestao(null);
 	}
 
 	@Override

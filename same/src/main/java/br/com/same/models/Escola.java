@@ -34,7 +34,7 @@ public class Escola implements Serializable {
 
 	@NotBlank
 	@Size(min = 5, max = 255)
-	@Column(unique = true, nullable = false)
+	@Column(nullable = false)
 	private String nome;
 
 	@Size(min = 5, max = 255)
