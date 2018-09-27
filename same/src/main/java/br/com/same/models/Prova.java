@@ -131,6 +131,10 @@ public class Prova implements Serializable {
 			}
 		}
 	}
+	
+	public void adicionarQuestaoEmBranco() {
+		this.getQuestoes().add(new Questao());
+	}
 
 	@Override
 	public String toString() {

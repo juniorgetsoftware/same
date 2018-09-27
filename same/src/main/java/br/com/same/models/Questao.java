@@ -92,6 +92,10 @@ public class Questao implements Serializable {
 		alternativa.setQuestao(null);
 	}
 
+	public void adicionarAlternativaEmBranco() {
+		this.getAlternativas().add(new Alternativa());
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

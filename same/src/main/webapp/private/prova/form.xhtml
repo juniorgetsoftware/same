@@ -117,6 +117,14 @@
 									<span class="ui-inputgroup-addon"> #{indiceQuestao.index +1 } </span>
 									<p:inputText value="#{questao.enunciado}" required="true"
 										placeholder="Enunciado da questão #{indiceQuestao.index +1 }" />
+										
+										<div class="ui-inputgroup">
+												<span class="ui-inputgroup-addon">
+													<p:commandButton icon="fa fa-trash" styleClass="btn-red" 
+														action="#{provaCtrl.prova.remover(questao)}" update="prova-gerada"
+														title="Clique para remover a questão #{indiceQuestao.index +1 }"/>
+												</span>
+											</div>
 								</div>
 
 								<br />
@@ -124,8 +132,7 @@
 								<p:panel header="Alternativas">
 									<p:repeat var="alternativa" value="#{questao.alternativas}"
 										varStatus="indiceAlternativa">
-
-
+										
 										<div class="ui-inputgroup">
 											<span class="ui-inputgroup-addon">
 												#{indiceQuestao.index +1 }.#{indiceAlternativa.index +1 } </span> <span
@@ -136,24 +143,60 @@
 
 											<p:inputText value="#{alternativa.descricao}" required="true"
 												placeholder="Digite o texto da alternativa   #{indiceAlternativa.index +1 } da questão  #{indiceQuestao.index +1 }" />
+												
+											<div class="ui-inputgroup">
+												<span class="ui-inputgroup-addon">
+													<p:commandButton icon="fa fa-trash" styleClass="btn-red" 
+														action="#{questao.remover(alternativa)}" update="prova-gerada"
+														title="Clique para remover a alternativa #{indiceQuestao.index +1 }.#{indiceAlternativa.index +1 }"/>
+												</span>
+											</div>
 										</div>
 
 										<br />
+										
+										<h:panelGroup rendered="#{indiceAlternativa.last}">
+												<p:commandButton icon="fa fa-plus" value="Adicionar alternativa" process="@this"
+													title="Clique para adicionar mais uma alternativa" style="width:200px"
+													action="#{questao.adicionarAlternativaEmBranco()}" update="prova-gerada"/>
+										</h:panelGroup>
 
 									</p:repeat>
+									
+										<h:panelGroup rendered="#{empty questao.alternativas}">
+												<p:commandButton icon="fa fa-plus" value="Adicionar alternativa" process="@this"
+													title="Clique para adicionar mais uma alternativa" style="width:200px"
+													action="#{questao.adicionarAlternativaEmBranco()}" update="prova-gerada"/>
+										</h:panelGroup>
+										
 								</p:panel>
 							</p:panel>
 
 						</div>
+						
+						<h:panelGroup rendered="#{indiceQuestao.last}">
+							<div class="ui-g-2">
+								<p:commandButton icon="fa fa-plus" value="Adicionar questão"
+									title="Clique para adicionar mais uma questão" style="width:200px"
+									action="#{provaCtrl.prova.adicionarQuestaoEmBranco()}"
+									 update="prova-gerada" process="@this"/>
+							</div>
+						</h:panelGroup>
 					</p:repeat>
 				</div>
 
 				<div class="ui-g-3 ui-lg-3 ui-md-6 ui-sm-12">
 					<p:commandButton icon="fa fa-cloud" value="Cadastrar prova"
 						action="#{provaCtrl.salvar()}"
-						rendered="#{not empty provaCtrl.prova.questoes}"
+						rendered="#{not empty provaCtrl.prova.questoes and provaCtrl.prova.id eq null}"
 						update="dados-prova, prova-gerada" process="@form"
-						validateClient="true" />
+						validateClient="true" title="Clique para cadastrar a prova"/>
+
+					<p:commandButton icon="fa fa-cloud" value="Editar prova"
+						action="#{provaCtrl.editar()}" styleClass="btn-green"
+						rendered="#{not empty provaCtrl.prova.questoes and provaCtrl.prova.id ne null}"
+						update="dados-prova, prova-gerada" process="@form"
+						validateClient="true" title="Clique para editar os dados da prova"/>
 				</div>
 
 			</h:form>
