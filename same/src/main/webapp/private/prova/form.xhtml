@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	template="/WEB-INF/template/layout.xhtml">
+
+	<ui:define name="page-name">
+		Cadastro de Prova
+	</ui:define>
+
+	<ui:define name="page-title">
+		Cadastro de Prova
+	</ui:define>
+
+	<ui:define name="page-subtitle">
+		Módulo para a criação de provas
+	</ui:define>
+
+	<ui:define name="page-image">
+		<p:graphicImage library="img" name="file-text.svg" />
+	</ui:define>
+
+	<ui:define name="content">
+		<div class="ui-fluid">
+
+			<h:form prependId="false">
+				<div jsf:id="dados-prova">
+					<div class="ui-g-12">
+						<div class="ui-g-6 ui-lg-6 ui-md-8 ui-sm-12">
+							<h:outputLabel for="prova-titulo" value="Título" />
+							<p:inputText id="prova-titulo" required="true" label="Título"
+								value="#{provaCtrl.prova.titulo}" />
+							<p:message for="prova-titulo" />
+						</div>
+					</div>
+
+					<div class="ui-g-12">
+						<div class="ui-g-6 ui-lg-6 ui-md-8 ui-sm-12">
+							<h:outputLabel for="prova-observacao" value="Observação" />
+							<p:textEditor id="prova-observacao" required="true"
+								label="Observação" value="#{provaCtrl.prova.observacao}">
+
+								<f:facet name="toolbar">
+									<span class="ql-formats">
+										<button class="ql-bold"></button>
+										<button class="ql-italic"></button>
+										<button class="ql-underline"></button>
+										<button class="ql-strike"></button>
+									</span>
+									<span class="ql-formats"> <select class="ql-font"></select>
+										<select class="ql-size"></select>
+									</span>
+								</f:facet>
+
+
+							</p:textEditor>
+							<p:message for="prova-observacao" />
+						</div>
+					</div>
+
+					<div class="ui-g-12">
+						<div class="ui-g-3 ui-lg-3 ui-md-6 ui-sm-6">
+							<h:outputLabel for="prova-qtd-questoes" value="Qtd. de questões" />
+							<p:inputText id="prova-qtd-questoes" required="true"
+								label="Qtd. de questões" value="#{provaCtrl.quantidadeQuestoes}" />
+							<p:message for="prova-qtd-questoes" />
+						</div>
+
+						<div class="ui-g-3 ui-lg-3 ui-md-6 ui-sm-6">
+							<label for="prova-qtd-alternativas">Qtd. de alternativas</label>
+							<p:inputText id="prova-qtd-alternativas" required="true"
+								label="Qtd. de alternativas"
+								value="#{provaCtrl.quantidadeAlternativasPorQuestao}" />
+							<p:message for="prova-qtd-alternativas" />
+						</div>
+					</div>
+				</div>
+
+				<div class="ui-g-3 ui-lg-3 ui-md-6 ui-sm-12">
+					<p:commandButton icon="fa fa-cog" value="Gerar campos da prova"
+						action="#{provaCtrl.gerarCamposProva()}" styleClass="btn-red"
+						update="dados-prova, prova-gerada" process="@form"
+						validateClient="true" />
+				</div>
+
+
+
+			</h:form>
+
+
+			<h:form id="prova-gerada" prependId="false">
+
+				<div class="ui-g-12">
+					<h1>#{provaCtrl.prova.titulo}</h1>
+					<h3>
+						<p:outputLabel value="#{provaCtrl.prova.observacao}"
+							escape="false" />
+					</h3>
+					<p:repeat var="questao" value="#{provaCtrl.prova.questoes}"
+						varStatus="indiceQuestao">
+
+						<div class="ui-g-12">
+
+							<p:panel header="Questão #{indiceQuestao.index +1 }">
+
+								<div class="ui-inputgroup">
+									<span class="ui-inputgroup-addon"> #{indiceQuestao.index +1 } </span>
+									<p:inputText value="#{questao.enunciado}" required="true"
+										placeholder="Enunciado da questão #{indiceQuestao.index +1 }" />
+								</div>
+
+								<br />
+
+								<p:panel header="Alternativas">
+									<p:repeat var="alternativa" value="#{questao.alternativas}"
+										varStatus="indiceAlternativa">
+
+
+										<div class="ui-inputgroup">
+											<span class="ui-inputgroup-addon">
+												#{indiceQuestao.index +1 }.#{indiceAlternativa.index +1 } </span> <span
+												class="ui-inputgroup-addon"> <p:selectBooleanCheckbox
+													value="#{alternativa.resposta}"
+													title="Clique para marcar se esta for a respoasta correta" />
+											</span>
+
+											<p:inputText value="#{alternativa.descricao}" required="true"
+												placeholder="Digite o texto da alternativa   #{indiceAlternativa.index +1 } da questão  #{indiceQuestao.index +1 }" />
+										</div>
+
+										<br />
+
+									</p:repeat>
+								</p:panel>
+							</p:panel>
+
+						</div>
+					</p:repeat>
+				</div>
+
+				<div class="ui-g-3 ui-lg-3 ui-md-6 ui-sm-12">
+					<p:commandButton icon="fa fa-cloud" value="Cadastrar prova"
+						action="#{provaCtrl.cadastrar()}"
+						rendered="#{not empty provaCtrl.prova.questoes}"
+						update="dados-prova, prova-gerada" process="@form"
+						validateClient="true" />
+				</div>
+
+			</h:form>
+		</div>
+
+	</ui:define>
+</ui:composition>

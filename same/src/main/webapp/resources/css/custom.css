@@ -1,3 +1,8 @@
+.ui-icon {
+    width: 18px !important;
+    height: 18px !important;
+}
+
 label {
 	color: #333333;
 }

@@ -4,23 +4,20 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	template="/WEB-INF/template/layout.xhtml">
-	
-	
+
 	<ui:define name="page-name">
-		Título da Página
+		New page
 	</ui:define>
-	
+
 	<ui:define name="page-title">
-		Título da Página
+		New page
 	</ui:define>
 
 	<ui:define name="page-subtitle">
-		Subtítulo da página
-	</ui:define>
-
-	<ui:define name="page-menu">
-		<ui:include src="/WEB-INF/template/links-funcionais.xhtml" />
+		New page
 	</ui:define>
 
 	<ui:define name="page-image">
@@ -28,8 +25,12 @@
 	</ui:define>
 
 	<ui:define name="content">
-		<h:form>
-	 		Hello World!!! =)
-		</h:form>
+		<div class="ui-fluid" jsf:id="group">
+
+			<div class="ui-g-12">
+				<h1>Hello, World!</h1>
+			</div>
+		</div>
+
 	</ui:define>
 </ui:composition>
