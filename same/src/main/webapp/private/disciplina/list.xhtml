@@ -59,7 +59,7 @@
 				<div class="ui-g-12">
 					<p:dataTable var="disciplina" value="#{disciplinaCtrl.disciplinas}"
 						paginator="true" emptyMessage="Nenhum registro foi encontrado"
-						rows="25" rowHover="true" sortBy="#{disciplina.nome}"
+						rows="25" rowHover="true" sortBy="#{disciplina.nome}" lazy="true"
 						paginatorPosition="bottom" paginatorAlwaysVisible="true"
 						paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 						currentPageReportTemplate="({startRecord} - {endRecord} de {totalRecords}, página {currentPage} de {totalPages})"

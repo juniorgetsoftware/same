@@ -111,25 +111,35 @@
 						<p:dialog id="escola" widgetVar="escola" closable="true"
 							closeOnEscape="true" draggable="false" header="Selecionar escola"
 							maximizable="false" minimizable="false" resizable="false"
-							modal="true" showEffect="fade" hideEffect="fade" visible="false" 
+							modal="true" showEffect="fade" hideEffect="fade" visible="false"
 							responsive="true" fitViewport="true" width="80%">
 
 							<p:dataTable var="escola" value="#{escolaCtrl.escolas}"
-								emptyMessage="Nenhuma escola foi listada">
+								emptyMessage="Nenhuma escola foi listada" lazy="true"
+								paginator="true" rows="25" rowHover="true"
+								sortBy="#{prova.titulo}" paginatorPosition="bottom"
+								paginatorAlwaysVisible="true"
+								paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+								currentPageReportTemplate="({startRecord} - {endRecord} de {totalRecords}, página {currentPage} de {totalPages})"
+								rowsPerPageTemplate="25,50,100">
+
 								<p:column headerText="Nome" colspan="6">
-								#{escola.nome}
-							</p:column>
-							
-							<p:column headerText="#" colspan="1">
-								<p:commandButton icon="fa fa-check" process="@this"
-									disabled="#{periodoLetivoCtrl.periodoLetivo.escola eq escola}"
-									update="periodo-letivo-escola"
-									oncomplete="PF('escola').hide()">
-									<f:setPropertyActionListener value="#{escola}"
-										target="#{periodoLetivoCtrl.periodoLetivo.escola}" />
-								</p:commandButton>
-							</p:column>
-							
+									#{escola.nome}
+								</p:column>
+
+								<p:column headerText="#" colspan="1" styleClass="center">
+									<p:commandButton icon="fa fa-check" process="@this"
+										rendered="#{periodoLetivoCtrl.periodoLetivo.escola ne escola}"
+										update="periodo-letivo-escola" 
+										oncomplete="PF('escola').hide()" >
+										<f:setPropertyActionListener value="#{escola}"
+											target="#{periodoLetivoCtrl.periodoLetivo.escola}" />
+									</p:commandButton>
+									
+									<p:outputLabel value="Adicionada" rendered="#{periodoLetivoCtrl.periodoLetivo.escola eq escola}"/>
+
+								</p:column>
+
 							</p:dataTable>
 						</p:dialog>
 					</div>

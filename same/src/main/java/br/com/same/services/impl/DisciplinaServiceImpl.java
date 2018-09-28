@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.deltaspike.data.api.EntityRepository;
+
 import br.com.same.models.Disciplina;
 import br.com.same.repository.DisciplinaRepository;
 import br.com.same.services.DisciplinaService;
@@ -14,7 +16,7 @@ public class DisciplinaServiceImpl implements DisciplinaService {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
 	private DisciplinaRepository disciplinaRepository;
 
@@ -41,6 +43,11 @@ public class DisciplinaServiceImpl implements DisciplinaService {
 	@Override
 	public void editar(Disciplina disciplina) {
 		disciplinaRepository.save(disciplina);
+	}
+
+	@Override
+	public EntityRepository<Disciplina, Long> getRepository() {
+		return disciplinaRepository;
 	}
 
 }

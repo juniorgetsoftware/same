@@ -60,7 +60,7 @@
 				<div class="ui-g-12">
 					<p:dataTable var="escola" 
 						value="#{escolaCtrl.escolas}"
-						paginator="true"
+						paginator="true" lazy="true"
 						emptyMessage="Nenhum registro foi encontrado" rows="25"
 						rowHover="true" sortBy="#{escola.nome}" paginatorPosition="bottom"
 						paginatorAlwaysVisible="true"

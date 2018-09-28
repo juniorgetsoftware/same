@@ -16,7 +16,7 @@ public class AlunoServiceImpl implements AlunoService {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
 	private AlunoRepository alunoRepository;
 

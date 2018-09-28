@@ -84,13 +84,16 @@
 							<p:message for="prova-qtd-alternativas" />
 						</div>
 					</div>
+
 				</div>
 
+				<div class="ui-g-12">
 				<div class="ui-g-3 ui-lg-3 ui-md-6 ui-sm-12">
 					<p:commandButton icon="fa fa-cog" value="Gerar campos da prova"
 						action="#{provaCtrl.gerarCamposProva()}" styleClass="btn-red"
 						update="dados-prova, prova-gerada" process="@form"
 						validateClient="true" />
+				</div>
 				</div>
 
 

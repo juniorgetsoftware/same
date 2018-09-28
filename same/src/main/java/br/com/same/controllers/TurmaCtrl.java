@@ -4,7 +4,6 @@ import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -16,6 +15,7 @@ import org.omnifaces.cdi.Param;
 import br.com.same.controllers.converters.TurmaConverter;
 import br.com.same.jsf.FacesUtil;
 import br.com.same.jsf.Msgs;
+import br.com.same.jsf.primefaces.LazyDataModel;
 import br.com.same.models.Turma;
 import br.com.same.services.TurmaService;
 
@@ -32,7 +32,7 @@ public class TurmaCtrl implements Serializable {
 	@Param(name = "turma", converterClass = TurmaConverter.class)
 	private Turma turma;
 
-	private List<Turma> turmas;
+	private LazyDataModel<Turma, Long> turmas;
 
 	@Inject
 	private JsfMessage<Msgs> msgs;
@@ -61,7 +61,7 @@ public class TurmaCtrl implements Serializable {
 
 	public void listar() {
 		if (facesUtil.isNotPostback() || isNull(turmas)) {
-			this.turmas = turmaService.listar();
+			this.turmas = new LazyDataModel<>(turmaService.getRepository());
 		}
 	}
 
@@ -75,11 +75,11 @@ public class TurmaCtrl implements Serializable {
 		this.turma = turma;
 	}
 
-	public List<Turma> getTurmas() {
+	public LazyDataModel<Turma, Long> getTurmas() {
 		return turmas;
 	}
 
-	public void setTurmas(List<Turma> turmas) {
+	public void setTurmas(LazyDataModel<Turma, Long> turmas) {
 		this.turmas = turmas;
 	}
 

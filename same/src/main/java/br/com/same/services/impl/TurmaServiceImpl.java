@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import br.com.same.dao.TurmaDao;
+import org.apache.deltaspike.data.api.EntityRepository;
+
 import br.com.same.models.Turma;
+import br.com.same.repository.TurmaRepository;
 import br.com.same.services.TurmaService;
 
 public class TurmaServiceImpl implements TurmaService {
@@ -14,33 +16,38 @@ public class TurmaServiceImpl implements TurmaService {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
-	private TurmaDao turmaDao;
+	private TurmaRepository turmaRepository;
 
 	@Override
 	public void salvar(Turma turma) {
-		turmaDao.salvar(turma);
+		turmaRepository.save(turma);
 	}
 
 	@Override
 	public List<Turma> listar() {
-		return turmaDao.listar();
+		return turmaRepository.findAll();
 	}
 
 	@Override
 	public Turma buscarPorId(Long id) {
-		return turmaDao.buscarPorId(id);
+		return turmaRepository.findBy(id);
 	}
 
 	@Override
 	public void remover(Turma turma) {
-		turmaDao.remover(turma);
+		turmaRepository.remove(turma);
 	}
 
 	@Override
 	public void editar(Turma turma) {
-		turmaDao.editar(turma);
+		turmaRepository.save(turma);
+	}
+
+	@Override
+	public EntityRepository<Turma, Long> getRepository() {
+		return turmaRepository;
 	}
 
 }

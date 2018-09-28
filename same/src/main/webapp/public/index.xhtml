@@ -3,11 +3,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-
-	<f:metadata>
-		<f:event type="preRenderView" listener="#{escolaCtrl.listar()}" />
-	</f:metadata>
-
+ 
 	<ui:define name="page-name">
 		Home
 	</ui:define>
@@ -21,7 +17,7 @@
 
 	<ui:define name="full-content">
 		<div class="ui-fluid">
-			<ui:repeat var="escola" value="#{escolaCtrl.escolas}">
+			<ui:repeat var="escola" value="#{escolaCtrl.escolasList}">
 				<p:link outcome="/public/index.xhtml">
 					<f:param name="escola" value="#{escola.id}" />
 					<div class="ui-g-3 ui-xl-2 ui-md-6 ui-lg-3 ui-sm-12">

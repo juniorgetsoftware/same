@@ -17,6 +17,7 @@ import org.omnifaces.cdi.Param;
 import br.com.same.controllers.converters.EscolaConverter;
 import br.com.same.jsf.FacesUtil;
 import br.com.same.jsf.Msgs;
+import br.com.same.jsf.primefaces.LazyDataModel;
 import br.com.same.models.Escola;
 import br.com.same.models.PeriodoLetivo;
 import br.com.same.services.EscolaService;
@@ -36,7 +37,9 @@ public class EscolaCtrl implements Serializable {
 
 	private PeriodoLetivo periodoLetivo;
 
-	private List<Escola> escolas;
+	private LazyDataModel<Escola, Long> escolas;
+	
+	private List<Escola> escolasList;
 
 	@Inject
 	private JsfMessage<Msgs> msgs;
@@ -65,7 +68,7 @@ public class EscolaCtrl implements Serializable {
 
 	public void listar() {
 		if (facesUtil.isNotPostback() || isNull(escolas)) {
-			this.escolas = escolaService.listar();
+			this.escolas = new LazyDataModel<>(escolaService.getRepository());
 		}
 	}
 
@@ -74,16 +77,25 @@ public class EscolaCtrl implements Serializable {
 			escola = new Escola();
 		return escola;
 	}
+	
+	public List<Escola> getEscolasList() {
+		if(isNull(this.escolasList)) escolasList = escolaService.listar();
+		return escolasList;
+	}
+
+	public void setEscolasList(List<Escola> escolasList) {
+		this.escolasList = escolasList;
+	}
 
 	public void setEscola(Escola escola) {
 		this.escola = escola;
 	}
 
-	public List<Escola> getEscolas() {
+	public LazyDataModel<Escola, Long> getEscolas() {
 		return escolas;
 	}
 
-	public void setEscolas(List<Escola> escolas) {
+	public void setEscolas(LazyDataModel<Escola, Long> escolas) {
 		this.escolas = escolas;
 	}
 

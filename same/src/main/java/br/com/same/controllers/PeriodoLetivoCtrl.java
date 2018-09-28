@@ -4,7 +4,6 @@ import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 
 import javax.faces.view.ViewScoped;
@@ -17,6 +16,7 @@ import org.omnifaces.cdi.Param;
 import br.com.same.controllers.converters.PeriodoLetivoConverter;
 import br.com.same.jsf.FacesUtil;
 import br.com.same.jsf.Msgs;
+import br.com.same.jsf.primefaces.LazyDataModel;
 import br.com.same.models.PeriodoLetivo;
 import br.com.same.models.Turma;
 import br.com.same.services.PeriodoLetivoService;
@@ -34,7 +34,7 @@ public class PeriodoLetivoCtrl implements Serializable {
 	@Param(name = "periodoLetivo", converterClass = PeriodoLetivoConverter.class)
 	private PeriodoLetivo periodoLetivo;
 
-	private List<PeriodoLetivo> periodoLetivos;
+	private LazyDataModel<PeriodoLetivo, Long> periodoLetivos;
 
 	@Inject
 	private JsfMessage<Msgs> msgs;
@@ -65,7 +65,7 @@ public class PeriodoLetivoCtrl implements Serializable {
 
 	public void listar() {
 		if (facesUtil.isNotPostback() || isNull(periodoLetivos)) {
-			this.periodoLetivos = periodoLetivoService.listar();
+			this.periodoLetivos = new LazyDataModel<>(periodoLetivoService.getRepository());
 		}
 	}
 
@@ -79,11 +79,11 @@ public class PeriodoLetivoCtrl implements Serializable {
 		this.periodoLetivo = periodoLetivo;
 	}
 
-	public List<PeriodoLetivo> getPeriodoLetivos() {
+	public LazyDataModel<PeriodoLetivo, Long> getPeriodoLetivos() {
 		return periodoLetivos;
 	}
 
-	public void setPeriodoLetivos(List<PeriodoLetivo> periodoLetivos) {
+	public void setPeriodoLetivos(LazyDataModel<PeriodoLetivo, Long> periodoLetivos) {
 		this.periodoLetivos = periodoLetivos;
 	}
 

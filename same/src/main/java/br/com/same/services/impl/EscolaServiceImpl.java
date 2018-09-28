@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import br.com.same.dao.EscolaDao;
+import org.apache.deltaspike.data.api.EntityRepository;
+
 import br.com.same.models.Escola;
+import br.com.same.repository.EscolaRepository;
 import br.com.same.services.EscolaService;
 
 public class EscolaServiceImpl implements EscolaService {
@@ -14,33 +16,38 @@ public class EscolaServiceImpl implements EscolaService {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
-	private EscolaDao escolaDao;
+	private EscolaRepository escolaRepository;
 
 	@Override
 	public void salvar(Escola escola) {
-		escolaDao.salvar(escola);
+		escolaRepository.save(escola);
 	}
 
 	@Override
 	public List<Escola> listar() {
-		return escolaDao.listar();
+		return escolaRepository.findAll();
 	}
 
 	@Override
 	public Escola buscarPorId(Long id) {
-		return escolaDao.buscarPorId(id);
+		return escolaRepository.findBy(id);
 	}
 
 	@Override
 	public void remover(Escola escola) {
-		escolaDao.remover(escola);
+		escolaRepository.remove(escola);
 	}
 
 	@Override
 	public void editar(Escola escola) {
-		escolaDao.editar(escola);
+		escolaRepository.save(escola);
+	}
+
+	@Override
+	public EntityRepository<Escola, Long> getRepository() {
+		return this.escolaRepository;
 	}
 
 }

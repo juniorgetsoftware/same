@@ -4,7 +4,6 @@ import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -16,6 +15,7 @@ import org.omnifaces.cdi.Param;
 import br.com.same.controllers.converters.DisciplinaConverter;
 import br.com.same.jsf.FacesUtil;
 import br.com.same.jsf.Msgs;
+import br.com.same.jsf.primefaces.LazyDataModel;
 import br.com.same.models.Disciplina;
 import br.com.same.services.DisciplinaService;
 
@@ -32,7 +32,7 @@ public class DisciplinaCtrl implements Serializable {
 	@Param(name = "disciplina", converterClass = DisciplinaConverter.class)
 	private Disciplina disciplina;
 
-	private List<Disciplina> disciplinas;
+	private LazyDataModel<Disciplina, Long> disciplinas;
 
 	@Inject
 	private JsfMessage<Msgs> msgs;
@@ -61,7 +61,7 @@ public class DisciplinaCtrl implements Serializable {
 
 	public void listar() {
 		if (facesUtil.isNotPostback() || isNull(disciplinas)) {
-			this.disciplinas = disciplinaService.listar();
+			this.disciplinas = new LazyDataModel<>(disciplinaService.getRepository());
 		}
 	}
 
@@ -75,11 +75,11 @@ public class DisciplinaCtrl implements Serializable {
 		this.disciplina = disciplina;
 	}
 
-	public List<Disciplina> getDisciplinas() {
+	public LazyDataModel<Disciplina, Long> getDisciplinas() {
 		return disciplinas;
 	}
 
-	public void setDisciplinas(List<Disciplina> disciplinas) {
+	public void setDisciplinas(LazyDataModel<Disciplina, Long> disciplinas) {
 		this.disciplinas = disciplinas;
 	}
 

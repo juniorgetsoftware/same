@@ -59,7 +59,7 @@
 				<div class="ui-g-12">
 					<p:dataTable var="periodoLetivo"
 						value="#{periodoLetivoCtrl.periodoLetivos}"
-						paginator="true"
+						paginator="true" lazy="true"
 						emptyMessage="Nenhum registro foi encontrado" rows="25"
 						rowHover="true" sortBy="#{periodoLetivo.nome}"
 						currentPageReportTemplate="({startRecord} - {endRecord} de {totalRecords}, página {currentPage} de {totalPages})"

@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import br.com.same.dao.PeriodoLetivoDao;
+import org.apache.deltaspike.data.api.EntityRepository;
+
 import br.com.same.models.PeriodoLetivo;
+import br.com.same.repository.PeriodoLetivoRepository;
 import br.com.same.services.PeriodoLetivoService;
 
 public class PeriodoLetivoServiceImpl implements PeriodoLetivoService {
@@ -14,33 +16,38 @@ public class PeriodoLetivoServiceImpl implements PeriodoLetivoService {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
-	private PeriodoLetivoDao periodoLetivoDao;
-
-	@Override
-	public void salvar(PeriodoLetivo periodoLetivo) {
-		periodoLetivoDao.salvar(periodoLetivo);
-	}
-
-	@Override
-	public List<PeriodoLetivo> listar() {
-		return periodoLetivoDao.listar();
-	}
+	private PeriodoLetivoRepository periodoLetivoRepository;
 
 	@Override
 	public PeriodoLetivo buscarPorId(Long id) {
-		return periodoLetivoDao.buscarPorId(id);
+		return periodoLetivoRepository.findBy(id);
 	}
 
 	@Override
-	public void remover(PeriodoLetivo periodoLetivo) {
-		periodoLetivoDao.remover(periodoLetivo);
+	public void salvar(PeriodoLetivo periodoLetivo) {
+		periodoLetivoRepository.save(periodoLetivo);
 	}
 
 	@Override
 	public void editar(PeriodoLetivo periodoLetivo) {
-		periodoLetivoDao.editar(periodoLetivo);
+		periodoLetivoRepository.save(periodoLetivo);
+	}
+
+	@Override
+	public List<PeriodoLetivo> listar() {
+		return periodoLetivoRepository.findAll();
+	}
+
+	@Override
+	public void remover(PeriodoLetivo periodoLetivo) {
+		periodoLetivoRepository.remove(periodoLetivo);
+	}
+
+	@Override
+	public EntityRepository<PeriodoLetivo, Long> getRepository() {
+		return periodoLetivoRepository;
 	}
 
 }

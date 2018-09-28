@@ -16,7 +16,7 @@ public class ProfessorServiceImpl implements ProfessorService {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
 	private ProfessorRepository professorRepository;
 

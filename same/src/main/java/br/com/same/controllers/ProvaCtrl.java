@@ -4,7 +4,6 @@ import static java.util.Objects.isNull;
 
 import java.io.Serializable;
 
-import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -30,7 +29,7 @@ public class ProvaCtrl implements Serializable {
 
 	private int quantidadeQuestoes;
 	private int quantidadeAlternativasPorQuestao;
-	
+
 	@Inject
 	@Param(name = "prova", converterClass = ProvaConverter.class)
 	private Prova prova;
@@ -71,11 +70,12 @@ public class ProvaCtrl implements Serializable {
 	public void gerarCamposProva() {
 		this.getProva().gerarCamposDaProva(quantidadeQuestoes, quantidadeAlternativasPorQuestao);
 	}
-	
+
 	//
-	
+
 	public Prova getProva() {
-		if(isNull(prova)) prova = new Prova();
+		if (isNull(prova))
+			prova = new Prova();
 		return prova;
 	}
 

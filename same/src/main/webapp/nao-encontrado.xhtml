@@ -27,11 +27,6 @@
 		<p:graphicImage library="img" name="boy.svg" />
 	</ui:define>
 
-	<f:metadata>
-		<f:viewParam name="dummy" />
-		<f:event listener="#{loginBean.preRender}" type="preRenderView" />
-	</f:metadata>
-
 	<ui:define name="full-content">
 
 		<h:form id="frm" prependId="false">
@@ -39,17 +34,20 @@
 			<div class="ui-fluid">
 
 				<p:dialog visible="true" closable="false" closeOnEscape="false"
-					draggable="false" resizable="false" responsive="true" header="Erro 404">
+					draggable="false" resizable="false" responsive="true"
+					header="Erro 404">
 					<center>
-					<i class="fa fa-file-o icon" />
-					<i class="fa fa-question icon" />
-						<h1><b>Arquivo não Encontrado</b></h1>
+						<i class="fa fa-file-o icon" /> <i class="fa fa-question icon" />
+						<h1>
+							<b>Arquivo não Encontrado</b>
+						</h1>
 						<h3>A URL que você solicitou não foi encontrada</h3>
 						<h5>Entre em contato com o administrador!</h5>
 					</center>
 					<br />
 
-					<p:button icon="fa fa-home" value="Página inicial" outcome="/home" />
+					<p:button icon="fa fa-home" value="Página inicial"
+						outcome="/public/index.xhtml" />
 
 				</p:dialog>
 
