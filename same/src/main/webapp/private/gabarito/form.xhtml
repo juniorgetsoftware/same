@@ -9,19 +9,19 @@
 	template="/WEB-INF/template/layout.xhtml">
 
 	<ui:define name="page-name">
-		Cadastro de Prova
+		Cadastro de Gabarito
 	</ui:define>
 
 	<ui:define name="page-title">
-		Cadastro de Prova
+		Cadastro de Gabarito
 	</ui:define>
 
 	<ui:define name="page-subtitle">
-		Módulo para a criação de provas
+		Módulo para a criação de gabaritos
 	</ui:define>
 
 	<ui:define name="page-image">
-		<p:graphicImage library="img" name="file-text.svg" />
+		<p:graphicImage library="img" name="test.svg" />
 	</ui:define>
 
 	<ui:define name="content">
@@ -34,21 +34,21 @@
 		<div class="ui-fluid">
 
 			<h:form prependId="false">
-				<div jsf:id="dados-prova">
+				<div jsf:id="dados-gabarito">
 					<div class="ui-g-12">
 						<div class="ui-g-6 ui-lg-6 ui-md-8 ui-sm-12">
-							<h:outputLabel for="prova-titulo" value="Título" />
-							<p:inputText id="prova-titulo" required="true" label="Título"
-								value="#{provaCtrl.prova.titulo}" />
-							<p:message for="prova-titulo" />
+							<h:outputLabel for="gabarito-titulo" value="Título" />
+							<p:inputText id="gabarito-titulo" required="true" label="Título"
+								value="#{gabaritoCtrl.gabarito.titulo}" />
+							<p:message for="gabarito-titulo" />
 						</div>
 					</div>
 
 					<div class="ui-g-12">
 						<div class="ui-g-6 ui-lg-6 ui-md-8 ui-sm-12">
-							<h:outputLabel for="prova-observacao" value="Observação" />
-							<p:textEditor id="prova-observacao" required="true"
-								label="Observação" value="#{provaCtrl.prova.observacao}">
+							<h:outputLabel for="gabarito-observacao" value="Observação" />
+							<p:textEditor id="gabarito-observacao" required="true"
+								label="Observação" value="#{gabaritoCtrl.gabarito.observacao}">
 
 								<f:facet name="toolbar">
 									<span class="ql-formats">
@@ -64,24 +64,24 @@
 
 
 							</p:textEditor>
-							<p:message for="prova-observacao" />
+							<p:message for="gabarito-observacao" />
 						</div>
 					</div>
 
 					<div class="ui-g-12">
 						<div class="ui-g-3 ui-lg-3 ui-md-6 ui-sm-6">
-							<h:outputLabel for="prova-qtd-questoes" value="Qtd. de questões" />
-							<p:inputText id="prova-qtd-questoes" required="true"
-								label="Qtd. de questões" value="#{provaCtrl.quantidadeQuestoes}" />
-							<p:message for="prova-qtd-questoes" />
+							<h:outputLabel for="gabarito-qtd-questoes" value="Qtd. de questões" />
+							<p:inputText id="gabarito-qtd-questoes" required="true"
+								label="Qtd. de questões" value="#{gabaritoCtrl.quantidadeQuestoes}" />
+							<p:message for="gabarito-qtd-questoes" />
 						</div>
 
 						<div class="ui-g-3 ui-lg-3 ui-md-6 ui-sm-6">
-							<label for="prova-qtd-alternativas">Qtd. de alternativas</label>
-							<p:inputText id="prova-qtd-alternativas" required="true"
+							<label for="gabarito-qtd-alternativas">Qtd. de alternativas</label>
+							<p:inputText id="gabarito-qtd-alternativas" required="true"
 								label="Qtd. de alternativas"
-								value="#{provaCtrl.quantidadeAlternativasPorQuestao}" />
-							<p:message for="prova-qtd-alternativas" />
+								value="#{gabaritoCtrl.quantidadeAlternativasPorQuestao}" />
+							<p:message for="gabarito-qtd-alternativas" />
 						</div>
 					</div>
 
@@ -89,9 +89,9 @@
 
 				<div class="ui-g-12">
 				<div class="ui-g-3 ui-lg-3 ui-md-6 ui-sm-12">
-					<p:commandButton icon="fa fa-cog" value="Gerar campos da prova"
-						action="#{provaCtrl.gerarCamposProva()}" styleClass="btn-red"
-						update="dados-prova, prova-gerada" process="@form"
+					<p:commandButton icon="fa fa-cog" value="Gerar campos do gabarito"
+						action="#{gabaritoCtrl.gerarCamposGabarito()}" styleClass="btn-red"
+						update="dados-gabarito, gabarito-gerada" process="@form"
 						validateClient="true" />
 				</div>
 				</div>
@@ -101,15 +101,15 @@
 			</h:form>
 
 
-			<h:form id="prova-gerada" prependId="false">
+			<h:form id="gabarito-gerada" prependId="false">
 
 				<div class="ui-g-12">
-					<h1>#{provaCtrl.prova.titulo}</h1>
+					<h1>#{gabaritoCtrl.gabarito.titulo}</h1>
 					<h3>
-						<p:outputLabel value="#{provaCtrl.prova.observacao}"
+						<p:outputLabel value="#{gabaritoCtrl.gabarito.observacao}"
 							escape="false" />
 					</h3>
-					<p:repeat var="questao" value="#{provaCtrl.prova.questoes}"
+					<p:repeat var="questao" value="#{gabaritoCtrl.gabarito.questoes}"
 						varStatus="indiceQuestao">
 
 						<div class="ui-g-12">
@@ -123,8 +123,8 @@
 										
 										<div class="ui-inputgroup">
 												<span class="ui-inputgroup-addon">
-													<p:commandButton icon="fa fa-trash" styleClass="btn-red" process="prova-gerada"
-														action="#{provaCtrl.prova.remover(questao)}" update="prova-gerada"
+													<p:commandButton icon="fa fa-trash" styleClass="btn-red" process="gabarito-gerada"
+														action="#{gabaritoCtrl.gabarito.remover(questao)}" update="gabarito-gerada"
 														title="Clique para remover a questão #{indiceQuestao.index +1 }"/>
 												</span>
 											</div>
@@ -149,8 +149,8 @@
 												
 											<div class="ui-inputgroup">
 												<span class="ui-inputgroup-addon">
-													<p:commandButton icon="fa fa-trash" styleClass="btn-red" process="prova-gerada" 
-														action="#{questao.remover(alternativa)}" update="prova-gerada"
+													<p:commandButton icon="fa fa-trash" styleClass="btn-red" process="gabarito-gerada" 
+														action="#{questao.remover(alternativa)}" update="gabarito-gerada"
 														title="Clique para remover a alternativa #{indiceQuestao.index +1 }.#{indiceAlternativa.index +1 }"/>
 												</span>
 											</div>
@@ -161,7 +161,7 @@
 										<h:panelGroup rendered="#{indiceAlternativa.last}">
 												<p:commandButton icon="fa fa-plus" value="Adicionar alternativa" process="@this"
 													title="Clique para adicionar mais uma alternativa" style="width:200px"
-													action="#{questao.adicionarAlternativaEmBranco()}" update="prova-gerada"/>
+													action="#{questao.adicionarAlternativaEmBranco()}" update="gabarito-gerada"/>
 										</h:panelGroup>
 
 									</p:repeat>
@@ -169,7 +169,7 @@
 										<h:panelGroup rendered="#{empty questao.alternativas}">
 												<p:commandButton icon="fa fa-plus" value="Adicionar alternativa" process="@this"
 													title="Clique para adicionar mais uma alternativa" style="width:200px"
-													action="#{questao.adicionarAlternativaEmBranco()}" update="prova-gerada"/>
+													action="#{questao.adicionarAlternativaEmBranco()}" update="gabarito-gerada"/>
 										</h:panelGroup>
 										
 								</p:panel>
@@ -181,35 +181,35 @@
 							<div class="ui-g-2">
 								<p:commandButton icon="fa fa-plus" value="Adicionar questão"
 									title="Clique para adicionar mais uma questão" style="width:200px"
-									action="#{provaCtrl.prova.adicionarQuestaoEmBranco()}"
-									 update="prova-gerada" process="@this"/>
+									action="#{gabaritoCtrl.gabarito.adicionarQuestaoEmBranco()}"
+									 update="gabarito-gerada" process="@this"/>
 							</div>
 						</h:panelGroup>
 					</p:repeat>
 					
-					<h:panelGroup rendered="#{empty provaCtrl.prova.questoes}">
+					<h:panelGroup rendered="#{empty gabaritoCtrl.gabarito.questoes}">
 						<div class="ui-g-2">
 							<p:commandButton icon="fa fa-plus" value="Adicionar questão"
 								title="Clique para adicionar mais uma questão" style="width:200px"
-								action="#{provaCtrl.prova.adicionarQuestaoEmBranco()}"
-								 update="prova-gerada" process="@this"/>
+								action="#{gabaritoCtrl.gabarito.adicionarQuestaoEmBranco()}"
+								 update="gabarito-gerada" process="@this"/>
 						</div>
 					</h:panelGroup>
 					
 				</div>
 
 				<div class="ui-g-3 ui-lg-3 ui-md-6 ui-sm-12">
-					<p:commandButton icon="fa fa-cloud" value="Cadastrar prova"
-						action="#{provaCtrl.salvar()}"
-						rendered="#{not empty provaCtrl.prova.questoes and provaCtrl.prova.id eq null}"
-						update="dados-prova, prova-gerada" process="@form"
-						validateClient="true" title="Clique para cadastrar a prova"/>
+					<p:commandButton icon="fa fa-cloud" value="Cadastrar gabarito"
+						action="#{gabaritoCtrl.salvar()}"
+						rendered="#{not empty gabaritoCtrl.gabarito.questoes and gabaritoCtrl.gabarito.id eq null}"
+						update="dados-gabarito, gabarito-gerada" process="@form"
+						validateClient="true" title="Clique para cadastrar a gabarito"/>
 
-					<p:commandButton icon="fa fa-cloud" value="Editar prova"
-						action="#{provaCtrl.editar()}" styleClass="btn-green"
-						rendered="#{not empty provaCtrl.prova.questoes and provaCtrl.prova.id ne null}"
-						update="dados-prova, prova-gerada" process="@form"
-						validateClient="true" title="Clique para editar os dados da prova"/>
+					<p:commandButton icon="fa fa-cloud" value="Editar gabarito"
+						action="#{gabaritoCtrl.editar()}" styleClass="btn-green"
+						rendered="#{not empty gabaritoCtrl.gabarito.questoes and gabaritoCtrl.gabarito.id ne null}"
+						update="dados-gabarito, gabarito-gerada" process="@form"
+						validateClient="true" title="Clique para editar os dados da gabarito"/>
 				</div>
 
 			</h:form>

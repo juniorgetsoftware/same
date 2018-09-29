@@ -16,9 +16,9 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-@Table(name = "alternativa")
-@Entity(name = "alternativa")
-public class Alternativa implements Serializable {
+@Table(name = "alternativa_prova")
+@Entity(name = "alternativa_prova")
+public class AlternativaProva implements Serializable {
 
 	/**
 	 * 
@@ -36,9 +36,9 @@ public class Alternativa implements Serializable {
 
 	private boolean resposta;
 
-	@ManyToOne(targetEntity = Questao.class)
-	@JoinColumn(name = "questao_id", nullable = false)
-	private Questao questao;
+	@ManyToOne(targetEntity = QuestaoProva.class)
+	@JoinColumn(name = "questao_prova_id", nullable = false)
+	private QuestaoProva questao;
 
 	public Long getId() {
 		return id;
@@ -64,12 +64,12 @@ public class Alternativa implements Serializable {
 		this.resposta = resposta;
 	}
 
-	public Questao getQuestao() {
-		if (isNull(questao)) questao = new Questao();
+	public QuestaoProva getQuestao() {
+		if (isNull(questao)) questao = new QuestaoProva();
 		return questao;
 	}
 
-	public void setQuestao(Questao questao) {
+	public void setQuestao(QuestaoProva questao) {
 		this.questao = questao;
 	}
 
@@ -89,7 +89,7 @@ public class Alternativa implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Alternativa other = (Alternativa) obj;
+		AlternativaProva other = (AlternativaProva) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,10 +16,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
-@Table(name = "questao")
-@Entity(name = "questao")
-public class Questao implements Serializable {
+import org.hibernate.validator.constraints.NotBlank;
+
+@Table(name = "questao_prova")
+@Entity(name = "questao_prova")
+public class QuestaoProva implements Serializable {
 
 	/**
 	 * 
@@ -28,11 +32,15 @@ public class Questao implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@NotBlank
+	@Size(min = 5, max = 255)
+	@Column(nullable = false)
 	private String enunciado;
 
 	@OneToMany(mappedBy = "questao", cascade = {
-			CascadeType.ALL }, targetEntity = Alternativa.class, orphanRemoval = true)
-	private List<Alternativa> alternativas;
+			CascadeType.ALL }, targetEntity = AlternativaProva.class, orphanRemoval = true)
+	private List<AlternativaProva> alternativas;
 
 	@ManyToOne(targetEntity = Prova.class)
 	@JoinColumn(name = "prova_id", nullable = false)
@@ -54,13 +62,13 @@ public class Questao implements Serializable {
 		this.enunciado = enunciado;
 	}
 
-	public List<Alternativa> getAlternativas() {
+	public List<AlternativaProva> getAlternativas() {
 		if (isNull(alternativas))
 			alternativas = new ArrayList<>();
 		return alternativas;
 	}
 
-	public void setAlternativas(List<Alternativa> alternativas) {
+	public void setAlternativas(List<AlternativaProva> alternativas) {
 		this.alternativas = alternativas;
 	}
 
@@ -73,7 +81,7 @@ public class Questao implements Serializable {
 		this.prova = prova;
 	}
 
-	public void adicionar(Alternativa alternativa) {
+	public void adicionar(AlternativaProva alternativa) {
 		if (alternativa == null) {
 			throw new RuntimeException("A alternativa é inválida");
 		}
@@ -81,19 +89,19 @@ public class Questao implements Serializable {
 		this.getAlternativas().add(alternativa);
 	}
 
-	public void atualizar(Alternativa alternativa) {
+	public void atualizar(AlternativaProva alternativa) {
 		alternativa.setQuestao(this);
 		int index = this.getAlternativas().indexOf(alternativa);
 		this.getAlternativas().set(index, alternativa);
 	}
 
-	public void remover(Alternativa alternativa) {
+	public void remover(AlternativaProva alternativa) {
 		this.getAlternativas().remove(alternativa);
 		alternativa.setQuestao(null);
 	}
 
 	public void adicionarAlternativaEmBranco() {
-		this.getAlternativas().add(new Alternativa());
+		this.getAlternativas().add(new AlternativaProva());
 	}
 	
 	@Override
@@ -112,7 +120,7 @@ public class Questao implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Questao other = (Questao) obj;
+		QuestaoProva other = (QuestaoProva) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

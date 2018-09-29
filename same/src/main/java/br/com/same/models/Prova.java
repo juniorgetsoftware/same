@@ -42,8 +42,8 @@ public class Prova implements Serializable {
 	private String observacao;
 	
 	@OneToMany(mappedBy = "prova", cascade = {
-			CascadeType.ALL }, targetEntity = Questao.class, orphanRemoval = true)
-	private List<Questao> questoes;
+			CascadeType.ALL }, targetEntity = QuestaoProva.class, orphanRemoval = true)
+	private List<QuestaoProva> questoes;
 
 	public Long getId() {
 		return id;
@@ -69,17 +69,17 @@ public class Prova implements Serializable {
 		this.observacao = observacao;
 	}
 
-	public List<Questao> getQuestoes() {
+	public List<QuestaoProva> getQuestoes() {
 		if (isNull(questoes))
 			questoes = new ArrayList<>();
 		return questoes;
 	}
 
-	public void setQuestoes(ArrayList<Questao> questoes) {
+	public void setQuestoes(ArrayList<QuestaoProva> questoes) {
 		this.questoes = questoes;
 	}
 	
-	public void adicionar(Questao questao) {
+	public void adicionar(QuestaoProva questao) {
 		if (questao == null) {
 			throw new RuntimeException("A questão é inválida");
 		}
@@ -87,13 +87,13 @@ public class Prova implements Serializable {
 		this.getQuestoes().add(questao);
 	}
 
-	public void atualizar(Questao questao) {
+	public void atualizar(QuestaoProva questao) {
 		questao.setProva(this);
 		int index = this.getQuestoes().indexOf(questao);
 		this.getQuestoes().set(index, questao);
 	}
 
-	public void remover(Questao questao) {
+	public void remover(QuestaoProva questao) {
 		this.getQuestoes().remove(questao);
 		questao.setProva(null);
 	}
@@ -125,15 +125,15 @@ public class Prova implements Serializable {
 
 	public void gerarCamposDaProva(int quantidadeQuestoes, int quantidadeAlternativasPorQuestao) {
 		for (int i = 0; i < quantidadeQuestoes; i++) {
-			this.adicionar(new Questao());
+			this.adicionar(new QuestaoProva());
 			for (int j = 0; j < quantidadeAlternativasPorQuestao; j++) {
-				this.getQuestoes().get(i).adicionar(new Alternativa());
+				this.getQuestoes().get(i).adicionar(new AlternativaProva());
 			}
 		}
 	}
 	
 	public void adicionarQuestaoEmBranco() {
-		this.getQuestoes().add(new Questao());
+		this.getQuestoes().add(new QuestaoProva());
 	}
 
 	@Override

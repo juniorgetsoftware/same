@@ -1,8 +1,10 @@
+-- ESCOLA
 INSERT INTO escola (id, nome, descricao) VALUES (1,'CEBCJEC','Colégio de Educação Básica José Epifânio das Chagas');
 INSERT INTO escola (id, nome, descricao) VALUES (2,'Escola Capitão','Escola de Eeducação Básica Capitão José Raimundo Evangelista');
 INSERT INTO escola (id, nome, descricao) VALUES (3,'Ana Clara','Escola de Eeducação Básica Ana Clara Andrade Nantua Bento');
 INSERT INTO escola (id, nome, descricao) VALUES (4,'Perboyre Girao','Escola de Eeducação Básica Prefeito Perboyre Girao');
 
+-- PERÍODO LETIVO
 INSERT INTO periodo_letivo (id, nome, descricao, escola_id) VALUES (1,'2017/1','Alguma descrição sobre o período letivo.', 1);
 INSERT INTO periodo_letivo (id, nome, descricao, escola_id) VALUES (2,'2017/2','Alguma descrição sobre o período letivo.', 1);
 INSERT INTO periodo_letivo (id, nome, descricao, escola_id) VALUES (3,'2018/1','Alguma descrição sobre o período letivo.', 1);
@@ -10,6 +12,7 @@ INSERT INTO periodo_letivo (id, nome, descricao, escola_id) VALUES (4,'2018/1','
 INSERT INTO periodo_letivo (id, nome, descricao, escola_id) VALUES (5,'2018/1','Alguma descrição sobre o período letivo.', 3);
 INSERT INTO periodo_letivo (id, nome, descricao, escola_id) VALUES (6,'2018/1','Alguma descrição sobre o período letivo.', 4);
 
+-- TURMA
 INSERT INTO turma (id, nome, descricao, periodo_letivo_id) VALUES (1,'1A - Primeiro A','Alguma descrição sobre a turma', 1);
 INSERT INTO turma (id, nome, descricao, periodo_letivo_id) VALUES (2,'2A - Segundo A','Alguma descrição sobre a turma', 1);
 INSERT INTO turma (id, nome, descricao, periodo_letivo_id) VALUES (3,'2B - Segundo B','Alguma descrição sobre a turma', 1);
@@ -23,6 +26,7 @@ INSERT INTO turma (id, nome, descricao, periodo_letivo_id) VALUES (10,'1A - Prim
 INSERT INTO turma (id, nome, descricao, periodo_letivo_id) VALUES (11,'2A - Segundo A','Alguma descrição sobre a turma', 5);
 INSERT INTO turma (id, nome, descricao, periodo_letivo_id) VALUES (12,'2B - Segundo B','Alguma descrição sobre a turma', 6);
 
+-- PROFESSOR
 INSERT INTO professor (id, nome) VALUES(1,'Wilton Aureliano');
 INSERT INTO professor (id, nome) VALUES(2,'Neide Lima');
 INSERT INTO professor (id, nome) VALUES(3,'Alex Wilton');
@@ -36,6 +40,7 @@ INSERT INTO professor (id, nome) VALUES(10,'Maria Ambrosina');
 INSERT INTO professor (id, nome) VALUES(11,'Francisco Alves');
 INSERT INTO professor (id, nome) VALUES(12,'Maria José');
 
+-- DISCIPLINA
 INSERT INTO disciplina (id, nome) VALUES(1,'Português');
 INSERT INTO disciplina (id, nome) VALUES(2,'Matemática');
 INSERT INTO disciplina (id, nome) VALUES(3,'Biologia');
@@ -49,6 +54,7 @@ INSERT INTO disciplina (id, nome) VALUES(10,'Filosofia');
 INSERT INTO disciplina (id, nome) VALUES(11,'Física');
 INSERT INTO disciplina (id, nome) VALUES(12,'Educação Física');
 
+-- RELAÇÃO PROFESSOR-DISCIPLINA
 INSERT INTO professor_disciplina (professor_id, disciplina_id) VALUES (1, 1);
 INSERT INTO professor_disciplina (professor_id, disciplina_id) VALUES (1, 2);
 INSERT INTO professor_disciplina (professor_id, disciplina_id) VALUES (2, 2);
@@ -73,6 +79,7 @@ INSERT INTO professor_disciplina (professor_id, disciplina_id) VALUES (10, 10);
 INSERT INTO professor_disciplina (professor_id, disciplina_id) VALUES (11, 11);
 INSERT INTO professor_disciplina (professor_id, disciplina_id) VALUES (12, 12);
 
+-- ALUNO
 INSERT INTO aluno (id, nome) VALUES (1,'Adélia Querino');
 INSERT INTO aluno (id, nome) VALUES (2,'Aldo Delgado');
 INSERT INTO aluno (id, nome) VALUES (3,'Anind Felipe');
@@ -124,6 +131,7 @@ INSERT INTO aluno (id, nome) VALUES (48,'Vanda Valle');
 INSERT INTO aluno (id, nome) VALUES (49,'Violeta Lira');
 INSERT INTO aluno (id, nome) VALUES (50,'Zuleide Seabra');
 
+-- RELAÇÃO TURMA-ALUNO
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (1, 1)
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (1, 2)
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (1, 3)
@@ -134,7 +142,6 @@ INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (1, 7)
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (1, 8)
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (1, 9)
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (1, 10)
-
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (2, 11)
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (2, 12)
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (2, 13)
@@ -145,8 +152,6 @@ INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (2, 17)
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (2, 18)
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (2, 19)
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (2, 20)
-
-
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (3, 21)
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (3, 22)
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (3, 23)
@@ -157,8 +162,6 @@ INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (3, 27)
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (3, 28)
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (3, 29)
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (3, 30)
-
-
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (4, 31)
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (4, 32)
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (4, 33)
@@ -169,8 +172,6 @@ INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (4, 37)
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (4, 38)
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (4, 39)
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (4, 40)
-
-
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (5, 41)
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (5, 42)
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (5, 43)
@@ -181,4 +182,43 @@ INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (5, 47)
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (5, 48)
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (5, 49)
 INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (5, 50)
+
+-- PROVA
+INSERT INTO prova (id, titulo, observacao) VALUES (1, 'Prova de matemática', 'Observações da prova...');
+INSERT INTO questao_prova (id, enunciado, prova_id) VALUES (1, 'Quanto é 1 + 1?', 1);
+INSERT INTO alternativa_prova (id, descricao, resposta, questao_prova_id) VALUES (1, '1', 0, 1);
+INSERT INTO alternativa_prova (id, descricao, resposta, questao_prova_id) VALUES (2, '2', 1, 1);
+INSERT INTO alternativa_prova (id, descricao, resposta, questao_prova_id) VALUES (3, '3', 0, 1);
+
+-- -- QUESTÃO-PROVA
+INSERT INTO questao_prova (id, enunciado, prova_id) VALUES (2, 'Quanto é 2 + 2?', 1);
+INSERT INTO alternativa_prova (id, descricao, resposta, questao_prova_id) VALUES (4, '4', 1, 2);
+INSERT INTO alternativa_prova (id, descricao, resposta, questao_prova_id) VALUES (5, '2', 0, 2);
+INSERT INTO alternativa_prova (id, descricao, resposta, questao_prova_id) VALUES (6, '3', 0, 2);
+
+-- -- ALTERNATIVA-QUESTÃO
+INSERT INTO questao_prova (id, enunciado, prova_id) VALUES (3, 'Quanto é 3 + 3?', 1);
+INSERT INTO alternativa_prova (id, descricao, resposta, questao_prova_id) VALUES (7, '1', 0, 3);
+INSERT INTO alternativa_prova (id, descricao, resposta, questao_prova_id) VALUES (8, '2', 0, 3);
+INSERT INTO alternativa_prova (id, descricao, resposta, questao_prova_id) VALUES (9, '6', 1, 3);
+
+-- GABARITO
+INSERT INTO gabarito (id, titulo, observacao) VALUES (1, 'Gabarito da prova de matemática', 'Observações dogabarito...');
+INSERT INTO questao_gabarito (id, enunciado, gabarito_id) VALUES (1, 'Questão 1', 1);
+INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id) VALUES (1, 'A', 0, 1);
+INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id) VALUES (2, 'B', 1, 1);
+INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id) VALUES (3, 'C', 0, 1);
+
+-- -- QUESTÃO-GABARITO
+INSERT INTO questao_gabarito (id, enunciado, gabarito_id) VALUES (2, 'Questão 2', 1);
+INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id) VALUES (4, 'A', 1, 2);
+INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id) VALUES (5, 'B', 0, 2);
+INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id) VALUES (6, 'C', 0, 2);
+
+-- -- ALTERNATIVA-GABARITO
+INSERT INTO questao_gabarito (id, enunciado, gabarito_id) VALUES (3, 'Questão 3', 1);
+INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id) VALUES (7, 'A', 0, 3);
+INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id) VALUES (8, 'B', 0, 3);
+INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id) VALUES (9, 'C', 1, 3);
+
 
