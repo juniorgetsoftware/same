@@ -23,11 +23,11 @@ import org.hibernate.validator.constraints.NotBlank;
 @Table(name = "questao_gabarito")
 @Entity(name = "questao_gabarito")
 public class QuestaoGabarito {
-	
+
 	public QuestaoGabarito() {
-		
+
 	}
-	
+
 	public QuestaoGabarito(String enunciado) {
 		this.enunciado = enunciado;
 	}
@@ -110,12 +110,35 @@ public class QuestaoGabarito {
 
 	//
 
+	/**
+	 * Adiciona uma alternativa em branco. Nenhum atributo é preenchido
+	 */
 	public void adicionarAlternativaEmBranco() {
 		this.getAlternativas().add(new AlternativaGabarito());
 	}
 
-	public void adicionarAlternativaComEnunciado(int indice) {
+	/**
+	 * Adiciona uma alternativa. Apenas o campo descricao é preenchido.
+	 * 
+	 * @param indice
+	 *            Representa a letra/índice de posição da alternativa na questão
+	 */
+	public void adicionarAlternativaComDescricao(int indice) {
 		this.adicionar(new AlternativaGabarito("Alternativa " + letraPorIndice(indice)));
+	}
+
+	/**
+	 * Adiciona uma alternativa. Os campos descrição e resposta certa são
+	 * preenchidos
+	 * 
+	 * @param indice
+	 *            Representa a letra/índice de posição da alternativa na questão
+	 * @param resposta
+	 *            Booleano indicando se a dada resposta é a resposta correta ou não.
+	 *            true para resposta correta e false para errada.
+	 */
+	public void adicionarAlternativaComDescricaoEResposta(int indice, boolean resposta) {
+		this.adicionar(new AlternativaGabarito("Alternativa " + letraPorIndice(indice), resposta));
 	}
 
 	public void adicionar(AlternativaGabarito alternativa) {

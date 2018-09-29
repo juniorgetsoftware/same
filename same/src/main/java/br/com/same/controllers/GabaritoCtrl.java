@@ -7,6 +7,7 @@ import java.io.Serializable;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.constraints.Min;
 
 import org.apache.deltaspike.jsf.api.message.JsfMessage;
 import org.omnifaces.cdi.Param;
@@ -27,7 +28,9 @@ public class GabaritoCtrl implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@Min(value = 5, message = "O gabarito deve ter pelo menos 5 questões")
 	private int quantidadeQuestoes;
+	@Min(value = 2, message = "A questão deve ter pelo menos 2 alternativa")
 	private int quantidadeAlternativasPorQuestao;
 
 	@Inject

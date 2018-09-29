@@ -7,6 +7,7 @@ import java.io.Serializable;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.constraints.Min;
 
 import org.apache.deltaspike.jsf.api.message.JsfMessage;
 import org.omnifaces.cdi.Param;
@@ -15,8 +16,10 @@ import br.com.same.controllers.converters.ProvaConverter;
 import br.com.same.jsf.FacesUtil;
 import br.com.same.jsf.Msgs;
 import br.com.same.jsf.primefaces.LazyDataModel;
+import br.com.same.models.Gabarito;
 import br.com.same.models.Prova;
 import br.com.same.services.ProvaService;
+import br.com.same.services.Service;
 
 @Named
 @ViewScoped
@@ -27,7 +30,9 @@ public class ProvaCtrl implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@Min(value = 5, message = "O gabarito deve ter pelo menos 5 questões")
 	private int quantidadeQuestoes;
+	@Min(value = 2, message = "A questão deve ter pelo menos 2 alternativa")
 	private int quantidadeAlternativasPorQuestao;
 
 	@Inject
@@ -45,8 +50,13 @@ public class ProvaCtrl implements Serializable {
 	@Inject
 	private FacesUtil facesUtil;
 
+	@Inject
+	private Service<Gabarito, Long> gabaritoService;
+
 	public String salvar() {
+		Gabarito gabarito = prova.gerarGabarito();
 		provaService.salvar(prova);
+		gabaritoService.salvar(gabarito);
 		msgs.addInfo().cadastradoComSucesso();
 		prova = null;
 		facesUtil.atualizarComponente("msgs");

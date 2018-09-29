@@ -30,6 +30,11 @@ public class AlternativaGabarito implements Serializable {
 	public AlternativaGabarito(String descricao) {
 		this.descricao = descricao;
 	}
+
+	public AlternativaGabarito(String descricao, boolean resposta) {
+		this.descricao = descricao;
+		this.resposta = resposta;
+	}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

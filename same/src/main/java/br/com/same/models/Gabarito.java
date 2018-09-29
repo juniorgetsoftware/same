@@ -45,12 +45,6 @@ public class Gabarito implements Serializable {
 			CascadeType.ALL }, targetEntity = QuestaoGabarito.class, orphanRemoval = true)
 	private List<QuestaoGabarito> questoes;
 
-	// private Escola escola;
-	// private PeriodoLetivo periodoLetivo;
-	// private Turma turma;
-	// private Disciplina disciplina;
-	// private Aluno aluno;
-
 	public Long getId() {
 		return id;
 	}
@@ -74,46 +68,6 @@ public class Gabarito implements Serializable {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-
-	// public Escola getEscola() {
-	// return escola;
-	// }
-	//
-	// public void setEscola(Escola escola) {
-	// this.escola = escola;
-	// }
-	//
-	// public PeriodoLetivo getPeriodoLetivo() {
-	// return periodoLetivo;
-	// }
-	//
-	// public void setPeriodoLetivo(PeriodoLetivo periodoLetivo) {
-	// this.periodoLetivo = periodoLetivo;
-	// }
-	//
-	// public Turma getTurma() {
-	// return turma;
-	// }
-	//
-	// public void setTurma(Turma turma) {
-	// this.turma = turma;
-	// }
-	//
-	// public Disciplina getDisciplina() {
-	// return disciplina;
-	// }
-	//
-	// public void setDisciplina(Disciplina disciplina) {
-	// this.disciplina = disciplina;
-	// }
-	//
-	// public Aluno getAluno() {
-	// return aluno;
-	// }
-	//
-	// public void setAluno(Aluno aluno) {
-	// this.aluno = aluno;
-	// }
 
 	public List<QuestaoGabarito> getQuestoes() {
 		if (isNull(questoes))
@@ -150,22 +104,69 @@ public class Gabarito implements Serializable {
 		return true;
 	}
 
+	/**
+	 * Gera o gabarito de uma prova
+	 * 
+	 * @return um gabarito preenchido com repsentaçãode questões, alternativas de
+	 *         resposta.
+	 * @param prova
+	 *            Prova para o qual ogabarito deve ser gerado.
+	 */
+	public Gabarito gerarGabaritoPorProva(Prova prova) {
+		if (isNull(prova))
+			throw new RuntimeException("A Prova é inválida");
+		this.setTitulo(prova.getTitulo());
+		this.setObservacao("Gabarito da pova '" + prova.getTitulo()+"'.");
+		for (int i = 0; i < prova.getQuestoes().size(); i++) {
+			QuestaoGabarito questaoGabarito = this.adicionarQuestaoComEnunciado(i);
+			List<AlternativaProva> alternativasQuestaoProva = prova.getQuestoes().get(i).getAlternativas();
+			for (int j = 0; j < alternativasQuestaoProva.size(); j++) {
+				AlternativaProva alternativaProva = alternativasQuestaoProva.get(j);
+				questaoGabarito.adicionarAlternativaComDescricaoEResposta(j, alternativaProva.isResposta());
+			}
+		}
+		return this;
+	}
+
+	/**
+	 * Utilizado para gerar automaticamenete um gabarito. Neste caso, é um gabaito
+	 * independente, não estando relacionado a uma prova.
+	 * 
+	 * @param quantidadeQuestoes
+	 *            Quantidade de questões que serão geradas
+	 * @param quantidadeAlternativasPorQuestao
+	 *            Quantidade de altermativas por questão
+	 */
 	public void gerarCamposDoGabarito(int quantidadeQuestoes, int quantidadeAlternativasPorQuestao) {
 		for (int i = 0; i < quantidadeQuestoes; i++) {
-			adicionarQuestaoComTitulo(i + 1);
+			adicionarQuestaoComEnunciado(i + 1);
 			for (int j = 0; j < quantidadeAlternativasPorQuestao; j++) {
-				this.getQuestoes().get(i).adicionarAlternativaComEnunciado(j);
+				this.getQuestoes().get(i).adicionarAlternativaComDescricao(j);
 			}
 		}
 	}
 
+	/**
+	 * Adiciona uma questão em branco. Nenhum atributo é preenchido.
+	 */
 	public void adicionarQuestaoEmBranco() {
 		this.getQuestoes().add(new QuestaoGabarito());
 	}
 
-	public void adicionarQuestaoComTitulo(int indice) {
-		this.adicionar(new QuestaoGabarito("Questão " + indice));
+	/**
+	 * Adiciona uma questão ao gabarito. Apenas o campo enunciado é preenchido.
+	 * 
+	 * @param indice
+	 *            Reprensenta o índice/letra de posição da questão, dentro do
+	 *            gabarito.
+	 */
+	public QuestaoGabarito adicionarQuestaoComEnunciado(int indice) {
+		QuestaoGabarito questaoGabarito = new QuestaoGabarito("Questão " + indice);
+		this.adicionar(questaoGabarito);
+		return questaoGabarito;
 	}
+
+	// public void adicionar
 
 	public void adicionar(QuestaoGabarito questaoGabarito) {
 		if (isNull(questaoGabarito))

@@ -1,10 +1,12 @@
 package br.com.same.models;
 
+import static java.util.Arrays.asList;
 import static java.util.Objects.isNull;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -88,6 +90,14 @@ public class QuestaoProva implements Serializable {
 		alternativa.setQuestao(this);
 		this.getAlternativas().add(alternativa);
 	}
+	
+	public void adicionar(AlternativaProva... alternativas) {
+		if (alternativas == null) {
+			throw new RuntimeException("A alternativa é inválida");
+		}
+		Stream.of(alternativas).forEach(a -> a.setQuestao(this));
+		this.getAlternativas().addAll(asList(alternativas));
+	}
 
 	public void atualizar(AlternativaProva alternativa) {
 		alternativa.setQuestao(this);
@@ -101,7 +111,7 @@ public class QuestaoProva implements Serializable {
 	}
 
 	public void adicionarAlternativaEmBranco() {
-		this.getAlternativas().add(new AlternativaProva());
+		this.adicionar(new AlternativaProva());
 	}
 	
 	@Override
@@ -133,5 +143,4 @@ public class QuestaoProva implements Serializable {
 	public String toString() {
 		return "Questao [enunciado=" + enunciado + ", alternativas=" + alternativas + "]";
 	}
-
 }
