@@ -169,7 +169,7 @@ public class Gabarito implements Serializable {
 	 *            gabarito.
 	 */
 	public QuestaoGabarito adicionarQuestaoComEnunciado(int indice) {
-		QuestaoGabarito questaoGabarito = new QuestaoGabarito("Questão " + indice);
+		QuestaoGabarito questaoGabarito = new QuestaoGabarito("Q" + indice);
 		this.adicionar(questaoGabarito);
 		return questaoGabarito;
 	}

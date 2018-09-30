@@ -39,7 +39,7 @@ public class QuestaoGabarito {
 	private Long id;
 
 	@NotBlank
-	@Size(min = 5, max = 255)
+	@Size(min = 2, max = 255)
 	@Column(nullable = false)
 	private String enunciado;
 
@@ -126,7 +126,7 @@ public class QuestaoGabarito {
 	 *            Representa a letra/índice de posição da alternativa na questão
 	 */
 	public void adicionarAlternativaComDescricao(int indice) {
-		this.adicionar(new AlternativaGabarito("Alternativa " + letraPorIndice(indice)));
+		this.adicionar(new AlternativaGabarito(""+letraPorIndice(indice)));
 	}
 
 	/**
@@ -140,7 +140,7 @@ public class QuestaoGabarito {
 	 *            true para resposta correta e false para errada.
 	 */
 	public void adicionarAlternativaComDescricaoEResposta(int indice, boolean resposta) {
-		this.adicionar(new AlternativaGabarito("Alternativa " + letraPorIndice(indice), resposta));
+		this.adicionar(new AlternativaGabarito(""+letraPorIndice(indice), resposta));
 	}
 
 	public void adicionar(AlternativaGabarito alternativa) {

@@ -41,7 +41,7 @@ public class AlternativaGabarito implements Serializable {
 	private Long id;
 
 	@NotBlank
-	@Size(min = 5, max = 255)
+	@Size(max = 255)
 	@Column(nullable = false)
 	private String descricao;
 
