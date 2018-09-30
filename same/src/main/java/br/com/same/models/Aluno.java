@@ -21,6 +21,12 @@ public class Aluno implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	public Aluno() {}
+	
+	public Aluno(String nome) {
+		this.nome = nome;
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

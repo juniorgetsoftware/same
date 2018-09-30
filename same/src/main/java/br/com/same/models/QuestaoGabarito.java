@@ -1,10 +1,12 @@
 package br.com.same.models;
 
 import static br.com.same.utils.LetraUtil.letraPorIndice;
+import static java.util.Arrays.asList;
 import static java.util.Objects.isNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -146,6 +148,14 @@ public class QuestaoGabarito {
 			throw new RuntimeException("Alternativa inválida");
 		alternativa.setQuestaoGabarito(this);
 		this.getAlternativas().add(alternativa);
+	}
+
+	public void adicionar(AlternativaGabarito... alternativas) {
+		if (isNull(alternativas))
+			throw new RuntimeException("Alternativas inválidas");
+		
+		Stream.of(alternativas).forEach(a -> a.setQuestaoGabarito(this));
+		this.getAlternativas().addAll(asList(alternativas));
 	}
 
 	public void atualizar(AlternativaGabarito alternativa) {

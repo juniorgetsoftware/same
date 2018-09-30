@@ -1,10 +1,12 @@
 package br.com.same.models;
 
+import static java.util.Arrays.asList;
 import static java.util.Objects.isNull;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -44,6 +46,12 @@ public class Gabarito implements Serializable {
 	@OneToMany(mappedBy = "gabarito", cascade = {
 			CascadeType.ALL }, targetEntity = QuestaoGabarito.class, orphanRemoval = true)
 	private List<QuestaoGabarito> questoes;
+
+	public Gabarito() {}
+	
+	public Gabarito(String titulo) {
+		this.titulo = titulo;
+	}
 
 	public Long getId() {
 		return id;
@@ -173,6 +181,13 @@ public class Gabarito implements Serializable {
 			throw new RuntimeException("Questao inválida");
 		questaoGabarito.setGabarito(this);
 		this.getQuestoes().add(questaoGabarito);
+	}
+	
+	public void adicionar(QuestaoGabarito... questoes) {
+		if (isNull(questoes))
+			throw new RuntimeException("Questões inválidas");
+		Stream.of(questoes).forEach(a -> a.setGabarito(this));
+		this.getQuestoes().addAll(asList(questoes));
 	}
 
 	public void atualizar(QuestaoGabarito questaoGabarito) {
