@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.deltaspike.data.api.EntityRepository;
 
 import br.com.same.models.Aluno;
+import br.com.same.models.Turma;
 import br.com.same.repository.AlunoRepository;
 import br.com.same.services.AlunoService;
 
@@ -48,6 +49,11 @@ public class AlunoServiceImpl implements AlunoService {
 	@Override
 	public EntityRepository<Aluno, Long> getRepository() {
 		return this.alunoRepository;
+	}
+
+	@Override
+	public List<Aluno> listar(Turma turma) {
+		return alunoRepository.findByTurmaOrderByNome(turma);
 	}
 
 }

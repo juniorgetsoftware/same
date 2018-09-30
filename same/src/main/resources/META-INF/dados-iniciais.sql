@@ -1,8 +1,8 @@
 -- ESCOLA
-INSERT INTO escola (id, nome, descricao) VALUES (1,'CEBCJEC','Colégio de Educação Básica José Epifânio das Chagas');
-INSERT INTO escola (id, nome, descricao) VALUES (2,'Escola Capitão','Escola de Eeducação Básica Capitão José Raimundo Evangelista');
-INSERT INTO escola (id, nome, descricao) VALUES (3,'Ana Clara','Escola de Eeducação Básica Ana Clara Andrade Nantua Bento');
-INSERT INTO escola (id, nome, descricao) VALUES (4,'Perboyre Girao','Escola de Eeducação Básica Prefeito Perboyre Girao');
+INSERT INTO escola (id, nome, descricao, versao, status) VALUES (1,'CEBCJEC','Colégio de Educação Básica José Epifânio das Chagas', 0, 'ATIVO');
+INSERT INTO escola (id, nome, descricao, versao, status) VALUES (2,'Escola Capitão','Escola de Eeducação Básica Capitão José Raimundo Evangelista', 0, 'ATIVO');
+INSERT INTO escola (id, nome, descricao, versao, status) VALUES (3,'Ana Clara','Escola de Eeducação Básica Ana Clara Andrade Nantua Bento', 0, 'ATIVO');
+INSERT INTO escola (id, nome, descricao, versao, status) VALUES (4,'Perboyre Girao','Escola de Eeducação Básica Prefeito Perboyre Girao', 0, 'ATIVO');
 
 -- PERÍODO LETIVO
 INSERT INTO periodo_letivo (id, nome, descricao, escola_id) VALUES (1,'2017/1','Alguma descrição sobre o período letivo.', 1);

@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.apache.deltaspike.data.api.EntityRepository;
 
+import br.com.same.models.Escola;
 import br.com.same.models.PeriodoLetivo;
 import br.com.same.repository.PeriodoLetivoRepository;
 import br.com.same.services.PeriodoLetivoService;
@@ -48,6 +49,11 @@ public class PeriodoLetivoServiceImpl implements PeriodoLetivoService {
 	@Override
 	public EntityRepository<PeriodoLetivo, Long> getRepository() {
 		return periodoLetivoRepository;
+	}
+
+	@Override
+	public List<PeriodoLetivo> listar(Escola escola) {
+		return periodoLetivoRepository.findByEscolaOrderByNome(escola);
 	}
 
 }

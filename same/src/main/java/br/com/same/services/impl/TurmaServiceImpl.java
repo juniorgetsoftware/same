@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.apache.deltaspike.data.api.EntityRepository;
 
+import br.com.same.models.PeriodoLetivo;
 import br.com.same.models.Turma;
 import br.com.same.repository.TurmaRepository;
 import br.com.same.services.TurmaService;
@@ -48,6 +49,11 @@ public class TurmaServiceImpl implements TurmaService {
 	@Override
 	public EntityRepository<Turma, Long> getRepository() {
 		return turmaRepository;
+	}
+
+	@Override
+	public List<Turma> listar(PeriodoLetivo periodo) {
+		return turmaRepository.findByPeriodoLetivoOrderByNome(periodo);
 	}
 
 }
