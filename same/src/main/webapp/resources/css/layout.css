@@ -186,38 +186,30 @@ li {
 	text-align: -webkit-match-parent;
 }
 
+.page-footer {
+    background: #c7c7c7;
+    padding: 50px 0 0 0;
+}
+
 .center {
 	text-align: center;
 }
 
 .page-footer-company {
-	margin-top: 20px;
-	background-color: #d2d2d2;
-	color: #656d79;
-	font-weight: 300;
-	text-align: center;
-	font-size: 12px;
+    background: #0000000f;
+    padding: 10px;
+    font-size: 12px;
+    color: #1f2f46;
 }
 
 @media ( min-width : 960px) {
-	.page-footer-company {
-		padding-top: 50px;
-		
-	}
+	 
 }
 
 @media ( max-width : 960px) {
-	.page-footer-company {
-		padding-top: 50px;
-		
-	}
+	 
 }
-
-.app-ano-atual {
-    background: #c7c7c7;
-    padding: 10px;
-}
-
+ 
 @media ( max-width : 640px) {
 	.my-head-menu {
 		display: none;
@@ -775,5 +767,5 @@ h1, h2, h3, h4, h5 {
 }
 
 .box {
-    background: aliceblue;
+    background: #c0ddf1;
 }

@@ -11,9 +11,7 @@ import java.util.stream.Stream;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -22,16 +20,12 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Table(name = "gabarito")
 @Entity(name = "gabarito")
-public class Gabarito implements Serializable {
+public class Gabarito extends EntidadeBase implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
 
 	@NotBlank
 	@Size(min = 5, max = 255)
@@ -43,22 +37,15 @@ public class Gabarito implements Serializable {
 	@Column(nullable = false)
 	private String observacao;
 
-	@OneToMany(mappedBy = "gabarito", cascade = {
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "gabarito", cascade = {
 			CascadeType.ALL }, targetEntity = QuestaoGabarito.class, orphanRemoval = true)
 	private List<QuestaoGabarito> questoes;
 
-	public Gabarito() {}
-	
+	public Gabarito() {
+	}
+
 	public Gabarito(String titulo) {
 		this.titulo = titulo;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getTitulo() {
@@ -87,31 +74,6 @@ public class Gabarito implements Serializable {
 		this.questoes = questoes;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Gabarito other = (Gabarito) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
-
 	/**
 	 * Gera o gabarito de uma prova
 	 * 
@@ -124,7 +86,7 @@ public class Gabarito implements Serializable {
 		if (isNull(prova))
 			throw new RuntimeException("A Prova é inválida");
 		this.setTitulo(prova.getTitulo());
-		this.setObservacao("Gabarito da pova '" + prova.getTitulo()+"'.");
+		this.setObservacao("Gabarito da pova '" + prova.getTitulo() + "'.");
 		for (int i = 0; i < prova.getQuestoes().size(); i++) {
 			QuestaoGabarito questaoGabarito = this.adicionarQuestaoComEnunciado(i);
 			List<AlternativaProva> alternativasQuestaoProva = prova.getQuestoes().get(i).getAlternativas();
@@ -182,7 +144,7 @@ public class Gabarito implements Serializable {
 		questaoGabarito.setGabarito(this);
 		this.getQuestoes().add(questaoGabarito);
 	}
-	
+
 	public void adicionar(QuestaoGabarito... questoes) {
 		if (isNull(questoes))
 			throw new RuntimeException("Questões inválidas");

@@ -11,9 +11,7 @@ import java.util.stream.Stream;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -24,7 +22,12 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Table(name = "questao_gabarito")
 @Entity(name = "questao_gabarito")
-public class QuestaoGabarito {
+public class QuestaoGabarito extends EntidadeBase {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public QuestaoGabarito() {
 
@@ -33,10 +36,6 @@ public class QuestaoGabarito {
 	public QuestaoGabarito(String enunciado) {
 		this.enunciado = enunciado;
 	}
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
 
 	@NotBlank
 	@Size(min = 2, max = 255)
@@ -47,17 +46,9 @@ public class QuestaoGabarito {
 	@JoinColumn(name = "gabarito_id", nullable = false)
 	private Gabarito gabarito;
 
-	@OneToMany(mappedBy = "questaoGabarito", cascade = {
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "questaoGabarito", cascade = {
 			CascadeType.ALL }, targetEntity = AlternativaGabarito.class, orphanRemoval = true)
 	private List<AlternativaGabarito> alternativas;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getEnunciado() {
 		return enunciado;
@@ -85,31 +76,6 @@ public class QuestaoGabarito {
 		this.alternativas = alternativas;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		QuestaoGabarito other = (QuestaoGabarito) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
-
 	//
 
 	/**
@@ -126,7 +92,7 @@ public class QuestaoGabarito {
 	 *            Representa a letra/índice de posição da alternativa na questão
 	 */
 	public void adicionarAlternativaComDescricao(int indice) {
-		this.adicionar(new AlternativaGabarito(""+letraPorIndice(indice)));
+		this.adicionar(new AlternativaGabarito("" + letraPorIndice(indice)));
 	}
 
 	/**
@@ -140,7 +106,7 @@ public class QuestaoGabarito {
 	 *            true para resposta correta e false para errada.
 	 */
 	public void adicionarAlternativaComDescricaoEResposta(int indice, boolean resposta) {
-		this.adicionar(new AlternativaGabarito(""+letraPorIndice(indice), resposta));
+		this.adicionar(new AlternativaGabarito("" + letraPorIndice(indice), resposta));
 	}
 
 	public void adicionar(AlternativaGabarito alternativa) {
@@ -153,7 +119,7 @@ public class QuestaoGabarito {
 	public void adicionar(AlternativaGabarito... alternativas) {
 		if (isNull(alternativas))
 			throw new RuntimeException("Alternativas inválidas");
-		
+
 		Stream.of(alternativas).forEach(a -> a.setQuestaoGabarito(this));
 		this.getAlternativas().addAll(asList(alternativas));
 	}

@@ -44,7 +44,7 @@
 
 					<div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12">
 						<label for="periodo">Período letivo</label>
-						<p:selectOneMenu id="periodo" value="#{correcaoCtrl.periodo}">
+						<p:selectOneMenu id="periodo" value="#{correcaoCtrl.periodo}" converter="genericConverter">
 							<f:selectItem itemLabel="Selecione" />
 							<f:selectItems var="periodo" value="#{correcaoCtrl.periodos}"
 								itemLabel="#{periodo.nome}" itemValue="#{periodo}" />
@@ -54,7 +54,7 @@
 
 					<div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12">
 						<label for="turma">Turma</label>
-						<p:selectOneMenu id="turma" value="#{correcaoCtrl.turma}">
+						<p:selectOneMenu id="turma" value="#{correcaoCtrl.turma}" converter="genericConverter">
 							<f:selectItem itemLabel="Selecione" />
 							<f:selectItems var="turma" value="#{correcaoCtrl.turmas}"
 								itemLabel="#{turma.nome}" itemValue="#{turma}" />
@@ -65,7 +65,7 @@
 
 					<div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12">
 						<label for="gabarito">Gabarito</label>
-						<p:selectOneMenu id="gabarito" value="#{correcaoCtrl.gabarito}">
+						<p:selectOneMenu id="gabarito" value="#{correcaoCtrl.gabarito}" converter="genericConverter">
 							<f:selectItem itemLabel="Selecione" />
 							<f:selectItems var="gabarito" value="#{correcaoCtrl.gabaritos}"
 								itemLabel="#{gabarito.titulo}" itemValue="#{gabarito}" />
@@ -92,7 +92,7 @@
 									<p:repeat var="questao" value="#{ag.gabarito.questoes}">
 
 										<div class="ui-g-3  ui-lg-3 ui-md-6 ui-sm-12 center ">
-											<div class="ui-g-12 box">
+											<div class="ui-g-12 box ui-shadow">
 												<p:outputLabel styleClass="my-label"
 													value="#{questao.enunciado}" />
 												<center>
