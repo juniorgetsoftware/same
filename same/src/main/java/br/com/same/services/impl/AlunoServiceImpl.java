@@ -56,4 +56,9 @@ public class AlunoServiceImpl implements AlunoService {
 		return alunoRepository.findByTurmaOrderByNome(turma);
 	}
 
+	@Override
+	public void alterarStatus(Aluno aluno) {
+		aluno.alterarStatus();
+		this.editar(aluno);
+	}
 }

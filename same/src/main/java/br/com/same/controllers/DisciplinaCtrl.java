@@ -42,6 +42,12 @@ public class DisciplinaCtrl implements Serializable {
 
 	@Inject
 	private FacesUtil facesUtil;
+	
+	public void alterarStatus() {
+		disciplinaService.alterarStatus(disciplina);
+		msgs.addInfo().statusAlteradoSucesso();
+		facesUtil.atualizarComponente("msgs");
+	}
 
 	public String salvar() {
 		disciplinaService.salvar(disciplina);

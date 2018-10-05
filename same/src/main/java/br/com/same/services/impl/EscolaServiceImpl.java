@@ -50,4 +50,9 @@ public class EscolaServiceImpl implements EscolaService {
 		return this.escolaRepository;
 	}
 
+	@Override
+	public void alterarStatus(Escola escola) {
+		escola.alterarStatus();
+		this.editar(escola);
+	}
 }

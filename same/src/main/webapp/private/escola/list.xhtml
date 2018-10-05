@@ -67,7 +67,14 @@
 						paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 						currentPageReportTemplate="({startRecord} - {endRecord} de {totalRecords}, página {currentPage} de {totalPages})"
 						rowsPerPageTemplate="25,50,100">
-
+						
+						<p:column headerText="Status" styleClass="center icon-list" colspan="1">
+							<p:commandLink action="#{escolaCtrl.alterarStatus()}" update="@this" title="#{escola.status.descricao}">
+								<f:setPropertyActionListener value="#{escola}" target="#{escolaCtrl.escola}" />
+								<i class="fa #{escola.status.icone}" style="#{escola.status.cor}"/>
+							</p:commandLink>
+						</p:column>
+						
 						<p:column headerText="Nome" colspan="2">
 							<p:link outcome="/private/escola/form.xhtml" styleClass="my-link"
 								title="Clique para editar este registro">

@@ -43,6 +43,12 @@ public class ProfessorCtrl implements Serializable {
 	@Inject
 	private FacesUtil facesUtil;
 
+	public void alterarStatus() {
+		professorService.alterarStatus(professor);
+		msgs.addInfo().statusAlteradoSucesso();
+		facesUtil.atualizarComponente("msgs");
+	}
+	
 	public String salvar() {
 		professorService.salvar(professor);
 		msgs.addInfo().cadastradoComSucesso();

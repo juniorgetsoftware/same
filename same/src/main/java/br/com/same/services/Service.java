@@ -19,4 +19,6 @@ public interface Service  <T, PK extends Serializable> extends Serializable {
 
 	EntityRepository<T, PK> getRepository();
 
+	void alterarStatus(T t);
+
 }

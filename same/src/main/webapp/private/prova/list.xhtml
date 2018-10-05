@@ -64,7 +64,14 @@
 						paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 						currentPageReportTemplate="({startRecord} - {endRecord} de {totalRecords}, página {currentPage} de {totalPages})"
 						rowsPerPageTemplate="25,50,100">
-
+						
+						<p:column headerText="Status" styleClass="center icon-list" colspan="1">
+							<p:commandLink action="#{provaCtrl.alterarStatus()}" update="@this" title="#{prova.status.descricao}">
+								<f:setPropertyActionListener value="#{prova}" target="#{provaCtrl.prova}" />
+								<i class="fa #{prova.status.icone}" style="#{prova.status.cor}"/>
+							</p:commandLink>
+						</p:column>
+						
 						<p:column headerText="Nome" colspan="3">
 							<p:link outcome="/private/prova/form.xhtml"
 								styleClass="my-link" title="Clique para editar este registro">

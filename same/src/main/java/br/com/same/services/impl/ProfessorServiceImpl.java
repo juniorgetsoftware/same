@@ -50,4 +50,9 @@ public class ProfessorServiceImpl implements ProfessorService {
 		return this.professorRepository;
 	}
 
+	@Override
+	public void alterarStatus(Professor professor) {
+		professor.alterarStatus();
+		this.editar(professor);
+	}
 }

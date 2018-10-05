@@ -50,4 +50,9 @@ public class ProvaServiceImpl implements ProvaService {
 		return this.provaRepository;
 	}
 
+	@Override
+	public void alterarStatus(Prova prova) {
+		prova.alterarStatus();
+		this.editar(prova);
+	}
 }

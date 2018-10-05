@@ -1,5 +1,8 @@
 package br.com.same.models;
 
+import static br.com.same.models.Status.ATIVO;
+import static br.com.same.models.Status.INATIVO;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -27,7 +30,7 @@ public class EntidadeBase implements Serializable {
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status", nullable = false)
-	private Status status = Status.ATIVO;
+	private Status status = ATIVO;
 
 	public Long getId() {
 		return id;
@@ -43,6 +46,14 @@ public class EntidadeBase implements Serializable {
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+
+	public void alterarStatus() {
+		if (this.status.equals(ATIVO)) {
+			this.status = INATIVO;
+		} else {
+			this.status = ATIVO;
+		}
 	}
 
 	@Override

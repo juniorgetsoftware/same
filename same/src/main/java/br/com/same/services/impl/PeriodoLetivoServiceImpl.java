@@ -56,4 +56,9 @@ public class PeriodoLetivoServiceImpl implements PeriodoLetivoService {
 		return periodoLetivoRepository.findByEscolaOrderByNome(escola);
 	}
 
+	@Override
+	public void alterarStatus(PeriodoLetivo periodo) {
+		periodo.alterarStatus();
+		this.editar(periodo);
+	}
 }

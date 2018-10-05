@@ -56,4 +56,9 @@ public class GabaritoServiceImpl implements GabaritoService {
 		return gabaritoRepository.findByTurmaOrderByTitulo(turma);
 	}
 
+	@Override
+	public void alterarStatus(Gabarito gabarito) {
+		gabarito.alterarStatus();
+		this.editar(gabarito);
+	}
 }

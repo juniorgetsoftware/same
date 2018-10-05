@@ -43,6 +43,12 @@ public class TurmaCtrl implements Serializable {
 	@Inject
 	private FacesUtil facesUtil;
 
+	public void alterarStatus() {
+		turmaService.alterarStatus(turma);
+		msgs.addInfo().statusAlteradoSucesso();
+		facesUtil.atualizarComponente("msgs");
+	}
+	
 	public String salvar() {
 		turmaService.salvar(turma);
 		msgs.addInfo().cadastradoComSucesso();

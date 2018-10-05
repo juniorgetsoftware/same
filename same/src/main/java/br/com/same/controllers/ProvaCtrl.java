@@ -53,6 +53,12 @@ public class ProvaCtrl implements Serializable {
 	@Inject
 	private Service<Gabarito, Long> gabaritoService;
 
+	public void alterarStatus() {
+		provaService.alterarStatus(prova);
+		msgs.addInfo().statusAlteradoSucesso();
+		facesUtil.atualizarComponente("msgs");
+	}
+	
 	public String salvar() {
 		Gabarito gabarito = prova.gerarGabarito();
 		provaService.salvar(prova);

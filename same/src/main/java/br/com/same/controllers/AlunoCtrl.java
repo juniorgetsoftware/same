@@ -51,6 +51,12 @@ public class AlunoCtrl implements Serializable {
 		return null;
 	}
 
+	public void alterarStatus() {
+		alunoService.alterarStatus(aluno);
+		msgs.addInfo().statusAlteradoSucesso();
+		facesUtil.atualizarComponente("msgs");
+	}
+	
 	public String editar() {
 		alunoService.editar(aluno);
 		msgs.addInfo().editadoComSucesso();

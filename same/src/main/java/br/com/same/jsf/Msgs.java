@@ -17,4 +17,7 @@ public interface Msgs {
 
 	@MessageTemplate("{deletado.sucesso}")
 	String deletadoComSucesso();
+	
+	@MessageTemplate("{status.alterado.sucesso}")
+	String statusAlteradoSucesso();
 }

@@ -50,4 +50,9 @@ public class DisciplinaServiceImpl implements DisciplinaService {
 		return disciplinaRepository;
 	}
 
+	@Override
+	public void alterarStatus(Disciplina disciplina) {
+		disciplina.alterarStatus();
+		this.editar(disciplina);
+	}
 }

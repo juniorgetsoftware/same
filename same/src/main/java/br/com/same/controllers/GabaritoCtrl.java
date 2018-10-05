@@ -47,6 +47,12 @@ public class GabaritoCtrl implements Serializable {
 
 	@Inject
 	private FacesUtil facesUtil;
+	
+	public void alterarStatus() {
+		gabaritoService.alterarStatus(gabarito);
+		msgs.addInfo().statusAlteradoSucesso();
+		facesUtil.atualizarComponente("msgs");
+	}
 
 	public String salvar() {
 		gabaritoService.salvar(gabarito);

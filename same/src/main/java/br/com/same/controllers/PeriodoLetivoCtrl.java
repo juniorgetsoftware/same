@@ -47,6 +47,12 @@ public class PeriodoLetivoCtrl implements Serializable {
 
 	private Turma turma;
 
+	public void alterarStatus() {
+		periodoLetivoService.alterarStatus(periodoLetivo);
+		msgs.addInfo().statusAlteradoSucesso();
+		facesUtil.atualizarComponente("msgs");
+	}
+	
 	public String salvar() {
 		periodoLetivoService.salvar(periodoLetivo);
 		msgs.addInfo().cadastradoComSucesso();

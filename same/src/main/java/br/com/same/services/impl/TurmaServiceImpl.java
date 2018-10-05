@@ -56,4 +56,9 @@ public class TurmaServiceImpl implements TurmaService {
 		return turmaRepository.findByPeriodoLetivoOrderByNome(periodo);
 	}
 
+	@Override
+	public void alterarStatus(Turma turma) {
+		turma.alterarStatus();
+		this.editar(turma);
+	}
 }

@@ -49,6 +49,12 @@ public class EscolaCtrl implements Serializable {
 
 	@Inject
 	private FacesUtil facesUtil;
+	
+	public void alterarStatus() {
+		escolaService.alterarStatus(escola);
+		msgs.addInfo().statusAlteradoSucesso();
+		facesUtil.atualizarComponente("msgs");
+	}
 
 	public String salvar() {
 		escolaService.salvar(escola);
