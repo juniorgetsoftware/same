@@ -2,10 +2,12 @@ package br.com.same.models;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -43,6 +45,10 @@ public class AlternativaGabarito extends EntidadeBase implements Serializable {
 	@ManyToOne(targetEntity = QuestaoGabarito.class)
 	@JoinColumn(name = "questao_gabarito_id", nullable = false)
 	private QuestaoGabarito questaoGabarito;
+	
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "alternativa_prova_id")
+	private AlternativaProva alternativaProva;
 
 	//
 
@@ -68,6 +74,14 @@ public class AlternativaGabarito extends EntidadeBase implements Serializable {
 
 	public void setQuestaoGabarito(QuestaoGabarito questaoGabarito) {
 		this.questaoGabarito = questaoGabarito;
+	}
+	
+	public AlternativaProva getAlternativaProva() {
+		return alternativaProva;
+	}
+
+	public void setAlternativaProva(AlternativaProva alternativaProva) {
+		this.alternativaProva = alternativaProva;
 	}
 
 	@Override

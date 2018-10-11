@@ -27,6 +27,8 @@
 	<ui:define name="content">
 		<div class="ui-fluid" jsf:id="group">
 			<div class="ui-g-12">
+			
+			<p:growl id="msg" life="5000"/>
 
 				<h:form prependId="false">
 
@@ -112,6 +114,11 @@
 
 							</p:repeat>
 						</div>
+					</div>
+					
+					<div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12">
+						<p:commandButton value="Guardar gabaritos" icon="fa fa-save" styleClass="bg-green" 
+							action="#{correcaoCtrl.salvar()}"/>
 					</div>
 				</h:form>
 			</div>

@@ -9,12 +9,17 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.deltaspike.jsf.api.message.JsfMessage;
+
+import br.com.same.jsf.FacesUtil;
+import br.com.same.jsf.Msgs;
 import br.com.same.models.Aluno;
 import br.com.same.models.AlunoGabarito;
 import br.com.same.models.Escola;
 import br.com.same.models.Gabarito;
 import br.com.same.models.PeriodoLetivo;
 import br.com.same.models.Turma;
+import br.com.same.services.AlunoGabaritoService;
 import br.com.same.services.AlunoService;
 import br.com.same.services.EscolaService;
 import br.com.same.services.GabaritoService;
@@ -46,8 +51,23 @@ public class CorrecaoCtrl implements Serializable {
 	private AlunoService alunoService;
 	
 	private List<AlunoGabarito> alunoGabaritos;
+
+	@Inject
+	private AlunoGabaritoService alunoGabaritoService;
+	
+	@Inject
+	private JsfMessage<Msgs> msgs;
+	
+	@Inject
+	private FacesUtil facesUtil;
 	
 	//
+	
+	public void salvar() {
+		alunoGabaritoService.salvar(alunoGabaritos);
+		msgs.addInfo().cadastradoComSucesso();
+		facesUtil.atualizarComponente("msg");
+	}
 
 	private List<Escola> escolas;
 	private Escola escola;

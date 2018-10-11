@@ -203,22 +203,22 @@ INSERT INTO alternativa_prova (id, descricao, resposta, questao_prova_id, versao
 INSERT INTO alternativa_prova (id, descricao, resposta, questao_prova_id, versao, status) VALUES (9, '6', 1, 3, 0, 'ATIVO');
 
 -- GABARITO
-INSERT INTO gabarito (id, titulo, observacao, versao, status) VALUES (1, 'Gabarito da prova de matemática', 'Observações dogabarito...', 0, 'ATIVO');
-INSERT INTO questao_gabarito (id, enunciado, gabarito_id, versao, status) VALUES (1, 'Questão 1', 1, 0, 'ATIVO');
-INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id, versao, status) VALUES (1, 'A', 0, 1, 0, 'ATIVO');
-INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id, versao, status) VALUES (2, 'B', 1, 1, 0, 'ATIVO');
-INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id, versao, status) VALUES (3, 'C', 0, 1, 0, 'ATIVO');
+INSERT INTO gabarito (id, titulo, observacao, versao, status, prova_id) VALUES (1, 'Gabarito da prova de matemática', 'Observações dogabarito...', 0, 'ATIVO', 1);
+INSERT INTO questao_gabarito (id, enunciado, gabarito_id, versao, status, questao_prova_id) VALUES (1, 'Questão 1', 1, 0, 'ATIVO', 1);
+INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id, versao, status, alternativa_prova_id) VALUES (1, 'A', 0, 1, 0, 'ATIVO', 1);
+INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id, versao, status, alternativa_prova_id) VALUES (2, 'B', 1, 1, 0, 'ATIVO', 2);
+INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id, versao, status, alternativa_prova_id) VALUES (3, 'C', 0, 1, 0, 'ATIVO', 3);
 
 -- -- QUESTÃO-GABARITO
-INSERT INTO questao_gabarito (id, enunciado, gabarito_id, versao, status) VALUES (2, 'Questão 2', 1, 0, 'ATIVO');
-INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id, versao, status) VALUES (4, 'A', 1, 2, 0, 'ATIVO');
-INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id, versao, status) VALUES (5, 'B', 0, 2, 0, 'ATIVO');
-INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id, versao, status) VALUES (6, 'C', 0, 2, 0, 'ATIVO');
+INSERT INTO questao_gabarito (id, enunciado, gabarito_id, versao, status, questao_prova_id) VALUES (2, 'Questão 2', 1, 0, 'ATIVO', 2);
+INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id, versao, status, alternativa_prova_id) VALUES (4, 'A', 1, 2, 0, 'ATIVO', 4);
+INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id, versao, status, alternativa_prova_id) VALUES (5, 'B', 0, 2, 0, 'ATIVO', 5);
+INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id, versao, status, alternativa_prova_id) VALUES (6, 'C', 0, 2, 0, 'ATIVO', 6);
 
 -- -- ALTERNATIVA-GABARITO
-INSERT INTO questao_gabarito (id, enunciado, gabarito_id, versao, status) VALUES (3, 'Questão 3', 1, 0, 'ATIVO');
-INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id, versao, status) VALUES (7, 'A', 0, 3, 0, 'ATIVO');
-INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id, versao, status) VALUES (8, 'B', 0, 3, 0, 'ATIVO');
-INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id, versao, status) VALUES (9, 'C', 1, 3, 0, 'ATIVO');
+INSERT INTO questao_gabarito (id, enunciado, gabarito_id, versao, status, questao_prova_id) VALUES (3, 'Questão 3', 1, 0, 'ATIVO', 3);
+INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id, versao, status, alternativa_prova_id) VALUES (7, 'A', 0, 3, 0, 'ATIVO', 7);
+INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id, versao, status, alternativa_prova_id) VALUES (8, 'B', 0, 3, 0, 'ATIVO', 8);
+INSERT INTO alternativa_gabarito (id, descricao, resposta, questao_gabarito_id, versao, status, alternativa_prova_id) VALUES (9, 'C', 1, 3, 0, 'ATIVO', 9);
 
 

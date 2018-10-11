@@ -12,7 +12,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -41,6 +43,13 @@ public class Gabarito extends EntidadeBase implements Serializable {
 			CascadeType.ALL }, targetEntity = QuestaoGabarito.class, orphanRemoval = true)
 	private List<QuestaoGabarito> questoes;
 
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "prova_id")
+	private Prova prova;
+	
+	//
+	
+	
 	public Gabarito() {
 	}
 
@@ -86,13 +95,18 @@ public class Gabarito extends EntidadeBase implements Serializable {
 		if (isNull(prova))
 			throw new RuntimeException("A Prova é inválida");
 		this.setTitulo(prova.getTitulo());
+		this.setProva(prova);
 		this.setObservacao("Gabarito da pova '" + prova.getTitulo() + "'.");
 		for (int i = 0; i < prova.getQuestoes().size(); i++) {
 			QuestaoGabarito questaoGabarito = this.adicionarQuestaoComEnunciado(i);
+			questaoGabarito.setQuestaoProva(prova.getQuestoes().get(i)); // questão corrente
 			List<AlternativaProva> alternativasQuestaoProva = prova.getQuestoes().get(i).getAlternativas();
 			for (int j = 0; j < alternativasQuestaoProva.size(); j++) {
 				AlternativaProva alternativaProva = alternativasQuestaoProva.get(j);
-				questaoGabarito.adicionarAlternativaComDescricaoEResposta(j, alternativaProva.isResposta());
+				AlternativaGabarito alternativaGabarito = questaoGabarito.adicionarAlternativaComDescricaoEResposta(j,
+						alternativaProva.isResposta());//alternativ corrente
+				alternativaGabarito.setAlternativaProva(alternativaProva);
+				
 			}
 		}
 		return this;
@@ -135,8 +149,16 @@ public class Gabarito extends EntidadeBase implements Serializable {
 		this.adicionar(questaoGabarito);
 		return questaoGabarito;
 	}
-
+	
 	// public void adicionar
+
+	public Prova getProva() {
+		return prova;
+	}
+
+	public void setProva(Prova prova) {
+		this.prova = prova;
+	}
 
 	public void adicionar(QuestaoGabarito questaoGabarito) {
 		if (isNull(questaoGabarito))

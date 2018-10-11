@@ -1,9 +1,25 @@
 package br.com.same.models;
 
-public class AlunoGabarito {
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-	private Long id;
+@Entity(name = "aluno_gabarito")
+@Table(name = "aluno_gabarito")
+public class AlunoGabarito extends EntidadeBase {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4738055469151750724L;
+
+	@OneToOne( orphanRemoval = true)
+	@JoinColumn(name = "aluno_id")
 	private Aluno aluno;
+
+	@OneToOne(orphanRemoval = true)
+	@JoinColumn(name = "gabarito_id")
 	private Gabarito gabarito;
 
 	public AlunoGabarito() {
@@ -12,14 +28,6 @@ public class AlunoGabarito {
 	public AlunoGabarito(Aluno aluno, Gabarito gabarito) {
 		this.aluno = aluno;
 		this.gabarito = gabarito;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public Aluno getAluno() {
@@ -37,30 +45,4 @@ public class AlunoGabarito {
 	public void setGabarito(Gabarito gabarito) {
 		this.gabarito = gabarito;
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		AlunoGabarito other = (AlunoGabarito) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
-
 }

@@ -15,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -49,6 +50,12 @@ public class QuestaoGabarito extends EntidadeBase {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "questaoGabarito", cascade = {
 			CascadeType.ALL }, targetEntity = AlternativaGabarito.class, orphanRemoval = true)
 	private List<AlternativaGabarito> alternativas;
+
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "questao_prova_id")
+	private QuestaoProva questaoProva;
+
+	//
 
 	public String getEnunciado() {
 		return enunciado;
@@ -105,8 +112,10 @@ public class QuestaoGabarito extends EntidadeBase {
 	 *            Booleano indicando se a dada resposta é a resposta correta ou não.
 	 *            true para resposta correta e false para errada.
 	 */
-	public void adicionarAlternativaComDescricaoEResposta(int indice, boolean resposta) {
-		this.adicionar(new AlternativaGabarito("" + letraPorIndice(indice), resposta));
+	public AlternativaGabarito adicionarAlternativaComDescricaoEResposta(int indice, boolean resposta) {
+		AlternativaGabarito alternativa = new AlternativaGabarito("" + letraPorIndice(indice), resposta);
+		this.adicionar(alternativa);
+		return alternativa;
 	}
 
 	public void adicionar(AlternativaGabarito alternativa) {
@@ -141,6 +150,14 @@ public class QuestaoGabarito extends EntidadeBase {
 	@Override
 	public String toString() {
 		return "QuestaoGabarito [enunciado=" + enunciado + ", alternativas=" + alternativas + "]";
+	}
+
+	public QuestaoProva getQuestaoProva() {
+		return questaoProva;
+	}
+
+	public void setQuestaoProva(QuestaoProva questaoProva) {
+		this.questaoProva = questaoProva;
 	}
 
 }
