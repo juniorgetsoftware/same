@@ -11,17 +11,19 @@ import java.util.stream.Stream;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotBlank;
 
-@Table(name = "questao_prova")
-@Entity(name = "questao_prova")
-public class QuestaoProva extends EntidadeBase implements Serializable {
+@Table(name = "questao")
+@Entity(name = "questao")
+public class Questao extends EntidadeBase implements Serializable {
 
 	/**
 	 * 
@@ -29,13 +31,14 @@ public class QuestaoProva extends EntidadeBase implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@NotBlank
-	@Size(min = 5, max = 255)
+//	@Size(min = 5, max = 255)
 	@Column(nullable = false)
 	private String enunciado;
 
+	@Fetch(FetchMode.SUBSELECT)
 	@OneToMany(mappedBy = "questao", cascade = {
-			CascadeType.ALL }, targetEntity = AlternativaProva.class, orphanRemoval = true)
-	private List<AlternativaProva> alternativas;
+			CascadeType.ALL }, targetEntity = Alternativa.class, orphanRemoval = true, fetch = FetchType.EAGER)
+	private List<Alternativa> alternativas;
 
 	@ManyToOne(targetEntity = Prova.class)
 	@JoinColumn(name = "prova_id", nullable = false)
@@ -49,13 +52,13 @@ public class QuestaoProva extends EntidadeBase implements Serializable {
 		this.enunciado = enunciado;
 	}
 
-	public List<AlternativaProva> getAlternativas() {
+	public List<Alternativa> getAlternativas() {
 		if (isNull(alternativas))
 			alternativas = new ArrayList<>();
 		return alternativas;
 	}
 
-	public void setAlternativas(List<AlternativaProva> alternativas) {
+	public void setAlternativas(List<Alternativa> alternativas) {
 		this.alternativas = alternativas;
 	}
 
@@ -69,7 +72,7 @@ public class QuestaoProva extends EntidadeBase implements Serializable {
 		this.prova = prova;
 	}
 
-	public void adicionar(AlternativaProva alternativa) {
+	public void adicionar(Alternativa alternativa) {
 		if (alternativa == null) {
 			throw new RuntimeException("A alternativa é inválida");
 		}
@@ -77,7 +80,7 @@ public class QuestaoProva extends EntidadeBase implements Serializable {
 		this.getAlternativas().add(alternativa);
 	}
 
-	public void adicionar(AlternativaProva... alternativas) {
+	public void adicionar(Alternativa... alternativas) {
 		if (alternativas == null) {
 			throw new RuntimeException("A alternativa é inválida");
 		}
@@ -85,23 +88,23 @@ public class QuestaoProva extends EntidadeBase implements Serializable {
 		this.getAlternativas().addAll(asList(alternativas));
 	}
 
-	public void atualizar(AlternativaProva alternativa) {
+	public void atualizar(Alternativa alternativa) {
 		alternativa.setQuestao(this);
 		int index = this.getAlternativas().indexOf(alternativa);
 		this.getAlternativas().set(index, alternativa);
 	}
 
-	public void remover(AlternativaProva alternativa) {
+	public void remover(Alternativa alternativa) {
 		this.getAlternativas().remove(alternativa);
 		alternativa.setQuestao(null);
 	}
 
 	public void adicionarAlternativaEmBranco() {
-		this.adicionar(new AlternativaProva());
+		this.adicionar(new Alternativa());
 	}
 
 	@Override
 	public String toString() {
-		return "Questao [enunciado=" + enunciado + ", alternativas=" + alternativas + "]";
+		return "Questao [enunciado=" + enunciado +"] ";
 	}
 }

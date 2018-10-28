@@ -8,7 +8,7 @@ import javax.inject.Inject;
 
 import org.apache.deltaspike.data.api.EntityRepository;
 
-import br.com.same.models.AlunoGabarito;
+import br.com.same.models.AlunoProva;
 import br.com.same.repository.AlunoGabaritoRepository;
 import br.com.same.services.AlunoGabaritoService;
 
@@ -23,44 +23,50 @@ public class AlunoGabaritoServiceImpl implements AlunoGabaritoService {
 	private AlunoGabaritoRepository alunoGabaritoRepository;
 
 	@Override
-	public void salvar(AlunoGabarito alunoGabarito) {
+	public void salvar(AlunoProva alunoGabarito) {
 		alunoGabaritoRepository.save(alunoGabarito);
 	}
 
 	@Override
-	public List<AlunoGabarito> listar() {
+	public List<AlunoProva> listar() {
 		return alunoGabaritoRepository.findAll();
 	}
 
 	@Override
-	public AlunoGabarito buscarPorId(Long id) {
+	public AlunoProva buscarPorId(Long id) {
 		return alunoGabaritoRepository.findBy(id);
 	}
 
 	@Override
-	public void remover(AlunoGabarito alunoGabarito) {
+	public void remover(AlunoProva alunoGabarito) {
 		alunoGabaritoRepository.remove(alunoGabarito);
 	}
 
 	@Override
-	public void editar(AlunoGabarito alunoGabarito) {
+	public void editar(AlunoProva alunoGabarito) {
 		alunoGabaritoRepository.save(alunoGabarito);
 	}
 
 	@Override
-	public EntityRepository<AlunoGabarito, Long> getRepository() {
+	public EntityRepository<AlunoProva, Long> getRepository() {
 		return this.alunoGabaritoRepository;
 	}
 
 	@Override
-	public void alterarStatus(AlunoGabarito alunoGabarito) {
+	public void alterarStatus(AlunoProva alunoGabarito) {
 		alunoGabarito.alterarStatus();
 		this.editar(alunoGabarito);
 	}
 
 	@Override
-	public void salvar(List<AlunoGabarito> alunoGabaritos) {
+	public void salvar(List<AlunoProva> alunoGabaritos) {
 		if (isNull(alunoGabaritos))  throw new RuntimeException("A lista de alunos e gabaritos não pode ser nula!");
-		alunoGabaritos.forEach(a -> this.salvar(a));
+		alunoGabaritos.forEach(a->{
+			System.out.println(a);
+		});
+		
+		for (AlunoProva alunoProva : alunoGabaritos) {
+			alunoGabaritoRepository.saveAndFlush(alunoProva);
+		}
 	}
 }

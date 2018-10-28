@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Table(name = "escola")
@@ -33,8 +35,8 @@ public class Escola extends EntidadeBase implements Serializable {
 	@Size(min = 5, max = 255)
 	private String descricao;
 
-	@OneToMany(mappedBy = "escola", cascade = {
-			CascadeType.ALL }, targetEntity = PeriodoLetivo.class, orphanRemoval = true)
+	@Fetch(FetchMode.SUBSELECT)
+	@OneToMany(mappedBy = "escola", cascade = {}, targetEntity = PeriodoLetivo.class, orphanRemoval = true)
 	private List<PeriodoLetivo> periodosLetivo;
 
 	//

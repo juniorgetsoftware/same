@@ -76,10 +76,6 @@ public class GabaritoCtrl implements Serializable {
 		}
 	}
 
-	public void gerarCamposGabarito() {
-		this.getGabarito().gerarCamposDoGabarito(quantidadeQuestoes, quantidadeAlternativasPorQuestao);
-	}
-
 	//
 
 	public Gabarito getGabarito() {

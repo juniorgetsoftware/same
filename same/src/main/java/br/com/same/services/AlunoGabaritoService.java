@@ -2,10 +2,10 @@ package br.com.same.services;
 
 import java.util.List;
 
-import br.com.same.models.AlunoGabarito;
+import br.com.same.models.AlunoProva;
 
-public interface AlunoGabaritoService extends Service<AlunoGabarito, Long>{
+public interface AlunoGabaritoService extends Service<AlunoProva, Long>{
 
-	void salvar(List<AlunoGabarito> alunoGabaritos);
+	void salvar(List<AlunoProva> alunoGabaritos);
 
 }

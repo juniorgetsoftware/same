@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity(name = "periodo_letivo")
@@ -34,8 +36,8 @@ public class PeriodoLetivo extends EntidadeBase {
 	@JoinColumn(name = "escola_id", nullable = false)
 	private Escola escola;
 
-	@OneToMany(mappedBy = "periodoLetivo", cascade = {
-			CascadeType.ALL }, targetEntity = Turma.class, orphanRemoval = true)
+	@Fetch(FetchMode.SUBSELECT)
+	@OneToMany(mappedBy = "periodoLetivo", cascade = {}, targetEntity = Turma.class, orphanRemoval = true)
 	private List<Turma> turmas;
 
 	public String getNome() {

@@ -9,4 +9,6 @@ public interface GabaritoService extends Service<Gabarito, Long> {
 
 	List<Gabarito> listar(Turma turma);
 
+	void salvar(List<Gabarito> gabaritos);
+
 }

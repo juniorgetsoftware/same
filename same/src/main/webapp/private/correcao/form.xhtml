@@ -27,81 +27,101 @@
 	<ui:define name="content">
 		<div class="ui-fluid" jsf:id="group">
 			<div class="ui-g-12">
-			
-			<p:growl id="msg" life="5000"/>
+
+				<p:messages id="msg" life="5000" closable="true"/>
 
 				<h:form prependId="false">
 
 					<div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12">
 						<label for="escola">Escola</label>
-						<p:selectOneMenu id="escola" value="#{correcaoCtrl.escola}" converter="genericConverter">
+						<p:selectOneMenu id="escola"
+							value="#{insercaoGabaritoCtrl.escola}"
+							converter="genericConverter">
 							<f:selectItem itemLabel="Selecione" />
-							<f:selectItems var="escola" value="#{correcaoCtrl.escolas}"
+							<f:selectItems var="escola"
+								value="#{insercaoGabaritoCtrl.escolas}"
 								itemLabel="#{escola.nome}" itemValue="#{escola}" />
-							<p:ajax listener="#{correcaoCtrl.listarPeriodos()}"
-								update="periodo" process="@this" event="change"/>
+							<p:ajax listener="#{insercaoGabaritoCtrl.listarPeriodos()}"
+								update="periodo" process="@this" event="change" />
 						</p:selectOneMenu>
 					</div>
 
 
 					<div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12">
 						<label for="periodo">Período letivo</label>
-						<p:selectOneMenu id="periodo" value="#{correcaoCtrl.periodo}" converter="genericConverter">
+						<p:selectOneMenu id="periodo"
+							value="#{insercaoGabaritoCtrl.periodo}"
+							converter="genericConverter">
 							<f:selectItem itemLabel="Selecione" />
-							<f:selectItems var="periodo" value="#{correcaoCtrl.periodos}"
+							<f:selectItems var="periodo"
+								value="#{insercaoGabaritoCtrl.periodos}"
 								itemLabel="#{periodo.nome}" itemValue="#{periodo}" />
-							<p:ajax listener="#{correcaoCtrl.listarTurmas()}" update="turma" />
+							<p:ajax listener="#{insercaoGabaritoCtrl.listarTurmas()}"
+								update="turma" />
 						</p:selectOneMenu>
 					</div>
 
 					<div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12">
 						<label for="turma">Turma</label>
-						<p:selectOneMenu id="turma" value="#{correcaoCtrl.turma}" converter="genericConverter">
+						<p:selectOneMenu id="turma" value="#{insercaoGabaritoCtrl.turma}"
+							converter="genericConverter">
 							<f:selectItem itemLabel="Selecione" />
-							<f:selectItems var="turma" value="#{correcaoCtrl.turmas}"
+							<f:selectItems var="turma" value="#{insercaoGabaritoCtrl.turmas}"
 								itemLabel="#{turma.nome}" itemValue="#{turma}" />
-							<p:ajax listener="#{correcaoCtrl.listarGabaritos()}"
-								update="gabarito" />
+							<p:ajax listener="#{insercaoGabaritoCtrl.listarGabaritos()}"
+								update="prova" />
 						</p:selectOneMenu>
 					</div>
 
 					<div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12">
-						<label for="gabarito">Gabarito</label>
-						<p:selectOneMenu id="gabarito" value="#{correcaoCtrl.gabarito}" converter="genericConverter">
+						<label for="prova">Prova</label>
+						<p:selectOneMenu id="prova" value="#{insercaoGabaritoCtrl.prova}"
+							converter="genericConverter">
 							<f:selectItem itemLabel="Selecione" />
-							<f:selectItems var="gabarito" value="#{correcaoCtrl.gabaritos}"
-								itemLabel="#{gabarito.titulo}" itemValue="#{gabarito}" />
-							<p:ajax listener="#{correcaoCtrl.gerarGabarito()}"
-								update="aluno-gabarito" />
+							<f:selectItems var="prova" value="#{insercaoGabaritoCtrl.provas}"
+								itemLabel="#{prova.titulo}" itemValue="#{prova}" />
+							<p:ajax listener="#{insercaoGabaritoCtrl.gerarGabarito()}"
+								update="aluno-prova" />
 						</p:selectOneMenu>
 					</div>
 
-					<div class="ui-g-12 ui-g-nopad" jsf:id="aluno-gabarito">
+
+
+					<div class="ui-g-12 ui-g-nopad" jsf:id="aluno-prova">
 						<div class="ui-g-12">
-							<h1>#{correcaoCtrl.gabarito.titulo}</h1>
+							<h1>#{insercaoGabaritoCtrl.prova.titulo}</h1>
 						</div>
 
 						<div class="ui-g-12 ui-g-nopad">
-							<p:repeat var="ag" value="#{correcaoCtrl.alunoGabaritos}"
+
+
+							<p:repeat var="ap" value="#{insercaoGabaritoCtrl.alunoProvas}"
 								varStatus="indice">
 
 								<div class="ui-g-12">
 
 									<div class="ui-g-12  ui-lg-12 ui-md-12 ui-sm-12">
-										<label> #{ag.aluno.nome} </label>
+										<label> #{ap.aluno.nome} </label>
 									</div>
 
-									<p:repeat var="questao" value="#{ag.gabarito.questoes}">
+									<p:repeat var="questao" value="#{ap.questoesAlternativas}"
+										varStatus="q">
 
 										<div class="ui-g-3  ui-lg-3 ui-md-6 ui-sm-12 center ">
 											<div class="ui-g-12 box ui-shadow">
-												<p:outputLabel styleClass="my-label"
-													value="#{questao.enunciado}" />
+												<p:outputLabel styleClass="my-label" value="#{q.index + 1}" />
 												<center>
-													<p:selectOneRadio>
-														<f:selectItems value="#{questao.alternativas}"
-															itemLabel="#{alternativa.descricao}" var="alternativa" />
-													</p:selectOneRadio>
+
+													<h:selectOneRadio value="#{questao.alternativaProva}"
+														converter="genericConverter">
+<!-- 														<f:attribute name="collectionType" -->
+<!-- 															value="java.util.ArrayList" /> -->
+														<f:selectItems var="alternativa"
+															value="#{questao.questaoProva.alternativas}"
+															itemLabel="#{q.index + 1}" itemValue="#{alternativa}" />
+														<f:validateBean disabled="true" />
+													</h:selectOneRadio>
+
 												</center>
 											</div>
 										</div>
@@ -115,10 +135,10 @@
 							</p:repeat>
 						</div>
 					</div>
-					
+
 					<div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12">
-						<p:commandButton value="Guardar gabaritos" icon="fa fa-save" styleClass="bg-green" 
-							action="#{correcaoCtrl.salvar()}"/>
+						<p:commandButton value="Guardar gabaritos" icon="fa fa-save"
+							styleClass="bg-green" action="#{insercaoGabaritoCtrl.salvar()}" />
 					</div>
 				</h:form>
 			</div>

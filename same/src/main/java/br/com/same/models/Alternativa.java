@@ -9,29 +9,41 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-@Table(name = "alternativa_prova")
-@Entity(name = "alternativa_prova")
-public class AlternativaProva extends EntidadeBase implements Serializable {
+@Table(name = "alternativa")
+@Entity(name = "alternativa")
+public class Alternativa extends EntidadeBase implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
+	public Alternativa() {
+		
+	}
+	
+	public Alternativa(boolean resposta) {
+		this.resposta = resposta;
+	}
+
+	public Alternativa(String descricao, boolean resposta) {
+		this.descricao = descricao;
+		this.resposta = resposta;
+	}
+	
 	@NotBlank
-	@Size(min = 5, max = 255)
+//	@Size(min = 5, max = 255)
 	@Column(nullable = false)
 	private String descricao;
 
 	private boolean resposta;
 
-	@ManyToOne(targetEntity = QuestaoProva.class)
-	@JoinColumn(name = "questao_prova_id", nullable = false)
-	private QuestaoProva questao;
+	@ManyToOne(targetEntity = Questao.class)
+	@JoinColumn(name = "questao_id", nullable = false)
+	private Questao questao;
 
 	public String getDescricao() {
 		return descricao;
@@ -49,13 +61,13 @@ public class AlternativaProva extends EntidadeBase implements Serializable {
 		this.resposta = resposta;
 	}
 
-	public QuestaoProva getQuestao() {
+	public Questao getQuestao() {
 		if (isNull(questao))
-			questao = new QuestaoProva();
+			questao = new Questao();
 		return questao;
 	}
 
-	public void setQuestao(QuestaoProva questao) {
+	public void setQuestao(Questao questao) {
 		this.questao = questao;
 	}
 

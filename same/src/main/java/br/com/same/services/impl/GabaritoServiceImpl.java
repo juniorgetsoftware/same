@@ -61,4 +61,9 @@ public class GabaritoServiceImpl implements GabaritoService {
 		gabarito.alterarStatus();
 		this.editar(gabarito);
 	}
+
+	@Override
+	public void salvar(List<Gabarito> gabaritos) {
+		gabaritos.forEach(a -> salvar(a));
+	}
 }

@@ -65,7 +65,7 @@
 						currentPageReportTemplate="({startRecord} - {endRecord} de {totalRecords}, página {currentPage} de {totalPages})"
 						rowsPerPageTemplate="25,50,100">
 						
-						<p:column headerText="Status" styleClass="center icon-list" colspan="1">
+						<p:column headerText="Status" styleClass="center" colspan="1">
 							<p:commandLink action="#{professorCtrl.alterarStatus()}" update="@this" title="#{professor.status.descricao}">
 								<f:setPropertyActionListener value="#{professor}" target="#{professorCtrl.professor}" />
 								<i class="fa #{professor.status.icone}" style="#{professor.status.cor}"/>

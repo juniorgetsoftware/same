@@ -40,7 +40,7 @@
 					<div class="ui-g-6 ui-lg-6 ui-md-8 ui-sm-12 ui-g-nopad">
 						<label>Nome</label>
 						<p:inputText id="escola-nome" value="#{escolaCtrl.escola.nome}"
-							required="true" label="Nome" styleClass="form-control">
+							required="true" label="Nome" >
 							<p:clientValidator event="keyup" />
 						</p:inputText>
 						<p:message for="escola-nome" />
@@ -50,7 +50,7 @@
 				<div class="ui-g-12">
 					<div class="ui-g-6 ui-lg-6 ui-md-8 ui-sm-12 ui-g-nopad">
 						<label>Observação</label>
-						<p:inputTextarea id="escola-descricao" styleClass="form-control"
+						<p:inputTextarea id="escola-descricao" 
 							value="#{escolaCtrl.escola.descricao}" label="Observação">
 							<p:clientValidator event="keyup" />
 						</p:inputTextarea>
@@ -125,7 +125,7 @@
 							<label>Nome</label>
 							<p:inputText id="periodo-letivo-nome"
 								value="#{escolaCtrl.periodoLetivo.nome}" required="true"
-								label="Nome" styleClass="form-control">
+								label="Nome" >
 								<p:clientValidator event="keyup" />
 							</p:inputText>
 							<p:message for="periodo-letivo-nome" />
@@ -134,7 +134,7 @@
 						<div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
 							<label>Observação</label>
 							<p:inputTextarea id="periodo-letivo-descricao"
-								styleClass="form-control"
+								
 								value="#{escolaCtrl.periodoLetivo.descricao}" label="Observação">
 								<p:clientValidator event="keyup" />
 							</p:inputTextarea>

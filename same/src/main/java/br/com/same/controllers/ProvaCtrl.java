@@ -18,8 +18,8 @@ import br.com.same.jsf.Msgs;
 import br.com.same.jsf.primefaces.LazyDataModel;
 import br.com.same.models.Gabarito;
 import br.com.same.models.Prova;
+import br.com.same.services.GabaritoService;
 import br.com.same.services.ProvaService;
-import br.com.same.services.Service;
 
 @Named
 @ViewScoped
@@ -30,7 +30,7 @@ public class ProvaCtrl implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Min(value = 5, message = "O gabarito deve ter pelo menos 5 questões")
+	@Min(value = 2, message = "O gabarito deve ter pelo menos 5 questões")
 	private int quantidadeQuestoes;
 	@Min(value = 2, message = "A questão deve ter pelo menos 2 alternativa")
 	private int quantidadeAlternativasPorQuestao;
@@ -51,17 +51,18 @@ public class ProvaCtrl implements Serializable {
 	private FacesUtil facesUtil;
 
 	@Inject
-	private Service<Gabarito, Long> gabaritoService;
+	private GabaritoService gabaritoService;
 
 	public void alterarStatus() {
 		provaService.alterarStatus(prova);
 		msgs.addInfo().statusAlteradoSucesso();
 		facesUtil.atualizarComponente("msgs");
 	}
-	
+
 	public String salvar() {
 		Gabarito gabarito = prova.gerarGabarito();
 		provaService.salvar(prova);
+		
 		gabaritoService.salvar(gabarito);
 		msgs.addInfo().cadastradoComSucesso();
 		prova = null;

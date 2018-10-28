@@ -65,7 +65,7 @@
 						currentPageReportTemplate="({startRecord} - {endRecord} de {totalRecords}, página {currentPage} de {totalPages})"
 						rowsPerPageTemplate="25,50,100">
 						
-						<p:column headerText="Status" styleClass="center icon-list" colspan="1">
+						<p:column headerText="Status" styleClass="center" colspan="1">
 							<p:commandLink action="#{provaCtrl.alterarStatus()}" update="@this" title="#{prova.status.descricao}">
 								<f:setPropertyActionListener value="#{prova}" target="#{provaCtrl.prova}" />
 								<i class="fa #{prova.status.icone}" style="#{prova.status.cor}"/>

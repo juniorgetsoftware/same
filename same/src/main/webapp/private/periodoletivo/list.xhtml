@@ -67,7 +67,7 @@
 						paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 						rowsPerPageTemplate="25,50,100">
 						
-						<p:column headerText="Status" styleClass="center icon-list" colspan="1">
+						<p:column headerText="Status" styleClass="center" colspan="1">
 							<p:commandLink action="#{periodoLetivoCtrl.alterarStatus()}" update="@this" title="#{periodoLetivo.status.descricao}">
 								<f:setPropertyActionListener value="#{periodoLetivo}" target="#{periodoLetivoCtrl.periodoLetivo}" />
 								<i class="fa #{periodoLetivo.status.icone}" style="#{periodoLetivo.status.cor}"/>
