@@ -13,6 +13,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -40,8 +41,12 @@ public class Prova extends EntidadeBase implements Serializable {
 	private String observacao;
 
 	@Fetch(FetchMode.SUBSELECT)
-	@OneToMany(mappedBy = "prova", cascade = { CascadeType.ALL }, targetEntity = Questao.class, orphanRemoval = true, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "prova", cascade = {
+			CascadeType.ALL }, targetEntity = Questao.class, orphanRemoval = true, fetch = FetchType.EAGER)
 	private List<Questao> questoes;
+
+	@OneToOne(mappedBy = "prova")
+	private Gabarito gabarito;
 
 	public String getTitulo() {
 		return titulo;
@@ -112,21 +117,15 @@ public class Prova extends EntidadeBase implements Serializable {
 	 *         resposta.
 	 */
 	public Gabarito gerarGabarito() {
-		
 		Gabarito gabarito = new Gabarito(this.getTitulo(), getObservacao(), this);
-		
 		for (int i = 0; i < getQuestoes().size(); i++) {
-			
 			Questao questao = getQuestoes().get(i);
-
 			for (int j = 0; j < questao.getAlternativas().size(); j++) {
-				
 				Alternativa alternativa = questao.getAlternativas().get(j);
-				
 				if (alternativa.isResposta()) {
-					gabarito.getGabaritoQuestoesAlternativas().add(new GabaritoQuestaoAlternativa(gabarito, questao, alternativa));
+					gabarito.getGabaritoQuestoesAlternativas()
+							.add(new GabaritoQuestaoAlternativa(gabarito, questao, alternativa));
 				}
-				
 			}
 		}
 		return gabarito;
@@ -141,4 +140,11 @@ public class Prova extends EntidadeBase implements Serializable {
 		return "Prova [titulo=" + titulo + ", questoes=" + questoes + "]";
 	}
 
+	public Gabarito getGabarito() {
+		return gabarito;
+	}
+
+	public void setGabarito(Gabarito gabarito) {
+		this.gabarito = gabarito;
+	}
 }

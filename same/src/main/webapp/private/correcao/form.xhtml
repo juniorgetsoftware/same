@@ -8,16 +8,21 @@
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	template="/WEB-INF/template/layout.xhtml">
 
+	<f:metadata>
+		<f:event listener="#{correcaoCtrl.listarEscolas()}"
+			type="preRenderView"></f:event>
+	</f:metadata>
+
 	<ui:define name="page-name">
-		Inserção de gabaritos
+		Correção de gabaritos
 	</ui:define>
 
 	<ui:define name="page-title">
-		Inserção de gabaritos
+		Correção de gabaritos
 	</ui:define>
 
 	<ui:define name="page-subtitle">
-		Módulo de inserção de gabaritos
+		Módulo de correção de gabaritos
 	</ui:define>
 
 	<ui:define name="page-image">
@@ -28,20 +33,18 @@
 		<div class="ui-fluid" jsf:id="group">
 			<div class="ui-g-12">
 
-				<p:messages id="msg" life="5000" closable="true"/>
+				<p:messages id="msg" life="5000" closable="true" />
 
 				<h:form prependId="false">
 
 					<div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12">
 						<label for="escola">Escola</label>
-						<p:selectOneMenu id="escola"
-							value="#{insercaoGabaritoCtrl.escola}"
+						<p:selectOneMenu id="escola" value="#{correcaoCtrl.escola}"
 							converter="genericConverter">
 							<f:selectItem itemLabel="Selecione" />
-							<f:selectItems var="escola"
-								value="#{insercaoGabaritoCtrl.escolas}"
+							<f:selectItems var="escola" value="#{correcaoCtrl.escolas}"
 								itemLabel="#{escola.nome}" itemValue="#{escola}" />
-							<p:ajax listener="#{insercaoGabaritoCtrl.listarPeriodos()}"
+							<p:ajax listener="#{correcaoCtrl.listarPeriodos()}"
 								update="periodo" process="@this" event="change" />
 						</p:selectOneMenu>
 					</div>
@@ -49,97 +52,82 @@
 
 					<div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12">
 						<label for="periodo">Período letivo</label>
-						<p:selectOneMenu id="periodo"
-							value="#{insercaoGabaritoCtrl.periodo}"
+						<p:selectOneMenu id="periodo" value="#{correcaoCtrl.periodo}"
 							converter="genericConverter">
 							<f:selectItem itemLabel="Selecione" />
-							<f:selectItems var="periodo"
-								value="#{insercaoGabaritoCtrl.periodos}"
+							<f:selectItems var="periodo" value="#{correcaoCtrl.periodos}"
 								itemLabel="#{periodo.nome}" itemValue="#{periodo}" />
-							<p:ajax listener="#{insercaoGabaritoCtrl.listarTurmas()}"
-								update="turma" />
+							<p:ajax listener="#{correcaoCtrl.listarTurmas()}" update="turma" />
 						</p:selectOneMenu>
 					</div>
 
 					<div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12">
 						<label for="turma">Turma</label>
-						<p:selectOneMenu id="turma" value="#{insercaoGabaritoCtrl.turma}"
+						<p:selectOneMenu id="turma" value="#{correcaoCtrl.turma}"
 							converter="genericConverter">
 							<f:selectItem itemLabel="Selecione" />
-							<f:selectItems var="turma" value="#{insercaoGabaritoCtrl.turmas}"
+							<f:selectItems var="turma" value="#{correcaoCtrl.turmas}"
 								itemLabel="#{turma.nome}" itemValue="#{turma}" />
-							<p:ajax listener="#{insercaoGabaritoCtrl.listarGabaritos()}"
-								update="prova" />
+							<p:ajax listener="#{correcaoCtrl.listarProvas()}" update="prova" />
 						</p:selectOneMenu>
 					</div>
 
 					<div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12">
 						<label for="prova">Prova</label>
-						<p:selectOneMenu id="prova" value="#{insercaoGabaritoCtrl.prova}"
+						<p:selectOneMenu id="prova" value="#{correcaoCtrl.prova}"
 							converter="genericConverter">
 							<f:selectItem itemLabel="Selecione" />
-							<f:selectItems var="prova" value="#{insercaoGabaritoCtrl.provas}"
+							<f:selectItems var="prova" value="#{correcaoCtrl.provas}"
 								itemLabel="#{prova.titulo}" itemValue="#{prova}" />
-							<p:ajax listener="#{insercaoGabaritoCtrl.gerarGabarito()}"
-								update="aluno-prova" />
+							<p:ajax listener="#{correcaoCtrl.gerarMatriz()}" update="matriz" />
 						</p:selectOneMenu>
 					</div>
 
-
-
-					<div class="ui-g-12 ui-g-nopad" jsf:id="aluno-prova">
-						<div class="ui-g-12">
-							<h1>#{insercaoGabaritoCtrl.prova.titulo}</h1>
-						</div>
-
+					<h:panelGroup id="matriz">
 						<div class="ui-g-12 ui-g-nopad">
 
+							<p:repeat value="#{correcaoCtrl.alunoProvaList}" var="ap"
+								varStatus="a">
 
-							<p:repeat var="ap" value="#{insercaoGabaritoCtrl.alunoProvas}"
-								varStatus="indice">
+								<h:panelGroup rendered="#{a.first}">
+									
+									<div class="ui-g-12">
+										<h3>#{ap.prova.titulo}</h3>
+									</div>
+									
+									<div class="ui-g-12">
+										<div class="ui-g-3">
+											<label></label>
+										</div>
+										<p:repeat value="#{ap.questoesAlternativas}" var="qa"
+											varStatus="i">
+											<div class="ui-g-1">
+												#{ap.prova.gabarito.gabaritoQuestoesAlternativas.get(i.index).alternativa.descricao}
+											</div>
+										</p:repeat>
+									</div>
+								</h:panelGroup>
+
 
 								<div class="ui-g-12">
-
-									<div class="ui-g-12  ui-lg-12 ui-md-12 ui-sm-12">
-										<label> #{ap.aluno.nome} </label>
+									<div class="ui-g-3">
+										<label>#{ap.aluno.nome}</label>
 									</div>
-
-									<p:repeat var="questao" value="#{ap.questoesAlternativas}"
-										varStatus="q">
-
-										<div class="ui-g-3  ui-lg-3 ui-md-6 ui-sm-12 center ">
-											<div class="ui-g-12 box ui-shadow">
-												<p:outputLabel styleClass="my-label" value="#{q.index + 1}" />
-												<center>
-
-													<h:selectOneRadio value="#{questao.alternativaProva}"
-														converter="genericConverter">
-<!-- 														<f:attribute name="collectionType" -->
-<!-- 															value="java.util.ArrayList" /> -->
-														<f:selectItems var="alternativa"
-															value="#{questao.questaoProva.alternativas}"
-															itemLabel="#{q.index + 1}" itemValue="#{alternativa}" />
-														<f:validateBean disabled="true" />
-													</h:selectOneRadio>
-
-												</center>
+									<p:repeat value="#{ap.questoesAlternativas}" var="qa"
+										varStatus="i">
+										<div class="ui-g-1">
+										<div
+											class="fa #{ap.prova.gabarito.gabaritoQuestoesAlternativas.get(i.index).alternativa.id eq qa.alternativaProva.id ? 'fonte-green' : 'fonte-red'}">
+											#{qa.alternativaProva.descricao}
 											</div>
 										</div>
 									</p:repeat>
-
-									<div class="ui-g-12">
-										<hr />
-									</div>
 								</div>
-
 							</p:repeat>
-						</div>
-					</div>
 
-					<div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12">
-						<p:commandButton value="Guardar gabaritos" icon="fa fa-save"
-							styleClass="bg-green" action="#{insercaoGabaritoCtrl.salvar()}" />
-					</div>
+						</div>
+					</h:panelGroup>
+
 				</h:form>
 			</div>
 		</div>
