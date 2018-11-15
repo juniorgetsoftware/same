@@ -11,7 +11,7 @@ import br.com.same.models.Gabarito;
 import br.com.same.models.Turma;
 
 @Repository
-@ApplicationScoped
+//@ApplicationScoped
 public interface GabaritoRepository extends EntityRepository<Gabarito, Long> {
 
 	List<Gabarito> findByTurmaOrderByTitulo(Turma turma);

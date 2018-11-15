@@ -99,10 +99,10 @@
 										<div class="ui-g-3">
 											<label></label>
 										</div>
-										<p:repeat value="#{ap.questoesAlternativas}" var="qa"
+										<p:repeat value="#{ap.prova.gabarito.gabaritoQuestoesAlternativas}" var="qa"
 											varStatus="i">
-											<div class="ui-g-1">
-												#{ap.prova.gabarito.gabaritoQuestoesAlternativas.get(i.index).alternativa.descricao}
+											<div class="ui-g-2">
+												#{qa.alternativa.descricao}
 											</div>
 										</p:repeat>
 									</div>
@@ -115,19 +115,37 @@
 									</div>
 									<p:repeat value="#{ap.questoesAlternativas}" var="qa"
 										varStatus="i">
-										<div class="ui-g-1">
+										<div class="ui-g-2">
 										<div
-											class="fa #{ap.prova.gabarito.gabaritoQuestoesAlternativas.get(i.index).alternativa.id eq qa.alternativaProva.id ? 'fonte-green' : 'fonte-red'}">
-											#{qa.alternativaProva.descricao}
+											class="fa fa-2x #{qa.alternativaProva.resposta ? 'fonte-green fa-check' : 'fonte-red fa-ban'}">
 											</div>
 										</div>
+										
+										<h:panelGroup rendered="#{i.last}">
+											<div class="ui-g-2">
+												#{correcaoCtrl.acertosPorAluno(ap.aluno)}
+											</div>
+										</h:panelGroup>
 									</p:repeat>
 								</div>
+								
+								<h:panelGroup rendered="#{a.last}">
+									 
+									<div class="ui-g-3">
+										<label></label>
+									</div>
+									<p:repeat value="#{ap.questoesAlternativas}" var="qa"
+										varStatus="i">
+										<div class="ui-g-2">
+											#{correcaoCtrl.acertosPorQuestao(qa.questaoProva)}
+										</div>
+									</p:repeat>
+									
+								</h:panelGroup>
+									
 							</p:repeat>
-
 						</div>
 					</h:panelGroup>
-
 				</h:form>
 			</div>
 		</div>

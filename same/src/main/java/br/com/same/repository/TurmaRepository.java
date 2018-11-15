@@ -11,7 +11,7 @@ import br.com.same.models.PeriodoLetivo;
 import br.com.same.models.Turma;
 
 @Repository
-@ApplicationScoped
+//@ApplicationScoped
 public interface TurmaRepository extends EntityRepository<Turma, Long> {
 
 	List<Turma> findByPeriodoLetivoOrderByNome(PeriodoLetivo periodo);

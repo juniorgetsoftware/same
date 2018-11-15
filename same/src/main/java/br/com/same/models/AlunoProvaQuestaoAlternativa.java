@@ -2,6 +2,7 @@ package br.com.same.models;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -21,7 +22,7 @@ public class AlunoProvaQuestaoAlternativa extends EntidadeBase {
 		this.alternativaProva = alternativaProva;
 	}
 
-	@OneToOne()
+	@ManyToOne()
 	@JoinColumn(name = "aluno_prova_id")
 	private AlunoProva alunoProva;
 

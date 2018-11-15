@@ -8,7 +8,7 @@ import org.apache.deltaspike.data.api.Repository;
 import br.com.same.models.AlunoProva;
 
 @Repository
-@ApplicationScoped
+//@ApplicationScoped
 public interface AlunoGabaritoRepository extends EntityRepository<AlunoProva, Long> {
 
 }

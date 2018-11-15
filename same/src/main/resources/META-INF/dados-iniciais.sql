@@ -211,5 +211,6 @@ INSERT INTO gabarito (id, status, versao, observacao, titulo, prova_id) VALUES (
 
 		
 INSERT INTO gabarito_questao_alternativa (id, status, versao, gabarito_id, questao_id, alternativa_id) VALUES (1, 'ATIVO', 0, 1, 1, 2);
-INSERT INTO gabarito_questao_alternativa (id, status, versao, gabarito_id, questao_id, alternativa_id) VALUES (2, 'ATIVO', 0, 1, 2, 1);
-INSERT INTO gabarito_questao_alternativa (id, status, versao, gabarito_id, questao_id, alternativa_id) VALUES (3, 'ATIVO', 0, 1, 3, 3);
+INSERT INTO gabarito_questao_alternativa (id, status, versao, gabarito_id, questao_id, alternativa_id) VALUES (2, 'ATIVO', 0, 1, 2, 4);
+INSERT INTO gabarito_questao_alternativa (id, status, versao, gabarito_id, questao_id, alternativa_id) VALUES (3, 'ATIVO', 0, 1, 3, 9);
+

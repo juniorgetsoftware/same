@@ -2,6 +2,8 @@ package br.com.same.controllers;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -9,9 +11,11 @@ import javax.inject.Named;
 
 import br.com.same.models.Aluno;
 import br.com.same.models.AlunoProva;
+import br.com.same.models.AlunoProvaQuestaoAlternativa;
 import br.com.same.models.Escola;
 import br.com.same.models.PeriodoLetivo;
 import br.com.same.models.Prova;
+import br.com.same.models.Questao;
 import br.com.same.models.Turma;
 import br.com.same.services.AlunoService;
 import br.com.same.services.EscolaService;
@@ -168,5 +172,17 @@ public class CorrecaoCtrl implements Serializable {
 			List<AlunoProva> alunoProvaList) {
 		this.alunoProvaList = alunoProvaList;
 	}
-
+	
+	public long acertosPorQuestao(Questao questao) {
+		return alunoProvaList.stream()
+			.flatMap(a->a.getQuestoesAlternativas().stream())
+			.filter(a -> a.getQuestaoProva().equals(questao) && a.getAlternativaProva().isResposta()).count();
+	}
+	
+	public long acertosPorAluno(Aluno aluno) {
+		return alunoProvaList.stream()
+		.filter(ap->ap.getAluno().equals(aluno))
+		.flatMap(a->a.getQuestoesAlternativas().stream())
+			.filter(a -> a.getAlternativaProva().isResposta()).count();
+	}
 }

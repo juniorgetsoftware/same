@@ -39,8 +39,7 @@ public class AlunoProva extends EntidadeBase {
 	@JoinColumn(name = "prova_id")
 	private Prova prova;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "questao_alternativa", nullable = false)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "alunoProva")
 	private List<AlunoProvaQuestaoAlternativa> questoesAlternativas = new ArrayList<>();
 
 //	@OneToOne()

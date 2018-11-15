@@ -8,7 +8,7 @@ import org.apache.deltaspike.data.api.Repository;
 import br.com.same.models.Prova;
 
 @Repository
-@ApplicationScoped
+//@ApplicationScoped
 public interface ProvaRepository extends EntityRepository<Prova, Long> {
 
 }

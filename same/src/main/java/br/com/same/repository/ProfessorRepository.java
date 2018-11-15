@@ -8,7 +8,7 @@ import org.apache.deltaspike.data.api.Repository;
 import br.com.same.models.Professor;
 
 @Repository
-@ApplicationScoped
+//@ApplicationScoped
 public interface ProfessorRepository extends EntityRepository<Professor, Long> {
 
 }

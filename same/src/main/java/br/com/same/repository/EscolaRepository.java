@@ -10,7 +10,7 @@ import org.apache.deltaspike.data.api.Repository;
 import br.com.same.models.Escola;
 
 @Repository
-@ApplicationScoped
+//@ApplicationScoped
 public interface EscolaRepository extends EntityRepository<Escola, Long> {
 	
 	List<Escola> findByNomeLike(String nome);

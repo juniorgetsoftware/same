@@ -16,11 +16,11 @@ import br.com.same.jsf.Msgs;
 import br.com.same.models.Alternativa;
 import br.com.same.models.Aluno;
 import br.com.same.models.AlunoProva;
+import br.com.same.models.AlunoProvaQuestaoAlternativa;
 import br.com.same.models.Escola;
 import br.com.same.models.PeriodoLetivo;
 import br.com.same.models.Prova;
 import br.com.same.models.Questao;
-import br.com.same.models.AlunoProvaQuestaoAlternativa;
 import br.com.same.models.Turma;
 import br.com.same.services.AlunoGabaritoService;
 import br.com.same.services.AlunoService;
@@ -71,7 +71,6 @@ public class InsercaoGabaritoCtrl implements Serializable {
 		msgs.addInfo().cadastradoComSucesso();
 		facesUtil.atualizarComponente("msg");
 		alunoProvas = new ArrayList<>();
-		msgs.addInfo().cadastradoComSucesso();
 	}
 
 	private List<Escola> escolas;
@@ -100,7 +99,7 @@ public class InsercaoGabaritoCtrl implements Serializable {
 	private Prova prova;
 
 	public void listarGabaritos() {
-		provas = provaService.listar(/* turma */);
+		provas = provaService.listar();
 	}
 
 	private List<Aluno> alunos;

@@ -10,8 +10,8 @@ import org.apache.deltaspike.data.api.Repository;
 import br.com.same.models.Escola;
 import br.com.same.models.PeriodoLetivo;
 
-@ApplicationScoped
-@Repository(forEntity = PeriodoLetivo.class)
+@Repository
+//@ApplicationScoped
 public interface PeriodoLetivoRepository extends EntityRepository<PeriodoLetivo, Long>{
 
 	List<PeriodoLetivo> findByEscolaOrderByNome(Escola escola);
