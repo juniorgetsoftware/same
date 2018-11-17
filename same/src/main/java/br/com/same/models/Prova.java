@@ -12,6 +12,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -47,7 +49,13 @@ public class Prova extends EntidadeBase implements Serializable {
 
 	@OneToOne(mappedBy = "prova")
 	private Gabarito gabarito;
+	
+	@ManyToOne
+	@JoinColumn(name = "turma_id", nullable = false)
+	private Turma turma;
 
+	//
+	
 	public String getTitulo() {
 		return titulo;
 	}
@@ -147,4 +155,13 @@ public class Prova extends EntidadeBase implements Serializable {
 	public void setGabarito(Gabarito gabarito) {
 		this.gabarito = gabarito;
 	}
+
+	public Turma getTurma() {
+		return turma;
+	}
+
+	public void setTurma(Turma turma) {
+		this.turma = turma;
+	}
+	
 }

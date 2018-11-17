@@ -187,7 +187,7 @@ INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (1, 5);
 -- INSERT INTO turma_aluno(turma_id, aluno_id) VALUES (5, 50);
 
 -- PROVA
-INSERT INTO prova (id, titulo, observacao, versao, status) VALUES (1, 'Prova de matemática', 'Observações da prova...', 0, 'ATIVO');
+INSERT INTO prova (id, titulo, observacao, versao, status, turma_id) VALUES (1, 'Prova de matemática', 'Observações da prova...', 0, 'ATIVO', 1);
 
 INSERT INTO questao (id, enunciado, prova_id, versao, status) VALUES (1, 'Quanto é 1 + 1?', 1, 0, 'ATIVO');
 INSERT INTO alternativa (id, descricao, resposta, questao_id, versao, status) VALUES (1, '1', 0, 1, 0, 'ATIVO');

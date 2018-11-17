@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.deltaspike.data.api.EntityRepository;
 
 import br.com.same.models.Prova;
+import br.com.same.models.Turma;
 import br.com.same.repository.ProvaRepository;
 import br.com.same.services.ProvaService;
 
@@ -54,5 +55,10 @@ public class ProvaServiceImpl implements ProvaService {
 	public void alterarStatus(Prova prova) {
 		prova.alterarStatus();
 		this.editar(prova);
+	}
+
+	@Override
+	public List<Prova> listar(Turma turma) {
+		return provaRepository.findByTurma(turma);
 	}
 }

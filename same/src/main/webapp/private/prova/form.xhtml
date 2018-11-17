@@ -7,6 +7,11 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	template="/WEB-INF/template/layout.xhtml">
+	
+	<f:metadata>
+		<f:event listener="#{provaCtrl.listarEscolas()}"
+			type="preRenderView"></f:event>
+	</f:metadata>
 
 	<ui:define name="page-name">
 		Cadastro de Prova
@@ -35,6 +40,53 @@
 
 			<h:form prependId="false" id="dados-prova-form">
 				<div jsf:id="dados-prova">
+				
+				
+				
+				
+				
+				
+				<div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12">
+						<label for="escola">Escola</label>
+						<p:selectOneMenu id="escola" value="#{provaCtrl.escola}"
+							converter="genericConverter">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems var="escola" value="#{provaCtrl.escolas}"
+								itemLabel="#{escola.nome}" itemValue="#{escola}" />
+							<p:ajax listener="#{provaCtrl.listarPeriodos()}"
+								update="periodo" process="@this" event="change" />
+						</p:selectOneMenu>
+					</div>
+
+
+					<div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12">
+						<label for="periodo">Período letivo</label>
+						<p:selectOneMenu id="periodo" value="#{provaCtrl.periodo}"
+							converter="genericConverter">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems var="periodo" value="#{provaCtrl.periodos}"
+								itemLabel="#{periodo.nome}" itemValue="#{periodo}" />
+							<p:ajax listener="#{provaCtrl.listarTurmas()}" update="turma" />
+						</p:selectOneMenu>
+					</div>
+
+					<div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12">
+						<label for="turma">Turma</label>
+						<p:selectOneMenu id="turma" value="#{provaCtrl.prova.turma}"
+							converter="genericConverter">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems var="turma" value="#{provaCtrl.turmas}"
+								itemLabel="#{turma.nome}" itemValue="#{turma}" />
+						</p:selectOneMenu>
+					</div>
+				
+				
+				
+				
+				
+				
+				
+				
 					<div class="ui-g-12">
 						<div class="ui-g-6 ui-lg-6 ui-md-8 ui-sm-12">
 							<h:outputLabel for="prova-titulo" value="Título" />

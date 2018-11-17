@@ -14,6 +14,7 @@ import br.com.same.models.PeriodoLetivo;
 import br.com.same.models.Prova;
 import br.com.same.models.Questao;
 import br.com.same.models.Turma;
+import br.com.same.services.AlunoProvaService;
 import br.com.same.services.AlunoService;
 import br.com.same.services.EscolaService;
 import br.com.same.services.GabaritoService;
@@ -32,7 +33,7 @@ public class CorrecaoCtrl implements Serializable {
 	private static final long serialVersionUID = 5659861950428898387L;
 
 	@Inject
-	private Service<AlunoProva, Long> alunoProvaService;
+	private AlunoProvaService alunoProvaService;
 
 	@Inject
 	private GabaritoService gabaritoService;
@@ -76,7 +77,7 @@ public class CorrecaoCtrl implements Serializable {
 	}
 
 	public void listarProvas() {
-		provas = provaService.listar(/* turma */);
+		provas = provaService.listar(turma);
 	}
 
 	public void listarAlunos() {
@@ -84,7 +85,7 @@ public class CorrecaoCtrl implements Serializable {
 	}
 
 	public void gerarMatriz() {
-		alunoProvaList = alunoProvaService.listar();
+		alunoProvaList = alunoProvaService.listar(prova);
 	}
 
 	//
@@ -170,12 +171,22 @@ public class CorrecaoCtrl implements Serializable {
 		this.alunoProvaList = alunoProvaList;
 	}
 	
+	/**
+	 * Retorna a quantidade de alunos que acertaram uma dada questão
+	 * @param questao
+	 * @return
+	 */
 	public long acertosPorQuestao(Questao questao) {
 		return alunoProvaList.stream()
 			.flatMap(a->a.getQuestoesAlternativas().stream())
 			.filter(a -> a.getQuestaoProva().equals(questao) && a.getAlternativaProva().isResposta()).count();
 	}
 	
+	/**
+	 * Retorna a quantidade de acertos, em uma dada prova, por aluno
+	 * @param aluno
+	 * @return
+	 */
 	public long acertosPorAluno(Aluno aluno) {
 		return alunoProvaList.stream()
 		.filter(ap->ap.getAluno().equals(aluno))
@@ -183,6 +194,11 @@ public class CorrecaoCtrl implements Serializable {
 			.filter(a -> a.getAlternativaProva().isResposta()).count();
 	}
 	
+	/**
+	 * Retorna uma letra, dado um índice
+	 * @param indice
+	 * @return
+	 */
 	public char letraPorIndice(int indice) {
 		char[] letras = new char[] {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
 		return letras[indice];

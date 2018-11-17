@@ -5,12 +5,12 @@ import java.util.List;
 import org.apache.deltaspike.data.api.EntityRepository;
 import org.apache.deltaspike.data.api.Repository;
 
+import br.com.same.models.AlunoProva;
 import br.com.same.models.Prova;
-import br.com.same.models.Turma;
 
 @Repository
-public interface ProvaRepository extends EntityRepository<Prova, Long> {
+public interface AlunoProvaRepository extends EntityRepository<AlunoProva, Long>{
 
-	List<Prova> findByTurma(Turma turma);
-	
+	List<AlunoProva> findByProva(Prova prova);
+
 }

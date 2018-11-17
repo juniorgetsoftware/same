@@ -99,7 +99,7 @@ public class InsercaoGabaritoCtrl implements Serializable {
 	private Prova prova;
 
 	public void listarGabaritos() {
-		provas = provaService.listar();
+		provas = provaService.listar(turma);
 	}
 
 	private List<Aluno> alunos;
