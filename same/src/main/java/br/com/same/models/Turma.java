@@ -87,7 +87,7 @@ public class Turma extends EntidadeBase implements Serializable {
 
 	public void adicionar(Aluno aluno) {
 		if (aluno == null) {
-			throw new RuntimeException("O aluno é inválida");
+			throw new RuntimeException("O parâmetro é inválido");
 		}
 		this.getAlunos().add(aluno);
 	}

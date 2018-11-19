@@ -13,6 +13,11 @@ import br.com.same.services.AlunoProvaService;
 
 public class AlunoProvaServiceImpl implements AlunoProvaService {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	@Inject
 	private AlunoProvaRepository alunoProvaRepository;
 
