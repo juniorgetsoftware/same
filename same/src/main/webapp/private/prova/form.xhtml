@@ -11,6 +11,8 @@
 	<f:metadata>
 		<f:event listener="#{provaCtrl.listarEscolas()}"
 			type="preRenderView"></f:event>
+		<f:event listener="#{habilidadeCtrl.listarHabilidades()}"
+			type="preRenderView"></f:event>
 	</f:metadata>
 
 	<ui:define name="page-name">
@@ -166,24 +168,36 @@
 
 							<div class="ui-g-12">
 
+							
 								<p:panel header="Questão #{indiceQuestao.index +1 }">
+								
+										
+										<label for="prova-questao-habilidade" class="my-label">Habilidade</label>
+											<p:selectOneMenu id="prova-questao-habilidade" value="#{questao.habilidade}" required="true">
+												<f:selectItem itemLabel="Selecione a habilidade" noSelectionOption="true"/>
+												<f:selectItems value="#{habilidadeCtrl.habilidadesList}"
+													var="habilidade" itemLabel="#{habilidade.nome}" itemValue="#{habilidade}"/>
+											</p:selectOneMenu>
 
-									<div class="ui-inputgroup">
-										<span class="ui-inputgroup-addon">
-											#{indiceQuestao.index +1 } </span>
-										<p:inputText value="#{questao.enunciado}" required="true"
-											placeholder="Enunciado da questão #{indiceQuestao.index +1 }" />
-
+										<br/>
+										<br/>
+									
 										<div class="ui-inputgroup">
-											<span class="ui-inputgroup-addon"> <p:commandButton
-													icon="fa fa-trash" styleClass="btn-red"
-													process="prova-gerada"
-													action="#{provaCtrl.prova.remover(questao)}"
-													update="prova-gerada"
-													title="Clique para remover a questão #{indiceQuestao.index +1 }" />
-											</span>
+											<span class="ui-inputgroup-addon">
+												#{indiceQuestao.index +1 } </span>
+											<p:inputText value="#{questao.enunciado}" required="true"
+												placeholder="Enunciado da questão #{indiceQuestao.index +1 }" />
+	
+											<div class="ui-inputgroup">
+												<span class="ui-inputgroup-addon"> <p:commandButton
+														icon="fa fa-trash" styleClass="btn-red"
+														process="prova-gerada"
+														action="#{provaCtrl.prova.remover(questao)}"
+														update="prova-gerada"
+														title="Clique para remover a questão #{indiceQuestao.index +1 }" />
+												</span>
+											</div>
 										</div>
-									</div>
 
 									<br />
 

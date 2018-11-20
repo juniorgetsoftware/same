@@ -15,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Fetch;
@@ -31,7 +32,7 @@ public class Questao extends EntidadeBase implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@NotBlank
-//	@Size(min = 5, max = 255)
+	// @Size(min = 5, max = 255)
 	@Column(nullable = false)
 	private String enunciado;
 
@@ -43,6 +44,12 @@ public class Questao extends EntidadeBase implements Serializable {
 	@ManyToOne(targetEntity = Prova.class)
 	@JoinColumn(name = "prova_id", nullable = false)
 	private Prova prova;
+
+	@OneToOne()
+	@JoinColumn(nullable = false, name = "habilidade_id")
+	private Habilidade habilidade;
+
+	//
 
 	public String getEnunciado() {
 		return enunciado;
@@ -103,8 +110,16 @@ public class Questao extends EntidadeBase implements Serializable {
 		this.adicionar(new Alternativa());
 	}
 
+	public Habilidade getHabilidade() {
+		return habilidade;
+	}
+
+	public void setHabilidade(Habilidade habilidade) {
+		this.habilidade = habilidade;
+	}
+
 	@Override
 	public String toString() {
-		return "Questao [enunciado=" + enunciado +"] ";
+		return "Questao [enunciado=" + enunciado + "] ";
 	}
 }
